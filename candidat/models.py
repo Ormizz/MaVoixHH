@@ -43,3 +43,10 @@ class Proposition_electoral(models.Model):
     def __str__(self):
         return f'Proposition_electoral:{self.id_proposition_electoral} {self.reponse}'
     
+class Article(models.Model):
+    id_article = models.AutoField(primary_key=True)
+    titre = models.CharField(max_length=100)
+    candidat = models.ForeignKey(Candidat, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return f'Article:{self.id_article} {self.titre}'
