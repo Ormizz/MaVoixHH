@@ -1,0 +1,283 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+	<title>Candidat</title>
+	<link rel="icon" href="{%static 'img/logo.png' %}" type="image/png" sizes="16x16"> 
+    
+    <link rel="stylesheet" href="{%static 'css/main.min.css' %}">
+    <link rel="stylesheet" href="{%static 'css/styleC.css' %}">
+    <!-- <link rel="stylesheet" href="css/color.css"> -->
+    <link rel="stylesheet" href="{%static 'css/responsive.css' %}">
+	<style>
+		#modif .nav-item a{
+			color: #ff7200;
+		}
+	</style>
+</head>
+<body style="background-color:rgb(224,224,224)">
+
+<div class="theme-layout">
+	
+	<div class="responsive-header" style="background-color: white;">
+		<div class="logo res"><img src="images/logo.png" alt=""><span>Ma Voix</span></div>
+		
+		<div class="right-compact">
+			<div class="sidemenu">
+				<i>
+				<svg id="side-menu2" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></i>
+			</div>
+			<div class="res-search">
+				<span>
+				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>
+			</div>
+			
+		</div>
+		<div class="restop-search">
+			<span class="hide-search"><i class="icofont-close-circled"></i></span>
+			<form method="post">
+				<input type="text" placeholder="Search...">
+			</form>
+		</div>
+	</div><!-- responsive header -->
+	
+	<header class="">
+		<div class="topbar stick" style="background-color: white;">
+			<div class="logo" style="width:300px; height:50px"><img id="logo" style="width:500px; height:50px" src="{%static 'img/logo.png' %}" alt=""></div>
+			
+			<div class="searches">
+				<form method="post">
+					<input type="text" placeholder="Search...">
+					<button type="submit"><i class="icofont-search"></i></button>
+					<span class="cancel-search"><i class="icofont-close"></i></span>
+					
+				</form>
+			</div>
+			<ul class="web-elements">
+				
+				<li >
+					<a style="border-color:#ff7200; background-color:#ff7200" href="index.html" title="Home" data-toggle="tooltip">
+						<i>
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></i>
+					</a>
+				</li>
+				
+				<li>
+					<a style="border-color:#ff7200; background-color:#ff7200" class="mesg-notif" href="#" title="Notifications" data-toggle="tooltip">
+						<i>
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></i>
+					</a>
+					<span></span>
+				</li>
+				
+			</ul>
+		</div>
+		
+	</header><!-- header -->
+	
+	<section>
+		<div class="gap">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div id="page-contents" class="row merged20">
+							<div class="col-lg-3">
+								<aside class="sidebar static left">
+									
+									<div class="widget">
+										<h4 class="widget-title">Poser une question?</h4>
+										<div class="ask-question">
+											<i class="icofont-question-circle" style="color: #ff7200;"></i>
+											<h6>Posez des questions à votre candidat.</h6>
+											<a class="ask-qst"  href="#" title="" id="asking" >Posez une question</a>
+										</div>
+									</div>
+									<style>
+										
+										#asking{
+											color: #ff7200;
+											border-color: #ff7200;
+										}
+										#asking:hover{
+											color: white;
+											background-color: #ff7200;
+										}
+									</style>
+									<div class="widget">
+										<h4 class="widget-title">Les futurs évènements<a class="see-all" href="#" title="">Voir plus</a></h4>
+										<div class="rec-events" style="background-color: #ff7200;">
+											<i class="icofont-gift"></i>
+											<h6><a title="" href="">Création d'une école</a></h6>
+											<img alt="" src="{%static 'img/images/clock.png' %}">
+										</div>
+										<div class="rec-events" style="background-color: #027314;">
+											<i class="icofont-microphone"></i>
+											<h6><a title="" href="">La 03ième Conference 2023</a></h6>
+											<img alt="" src="{%static 'img/images/clock.png' %}">
+										</div>
+									</div>
+								</aside>
+							</div>
+							<div class="col-lg-9">
+								<div class="group-feed">
+									<div class="group-avatar">
+										<img src="{%static 'img/images/resources/profile-banner.jpg' %}" alt="">
+										<a href="#" title=""><i class="icofont-check-circled"></i>Suivre</a>
+										<figure class="group-dp"><img src="{%static 'img/images/resources/user.jpg' %}" alt=""></figure>
+									</div>
+									<div class="grp-info about">
+										<h4>{{ candidat.nom }} {{ candidat.prenoms }} <span>Surnom: @{{ candidat.surnom }}</span> <span>Partie Politique: {{ candidat.parti_politique }}</span></h4>
+										<ul class="joined-info">
+											<li><span>Abonnés:</span> 2.2K</li>
+											<li><span>Posts:</span> 932</li>
+										</ul>
+										<ul class="nav nav-tabs about-btn" id="modif">
+											<li class="nav-item"><a class="active perso" href="#posts" data-toggle="tab" style="color: white; background-color: #ff7200;">Fil d'actualité</a></li>
+											<li class="nav-item"><a class="perso" href="#pictures" data-toggle="tab">Propositions</a></li>
+											<li class="nav-item"><a class="perso" href="#videos" data-toggle="tab">Sondages</a></li>
+										</ul>
+									</div>
+									<div class="main-wraper">
+										<div class="grp-about">
+											<div class="row">
+												<div class="col-lg-8 col-md-6">
+													<h4>BIOGRAPHIE</h4>
+													<p>{{ candidat.biographie }}</p>
+													
+												</div>
+												<div class="col-lg-4 col-md-6">
+													<div class="share-article">
+														<span>Reseaux Sociaux</span>
+														<a href="#" title="" class="facebook"><i class="icofont-facebook"></i></a>
+														<a href="#" title="" class="pinterest"><i class="icofont-pinterest"></i></a>
+														<a href="#" title="" class="instagram"><i class="icofont-instagram"></i></a>
+														<a href="#" title="" class="twitter"><i class="icofont-twitter"></i></a>
+														<a href="#" title="" class="google"><i class="icofont-google-plus"></i></a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-lg-12">
+											<div class="tab-content">
+												<div class="tab-pane active fade show " id="posts" >
+													<div class="row merged20">
+														<div class="col-lg-8">
+															{% if articles %} {% for article in articles %}
+															<div class="main-wraper">
+																<div class="user-post">
+																	<div class="friend-info">
+																		<figure>
+																			<img alt="" src="{%static 'img/images/resources/user4.jpg' %}">
+																		</figure>
+																		<div class="friend-name">
+																			<ins><a title="" href="time-line.html">{{ candidat.nom }} {{ candidat.prenoms }}</a></ins>
+																			<span><i class="icofont-globe"></i> Publé: Sep,15 2023</span>
+																		</div>
+																		<div class="post-meta">
+																			<a href="post-detail.html" class="post-title">{{ article.titre }}</a>
+																			<p>
+																				{{ article.content }}
+																			</p>
+																			<div class="stat-tools">
+																				<div class="box">
+																				  <div class="Like"><a class="Like__link" style="background-color: #ff7200; color : white;"><i class="icofont-like"></i> J'aime</a>
+																				  </div>
+																				</div>
+																				<a title="" href="#" class="comment-to"><i class="icofont-comment"></i> Commentaires</a>
+																				<a title="" href="#" style="background-color: #027314; color : white;" class="share-to"><i class="icofont-share-alt"></i> Partager</a>
+																				<div class="emoji-state">
+																					<div class="popover_wrapper">
+																						<a class="popover_title" href="#" title=""><img alt="" src="images/smiles/thumb.png"></a>
+																						<div class="popover_content">
+																							<span><img alt="" src="images/smiles/thumb.png"> Likes</span>
+																							<span>20</span>
+																						</div>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div><!-- share post without image -->
+															{% endfor %} {% else %}
+															<h5 class="mt-4" style="text-align: center">Pas de Propositions</h5>
+															{% endif %}
+														</div>
+														<div class="col-lg-4">
+															<aside class="sidebar static left">
+																<div class="advertisment-box">
+																	<h4 class=""><i class="icofont-info-circle"></i> Informations</h4>
+																	<figure>
+																		<a href="#" title="Advertisment"><img src="{%static 'img/images/resources/ad-widget2.gif' %}" alt=""></a>
+																	</figure>
+																</div>
+																<div class="widget">
+																	<h4 class="widget-title">Autres Candidats</h4>
+																	<div class="sug-caro">
+																		<div class="friend-box">
+																			<figure>
+																				<img alt="" src="{%static 'img/images/resources/sidebar-info.jpg' %}">
+																				<span>Membres: 505K</span>
+																			</figure>
+																			<div class="frnd-meta">
+																				<img alt="" src="{%static 'img/images/resources/frnd-figure2.jpg' %}">
+																				<div class="frnd-name">
+																					<a title="" href="#">Candidat</a>
+																					<span>Independant</span>
+							
+																				</div>
+																				<a id="link" class="main-btn2" href="#" title="">Voir la page</a>
+																				<style>
+																					#link{
+																						color: #ff7200;
+																						border-color: #ff7200;
+																					}
+																					#link:hover{
+																						color: white;
+																						background-color: #ff7200;
+																					}
+																				</style>
+																			</div>
+																		</div>
+																	</div>	
+																</div>
+															</aside>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>	
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<figure class="bottom-mockup"><img alt="" src="images/footer.png"></figure>
+	<!-- bottombar -->
+	
+	<div class="bottombar">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<span class="">&copy; copyright All rights reserved by HackHuslter</span>
+				</div>
+			</div>
+		</div>
+	</div><!-- bottombar -->
+	
+</div>
+	
+	<script src="{%static 'js/script.js'%}"></script>
+</body>	
+</html>
