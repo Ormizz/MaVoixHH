@@ -1,16 +1,280 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
-        Hello sahire
-        
-        <script src="" async defer></script>
-    </body>
+  <head>
+    <title>Profile candidat</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/style.css' %}"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-light" data-bs-theme="light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Mavoix</a>
+        <div class="search">
+          <div class="search__icon">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
+          <input type="text" class="search__input" placeholder="Search..." />
+        </div>
+        <div class="bouton">
+          <i class="fa-regular fa-bell"></i>
+        </div>
+      </div>
+    </nav>
+
+    <section class="corp">
+      <div class="zone1 container-fluid">
+        <div class="card box">
+          <h5>Meetings</h5>
+          <div></div>
+        </div>
+      </div>
+
+      <div class="zone2 container-fluid">
+        <div class="card box">
+          <div class="user_header">
+            <div class="user_img">
+              <img
+                src="https://randomuser.me/api/portraits/men/74.jpg"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="user_datail row" style="margin-left: 25vh">
+            <div class="col">
+              <h4>Jean Jacque Kouassi</h4>
+              <p><span style="color: rgb(255, 114, 0)">RDHR</span> YOPOUGON</p>
+            </div>
+            <div class="col">
+              <h4 style="font-weight: bold">3 067</h4>
+              <p>abonnés</p>
+            </div>
+          </div>
+          <div class="user_datail row" style="margin-left: 25vh">
+            <div class="col"></div>
+            <div class="col d-flex">
+              <button
+                class="flex-end"
+                ;
+                style="
+                  background-color: transparent;
+                  border: none;
+                  color: #fff;
+                  height: 30px;
+                  width: 150px;
+                  font-weight: bold;
+                  border-radius: 5px;
+                  font-size: 21px;
+                  background: rgb(2, 115, 20);
+                "
+              >
+                + suivre
+              </button>
+            </div>
+          </div>
+          <div class="mx-4">
+            <h4>BIO</h4>
+            <p>{% lorem how_many_paragraphs %}</p>
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col container-fluid">
+            <div
+              class="card"
+              style="text-align: center; padding: 10px; border: none"
+            >
+              <h4>Fil d'actualité</h4>
+            </div>
+          </div>
+          <div class="col container-fluid">
+            <div
+              class="card"
+              style="
+                text-align: center;
+                padding: 10px;
+                border: none;
+                background: rgb(216, 233, 218);
+                color: rgb(2, 115, 20);
+              "
+            >
+              <h4>Propositions</h4>
+            </div>
+          </div>
+          <div class="col container-fluid">
+            <div
+              class="card"
+              style="text-align: center; padding: 10px; border: none"
+            >
+              <h4>Sondage</h4>
+            </div>
+          </div>
+        </div>
+
+        <div class="card mt-4">
+          <h4 class="card-title mx-4" style="margin-top: 15px">
+            Rehabilitations des voies
+          </h4>
+          <p class="mx-4">{% lorem how_many_paragraphs %}</p>
+          <div
+            class="mx-4"
+            style="display: flex; justify-content: space-between; margin: 10px"
+          >
+            <p>
+              <i class="fa-regular fa-heart"></i>
+              <span>mentions j'aimes </span>
+            </p>
+            <p>17 commentaire</p>
+          </div>
+          <div
+            class="mb-3"
+            style="
+              width: 95%;
+              height: 50px;
+              padding: 7px;
+              background: rgb(224, 224, 224);
+              margin: auto;
+              display: flex;
+            "
+          >
+            <input
+              type="text"
+              style="
+                width: 100%;
+                background: transparent;
+                border: none;
+                outline: none;
+                font-size: 17px;
+              "
+              class=""
+              placeholder="Laisser un commentaire..."
+            />
+            <div class="">
+              <i class="fa-solid fa-paper-plane-top"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="card mt-4">
+          <h4 class="card-title mx-4" style="margin-top: 15px">
+            Rehabilitations des voies
+          </h4>
+          <p class="mx-4">{% lorem how_many_paragraphs %}</p>
+          <div
+            class="mx-4"
+            style="display: flex; justify-content: space-between; margin: 10px"
+          >
+            <p>
+              <i class="fa-regular fa-heart"></i>
+              <span>mentions j'aimes </span>
+            </p>
+            <p>17 commentaire</p>
+          </div>
+          <div
+            class="mb-3"
+            style="
+              width: 95%;
+              height: 50px;
+              padding: 7px;
+              background: rgb(224, 224, 224);
+              margin: auto;
+              display: flex;
+            "
+          >
+            <input
+              type="text"
+              style="
+                width: 100%;
+                background: transparent;
+                border: none;
+                outline: none;
+                font-size: 17px;
+              "
+              class=""
+              placeholder="Laisser un commentaire..."
+            />
+            <div class="">
+              <i class="fa-solid fa-paper-plane-top"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="zone3 container-fluid">
+        <div class="card box1">
+          <h5>Galerie Photo</h5>
+          <div></div>
+        </div>
+
+        <h4>Autres candidats ...</h4>
+
+        <div class="card mb-3">
+          <img
+            class="card-img-top"
+            src="{% static 'img/candidat1.jpg' %}"
+            alt="Card image"
+          />
+          <div class="card-body" style="height: 70px">
+            <h4 class="card-title" style="font-size: 17px; margin: 0">
+              John Doe
+            </h4>
+            <div style="display: flex; justify-content: space-between">
+              <p class="card-text" style="margin: 0"><span>4,7K</span></p>
+              <button
+                style="
+                  background-color: transparent;
+                  border: none;
+                  color: rgb(2, 115, 20);
+                "
+              >
+                +suivre
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card mb-3">
+          <img
+            class="card-img-top"
+            src="{% static 'img/candidat1.jpg' %}"
+            alt="Card image"
+          />
+          <div class="card-body" style="height: 70px">
+            <h4 class="card-title" style="font-size: 17px; margin: 0">
+              John Doe
+            </h4>
+            <div style="display: flex; justify-content: space-between">
+              <p class="card-text" style="margin: 0"><span>4,7K</span></p>
+              <button
+                style="
+                  background-color: transparent;
+                  border: none;
+                  color: rgb(2, 115, 20);
+                "
+              >
+                +suivre
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+  <script src="" async defer></script>
 </html>
