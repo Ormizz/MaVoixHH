@@ -1,0 +1,107 @@
+body{
+    background-color: rgb(224, 224, 224);
+    font-family: 'Mulish', sans-serif;
+}
+.navbar{
+    height: 9vh;
+}
+.search{
+    display: flex;
+    background-color: rgb(224, 224, 224);
+    width: 500px;
+    height: 40px;
+    margin: auto;
+    padding-left: 15px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+.search__input{
+    background-color: transparent;
+    border: none;
+}
+.search__input:focus {
+    outline: none;
+}
+.search__icon{
+    display: flex;
+    align-items: center;
+    padding-right: 15px;
+}
+.bouton{
+    margin-right: 15px;
+    font-size: 24px;
+}
+
+
+.corp{
+    display: flex;
+    
+    justify-content: space-between;
+}
+
+.corp .zone1{
+    height: 91vh;
+    width: 75vh;
+}
+.corp .zone1 .box{
+    margin-top: 15px;
+    height: 50%;
+}
+.corp .zone1 .box h5{
+    font-weight: bold;
+    margin: 15px;
+}
+
+.corp .zone2 {
+    height: 91vh;
+    position: relative;
+    
+    width: 100%;
+}
+.corp .zone2 .box {
+    margin-top: 15px;
+    height: 50%;
+}
+.corp .zone2 .box .user_header{
+    background-color: rgb(2, 115, 20);
+    position: relative;
+    height: 50%;
+}
+.corp .zone2 .box .user_img {
+    position: absolute;
+    bottom: -5rem;
+    left: 45px;
+    right: 0;
+    height: 8.5rem;
+    width: 8.5rem;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: rgb(224, 224, 224);
+}
+.corp .zone2 .box .user_img img{
+    width: 100%;
+    height: 100%;
+    padding: .3rem;
+    border-radius: 50%;
+}
+
+
+.corp .zone3 {
+    height: 91vh;
+    width: 50vh;
+}
+.corp .zone3 .box1 {
+    margin-top: 15px;
+    height: 25%;
+}
+
+.corp .zone3 .box1 h5 {
+    font-weight: bold;
+    margin: 15px;
+}
+.corp .zone3  h4 {
+    font-weight: bold;
+    margin: 15px;
+}
