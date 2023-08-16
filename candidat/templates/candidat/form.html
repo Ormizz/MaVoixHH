@@ -1,0 +1,12 @@
+<form method="patch" action="{% url 'candidat/' candidat.id %}">
+    {% csrf_token %}
+    {% if candidat %}
+    <label for="nom">Nom:</label>
+    <input type="text" name="nom" id="nom" value="{{ candidat.nom }}">
+    {% endif %}
+    <label for="nom">Nom:</label>
+    <input type="text" name="nom" id="nom" value="">
+    <!-- Autres champs à mettre à jour -->
+
+    <button type="submit">Mettre à jour</button>
+</form>

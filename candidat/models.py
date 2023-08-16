@@ -46,7 +46,8 @@ class Proposition_electoral(models.Model):
 class Article(models.Model):
     id_article = models.AutoField(primary_key=True)
     titre = models.CharField(max_length=100)
+    content = models.TextField(max_length=400, default="un contenu")
     candidat = models.ForeignKey(Candidat, on_delete=models.CASCADE)
     
     def __str__(self):
-        return f'Article:{self.id_article} {self.titre}'
+        return f'Article:{self.id_article} {self.titre} {self.content}'

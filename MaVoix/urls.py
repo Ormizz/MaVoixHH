@@ -15,8 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework import routers
+
+from candidat.urls import router as candidatRouter
+
+router = routers.DefaultRouter()
+router.registry.extend(candidatRouter.registry)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('candidat/', include('candidat.urls')),
+    path('crudCandidat/', include(router.urls))
 ]
+
