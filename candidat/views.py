@@ -1,5 +1,5 @@
-import re
 from django.shortcuts import render
+
 import requests
 from rest_framework import viewsets
 
@@ -31,6 +31,7 @@ class Proposition_electoralViewSet(viewsets.ModelViewSet):
     
     queryset = Proposition_electoral.objects.all()
     serializer_class = Proposition_electoralSerializer
+
     
 # Create your views here.
 def index(request):
@@ -41,7 +42,7 @@ def index(request):
 
 def listC(request):
     # URL de l'API Django
-    api_url = "http://127.0.0.1:8000/crudCandidat/Candidat/"
+    api_url = "http://127.0.0.1:8000/crud/Candidat/"
 
     #utilisation de la requête
     
@@ -64,7 +65,7 @@ def form(request):
     
     # #Trouver l'utilisateur
     
-    # api_find = 'http://127.0.0.1:8000/crudCandidat/Candidat/'+ str(candidat_id)
+    # api_find = 'http://127.0.0.1:8000/crud/Candidat/'+ str(candidat_id)
     
     # findCandidat = requests.get(api_find)
     # if findCandidat.status_code == 200:
@@ -79,7 +80,7 @@ def form(request):
     
 def formedit(request, id):
     # Récupérer l'id du candidat
-    api_get_candadat = "http://127.0.0.1:8000/crudCandidat/Candidat/"+str(id)
+    api_get_candadat = "http://127.0.0.1:8000/crud/Candidat/"+str(id)
     return render(request, 'candidat/form.html')
         
     

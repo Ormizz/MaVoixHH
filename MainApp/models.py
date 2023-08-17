@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Electeur(models.Model):
@@ -22,10 +23,9 @@ class Type_utilisateur(models.Model):
     
 class Utilisateur (models.Model):
     id_utilisateur = models.AutoField(primary_key=True)
-    login = models.CharField(max_length=50)
-    password = models.CharField(max_length=70)
+    account = models.OneToOneField(User, on_delete=models.CASCADE, default="")
     titulaire = models.IntegerField()
     type_utilisateur = models.ForeignKey(Type_utilisateur, on_delete=models.CASCADE)
     
     def __str__(self):
-        return f'Utilisateur:{self.id_utilisateur} {self.login}'
+        return f'Utilisateur:{self.id_utilisateur} {self.account}'
