@@ -1,0 +1,157 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sondage</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/vote/css/style.css' %}"
+    />
+  </head>
+  <body>
+    
+<body>
+ 
+  <div class="tinder">
+  <div class="tinder--status">
+    <i class="fa fa-remove"></i>
+    <i class="fa fa-heart"></i>
+  </div>
+
+  <div class="tinder--cards">
+    <input type="text" hidden
+        class="form-control" name="" value="{{ nbr }}" id="nbr" aria-describedby="helpId" placeholder="">
+        <script>cpt = 0</script>
+    {% for reponse in reponses %}
+    <div class="tinder--card">
+      <h3>{{ reponse.themes_cles.libelle_themes_cles }}</h3>
+      <p>{{ reponse.libelle_proposition }}</p>
+      <div class="form-group">
+        <label for=""></label>
+        
+        <input type="text" hidden class="form-control vall{{ reponse.id_proposition }}" name="" id="" value="{{ reponse.id_proposition }}" aria-describedby="helpId" placeholder="">
+        <input type="text" hidden class="form-control prop{{ reponse.id_proposition }}" name="" id="" value="{{ reponse.themes_cles.zone.id_zone }}" aria-describedby="helpId" placeholder="">
+        <input type="text" hidden class="form-control cand{{ reponse.id_proposition }}" name="" id="" value="{{ reponse.candidat.id_candidat }}" aria-describedby="helpId" placeholder="">
+        
+        <script>
+            cpt++
+            var monElement = document.querySelector(".vall{{ reponse.id_proposition }}");
+            var monElement2 = document.querySelector(".prop{{ reponse.id_proposition }}");
+            var monElement3 = document.querySelector(".cand{{ reponse.id_proposition }}");
+            var valeyyy = "vale"+ cpt
+            var valeyyy2 = "prop"+ cpt
+            var valeyyy3 = "cand"+ cpt
+            // Ajouter un ID à l'élément
+            console.log(valeyyy)
+            monElement.id = valeyyy;
+            monElement2.id = valeyyy2;
+            monElement3.id = valeyyy3;
+            
+        </script>
+      </div>
+    </div>
+    <div class="tinder--buttons">
+  </div>
+    {% endfor %}
+  </div>
+
+  <div class="tinder--buttons">
+    <button onclick="voteC()" id="nope"><i class="fa fa-remove"></i></button>
+    <button onclick="voteP()" id="love"><i class="fa fa-heart"></i></button>
+  </div>
+</div>
+<div id="monModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Ceci est un modal.</p>
+  </div>
+</div>
+ <script src='https://hammerjs.github.io/dist/hammer.min.js'></script>
+  </body>
+  <script  src="{% static '/vote/js/index.js' %}"></script>
+  <script src="" async defer></script>
+  <script>
+    nbr = document.getElementById("nbr").value
+    nbrC = 0
+    function voteP() {
+        nbr--
+        console.log("Pour")
+        nbrC++
+        ff = document.getElementById("vale"+nbrC).value
+        ff2 = document.getElementById("prop"+nbrC).value
+        ff3 = document.getElementById("cand"+nbrC).value
+        const donnees = {
+            proposition: ff,
+            zone: ff2,
+            candidat: ff3,
+            nature_vote: "Pour",
+            electeur: 1
+            // Ajoutez d'autres champs et valeurs ici
+        };
+        enregistrerDonnees(donnees)
+        if(nbr==0){
+            alert("Merci d'avoir participer au sondage") 
+            window.location.href = "http://127.0.0.1:8000/vote/resultat";
+        }
+    }
+    function voteC() {
+        
+        nbr--
+        nbrC++
+        console.log("Contre")
+        ff = document.getElementById("vale"+nbrC).value
+        ff2 = document.getElementById("prop"+nbrC).value
+        ff3 = document.getElementById("cand"+nbrC).value
+        const donnees = {
+            proposition: ff,
+            zone: ff2,
+            candidat: ff3,
+            nature_vote: "contre",
+            electeur: 1
+            // Ajoutez d'autres champs et valeurs ici
+        };
+        enregistrerDonnees(donnees)
+        if(nbr==0){
+            alert("Merci d'avoir participer au sondage") 
+            window.location.href = "http://127.0.0.1:8000/vote/resultat";
+        }
+    }
+
+    function enregistrerDonnees(donnees) {
+
+        fetch('/vote/api/Vote/', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            // Ajoutez d'autres en-têtes si nécessaire
+            },
+            body: JSON.stringify(donnees)
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Traitez la réponse du serveur si nécessaire
+            console.log('Données enregistrées avec succès :', data);
+        })
+        .catch(error => {
+            // Gérez les erreurs de requête
+            console.error('Erreur lors de l\'enregistrement des données :', error);
+        });
+        }
+
+  </script>
+</html>

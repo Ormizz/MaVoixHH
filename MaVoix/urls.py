@@ -28,5 +28,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('candidat/', include('candidat.urls')),
     path('crud/', include(router.urls)),
+    path('vote/', include('vote.urls')),
 ]
 
