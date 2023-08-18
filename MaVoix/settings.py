@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'candidat',
+    'MainApp',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,8 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'candidat',
-    'MainApp',
 ]
 
 MIDDLEWARE = [
@@ -138,3 +138,7 @@ STATICFILES_DIRS = [ os.path.join(BASE_DIR, 'static')]
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#Login Redirect
+LOGIN_URL = 'login'  # Spécifiez votre propre URL de page de connexion
+LOGIN_REDIRECT_URL = 'actuality'  # Spécifiez votre propre URL de redirection après la connexion

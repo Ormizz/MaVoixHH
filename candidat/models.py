@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Creations des models pour candidat.
 class Election(models.Model):
@@ -23,7 +24,8 @@ class Candidat(models.Model):
     biographie = models.CharField(max_length=255)
     motivation = models.CharField(max_length=255)
     election = models.ForeignKey(Election, on_delete=models.CASCADE)
-    
+    user = models.OneToOneField(User, on_delete=models.SET_NULL, default="", null=True, blank=True)
+   
     def __str__(self):
         return f'Candidat:{self.id_candidat} {self.prenoms}'
     

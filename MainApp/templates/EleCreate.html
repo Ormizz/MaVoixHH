@@ -1,0 +1,13 @@
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="username" placeholder="username">
+    <input type="text" name="email" placeholder="email">
+    <input type="password" name="password" placeholder="password">
+    <input type="text" name="nom" placeholder="nom">
+    <input type="text" name="prenoms" placeholder="prenoms">
+    <input type="date" name="dateNais" placeholder="dateNais">
+    <input type="text" name="lieuNais" placeholder="lieuNais">
+    <input type="text" name="localisation" placeholder="localisation">
+    <input type="text" name="sexe" placeholder="sexe">
+    <button type="submit">Submit</button>
+</form>

@@ -18,15 +18,14 @@ from django.urls import path, include
 from rest_framework import routers
 
 from candidat.urls import router as candidatRouter
-from MainApp.urls import router as MainRouter
 
 router = routers.DefaultRouter()
 router.registry.extend(candidatRouter.registry)
-router.registry.extend(MainRouter.registry)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('candidat/', include('candidat.urls')),
+    path('', include('MainApp.urls')),
     path('crud/', include(router.urls)),
 ]
 
