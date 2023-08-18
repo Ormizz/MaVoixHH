@@ -27,5 +27,6 @@ urlpatterns = [
     path('candidat/', include('candidat.urls')),
     path('', include('MainApp.urls')),
     path('crud/', include(router.urls)),
+    path('vote/', include('vote.urls')),
 ]
 
