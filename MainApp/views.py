@@ -1,3 +1,4 @@
+import random
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -5,6 +6,7 @@ from django.contrib.auth.models import User, Group
 import requests
 from rest_framework import viewsets
 from django.contrib.auth import authenticate, login, logout
+from candidat.models import Article, Candidat
 
 from MainApp.models import * 
 from MainApp.serializers import ElecteurSerialiser
@@ -68,4 +70,50 @@ def SignUp(request):
 
 @login_required
 def actuality(request):
-    return render(request, 'accueil.html')
+    # Obtenez le nombre total d'objets dans la table
+    total_objects = Candidat.objects.count()
+    if total_objects>3:
+        # Générez trois indices aléatoires
+        random_indices = random.sample(range(1,total_objects+1), 3)
+    else:
+        random_indices = random.sample(range(1,total_objects+1), 2)
+    print(random_indices) 
+    # Obtenez les trois objets correspondants aux indices aléatoires
+    random_candidat = Candidat.objects.filter(pk__in=random_indices)
+    
+    for cand in random_candidat:
+        print(cand.nom)
+    
+    actualite = Article.objects.all()
+    utilisateur = request.user
+    return render(request, 'index.html', {
+        'user': utilisateur, 
+        'articles': actualite,
+        'rdCandidat': random_candidat,
+        }
+    )
+    
+@login_required
+def proposition(request):
+    # Obtenez le nombre total d'objets dans la table
+    total_objects = Candidat.objects.count()
+    if total_objects>3:
+        # Générez trois indices aléatoires
+        random_indices = random.sample(range(1,total_objects+1), 3)
+    else:
+        random_indices = random.sample(range(1,total_objects+1), 2)
+    print(random_indices) 
+    # Obtenez les trois objets correspondants aux indices aléatoires
+    random_candidat = Candidat.objects.filter(pk__in=random_indices)
+    
+    for cand in random_candidat:
+        print(cand.nom)
+    
+    actualite = Article.objects.all()
+    utilisateur = request.user
+    return render(request, 'index.html', {
+        'user': utilisateur, 
+        'articles': actualite,
+        'rdCandidat': random_candidat,
+        }
+    )

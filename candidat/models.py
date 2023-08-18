@@ -52,4 +52,4 @@ class Article(models.Model):
     candidat = models.ForeignKey(Candidat, on_delete=models.CASCADE)
     
     def __str__(self):
-        return f'Article:{self.id_article} {self.titre} {self.content}'
+        return f'Article:{self.id_article} {self.titre} {self.content} {self.candidat}'
