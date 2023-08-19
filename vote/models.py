@@ -13,7 +13,6 @@ class Zone(models.Model):
 class Themes_cles(models.Model):
     id_themes_cles = models.AutoField(primary_key=True)
     libelle_themes_cles = models.CharField(max_length=100)
-    zone = models.ForeignKey(Zone, on_delete=models.CASCADE)
     
     def __str__(self):
         return f'Themes_cles:{self.id_themes_cles} {self.libelle_themes_cles}'
@@ -22,6 +21,7 @@ class Proposition(models.Model):
     id_proposition = models.AutoField(primary_key=True)
     libelle_proposition = models.CharField(max_length=150)
     candidat = models.ForeignKey(Candidat, on_delete=models.CASCADE)
+    date_creation = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     themes_cles = models.ForeignKey(Themes_cles, on_delete=models.CASCADE)
     
     def __str__(self):

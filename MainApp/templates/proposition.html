@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{% static 'css/main.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/styleC.css' %}">
     <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
 </head>
 <body>
@@ -92,15 +93,19 @@
 						<div id="page-contents" class="row merged20">
 							<div class="col-lg-3">
 								<aside class="sidebar static left">
-									<div class="advertisment-box">
+									<div class="advertisment-box" data-aos="fade-right"
+                                    data-aos-duration="1000"
+                                    data-aos-easing="ease-in-sine">
 										<h4 class=""><i class="icofont-info-circle"></i> advertisment</h4>
 										<figure>
 											<a href="#" title="Advertisment"><img src="images/resources/ad-widget2.gif" alt=""></a>
 										</figure>
 									</div><!-- adversment widget -->
 									
-									<div class="widget">
-										<h4 class="widget-title">Recent Blogs <a class="see-all" href="#" title="">See All</a></h4>
+									<div class="widget" data-aos="fade-right"
+                                    data-aos-duration="1000"
+                                    data-aos-easing="ease-in-sine">
+										<h4 class="widget-title">Article recent <a class="see-all" href=".." title="">Voir plus</a></h4>
 										<ul class="recent-links">
 											<li>
 												<figure><img alt="" src="images/resources/recentlink-1.jpg"></figure>
@@ -125,7 +130,9 @@
 											</li>
 										</ul>
 									</div><!-- recent blog -->
-									<div class="widget">
+									<div class="widget" data-aos="fade-up"
+                                    data-aos-duration="1000"
+                                    data-aos-easing="ease-in-sine">
 										<h4 class="widget-title">Your profile has a new Experience section</h4>
 										<p>
 											Showcase your professional experience and education to help potential employers and collaborators find and contact you about career opportunities.
@@ -135,11 +142,17 @@
 								</aside>
 							</div>
 							<div class="col-lg-6">
-								<ul class="filtr-tabs">
+								<ul class="filtr-tabs" data-aos="fade-down"
+                                data-aos-duration="1000"
+                                data-aos-easing="ease-in-sine">
 									<li><a href="#" title="">Article</a></li>
 									<li><a class="active" href="proposition" title="">Propositions</a></li>
 								</ul><!-- tab buttons -->
-								<div class="main-wraper">
+								{% if propositions %}
+                                {% for proposition in propositions %}
+                                <div class="main-wraper" data-aos="fade-up"
+                                data-aos-duration="1000"
+                                data-aos-easing="ease-in-sine">
 									<div class="user-post">
 										<div class="friend-info">
 											<figure>
@@ -156,22 +169,28 @@
 													</div>
 												</div>
 												<ins>
-													<a title="verified" href="time-line.html">Jack Carter</a> Share Post</ins>
-												<span><i class="icofont-globe"></i> published: Sep,15 2020</span>
+													<a title="verified" href="time-line.html">{{proposition.candidat.nom}} {{proposition.candidat.prenoms}}</a> Share Post</ins>
+												<span><i class="icofont-globe"></i> published: {{proposition.date_creation}}</span>
 											</div>
 											<div class="post-meta">
-												<a href="post-detail.html" class="post-title">Supervision as a Personnel Development Device</a>
+												<a href="post-detail.html" class="post-title">Thématique: {{proposition.themes_cles.libelle_themes_cles}}</a>
 												<p>
-													Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero.
+                                                    {{proposition.libelle_proposition}}
 												</p>
 											</div>
 										</div>
 									</div>
 								</div><!--share post without image -->
+                                {% endfor %}
+                                {% else %}
+                                Nothing
+                                {% endif %}
 							</div>
 							<div class="col-lg-3">
 								<aside class="sidebar static right">
-									<div class="widget">
+									<div class="widget" data-aos="fade-left"
+                                    data-aos-duration="1000"
+                                    data-aos-easing="ease-in-sine">
 										<h4 class="widget-title">Candidat</h4>
 										<div class="sug-caro">
 											{% if rdCandidat %}
@@ -196,7 +215,9 @@
 											{% endif %}
 										</div>	
 									</div><!-- suggested group -->
-									<div class="widget">
+									<div class="widget" data-aos="fade-up"
+                                    data-aos-duration="1000"
+                                    data-aos-easing="ease-in-sine">
 										<h4 class="widget-title">Ask Research Question?</h4>
 										<div class="ask-question">
 											<i class="icofont-question-circle"></i>
@@ -204,7 +225,9 @@
 											<a class="ask-qst" href="#" title="">Ask a question</a>
 										</div>
 									</div><!-- ask question widget -->
-									<div class="widget">
+									<div class="widget" data-aos="fade-left"
+                                    data-aos-duration="1000"
+                                    data-aos-easing="ease-in-sine">
 										<h4 class="widget-title">Explor Events <a class="see-all" href="#" title="">See All</a></h4>
 										<div class="rec-events bg-purple">
 											<i class="icofont-gift"></i>
@@ -245,6 +268,10 @@
 	<script src="js/main.min.js"></script>
 	<!-- vendors merged files -->
 	<script src="js/date-time.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 	<!-- <script src="js/script.js"></script> -->
 	<!-- custom scripts -->
 

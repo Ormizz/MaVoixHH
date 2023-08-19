@@ -49,6 +49,7 @@ class Article(models.Model):
     id_article = models.AutoField(primary_key=True)
     titre = models.CharField(max_length=100)
     content = models.TextField(max_length=400, default="un contenu")
+    date_creation = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     candidat = models.ForeignKey(Candidat, on_delete=models.CASCADE)
     
     def __str__(self):

@@ -8,7 +8,8 @@ from rest_framework import viewsets
 from django.contrib.auth import authenticate, login, logout
 from candidat.models import Article, Candidat
 
-from MainApp.models import * 
+from MainApp.models import *
+from vote.models import Proposition 
 from MainApp.serializers import ElecteurSerialiser
 
 # Création des vues
@@ -94,7 +95,7 @@ def actuality(request):
     )
     
 @login_required
-def proposition(request):
+def propositionfunc(request):
     # Obtenez le nombre total d'objets dans la table
     total_objects = Candidat.objects.count()
     if total_objects>3:
@@ -108,12 +109,12 @@ def proposition(request):
     
     for cand in random_candidat:
         print(cand.nom)
+    proposition = Proposition.objects.all()
     
-    actualite = Article.objects.all()
     utilisateur = request.user
-    return render(request, 'index.html', {
+    return render(request, 'proposition.html', {
         'user': utilisateur, 
-        'articles': actualite,
+        'propositions': proposition,
         'rdCandidat': random_candidat,
         }
     )
