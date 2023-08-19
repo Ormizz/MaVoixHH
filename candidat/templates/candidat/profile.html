@@ -10,7 +10,7 @@
 			</li>
 			<li class="">
 				<a class="" href="analytics.html" title="">
-					<i class=""><svg id="ab7" class="feather feather-zap" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></i>Compte
+					<i class=""><svg id="ab7" class="feather feather-zap" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></i>Gestion de mon compte
 				</a>
 			</li>
 		</ul>
@@ -20,14 +20,14 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="panel-content">
-					<h4 class="main-title">User Profile <i class="icofont-pen-alt-1"></i></h4>
+					<h4 class="main-title">Mon profil <i class="icofont-pen-alt-1"></i></h4>
 					<div class="row merged20 mb-4">
 						<div class="col-lg-4">
 							<div class="d-widget text-center">
 								<div class="user-avatar-edit">
 									<figure><img src="{% static 'admin/images/resources/user-mockupbg.jpg' %}" alt=""></figure>
 									<div class="fileupload">
-										<span class="btn-text">edit</span>
+										<span class="btn-text">editer</span>
 										<input type="file" class="upload">
 									</div>
 								</div>
@@ -56,23 +56,18 @@
 								<div class="d-widget-title"><h5>Social Links</h5></div>
 								<div class="social-links">
 									<i class="icofont-facebook"></i>
-									<input type="text" placeholder="Facebook Profile">
-									<em>Add your Facebook username (e.g. johndoe).</em>
+									<input type="text" placeholder="Mon facebook">
+									<em>Mon facebook (...).</em>
 								</div>
 								<div class="social-links">
 									<i class="icofont-instagram"></i>
-									<input type="text" placeholder="Facebook Profile">
-									<em>Add your Facebook username (e.g. johndoe).</em>
+									<input type="text" placeholder="Mon instagram">
+									<em>Mon instagram (...).</em>
 								</div>
 								<div class="social-links">
 									<i class="icofont-twitter"></i>
-									<input type="text" placeholder="Facebook Profile">
-									<em>Add your Facebook username (e.g. johndoe).</em>
-								</div>
-								<div class="social-links">
-									<i class="icofont-pinterest"></i>
-									<input type="text" placeholder="Facebook Profile">
-									<em>Add your Facebook username (e.g. johndoe).</em>
+									<input type="text" placeholder="Mon twitter">
+									<em>Mon twitter(...).</em>
 								</div>
 							</div>
 						</div>
@@ -95,15 +90,15 @@
 										<div class="dash-item">
 											<a href="#">
 												<div class="sl-avatar ">
-													<img alt="avatar" src="images/resources/small-pic5.png" class="img-responsive img-circle">
+													<img alt="avatar" src="{% static 'admin/images/resources/small-pic5.png' %}" class="img-responsive img-circle">
 												</div>
 												<div class="sl-content">
 													<p class="inline-block"><span class="txt-success">{{actualite.titre}}</span><br><span>{{actualite.content}}</span></p>
-													<span class="">3 Min</span>
+													<span class="">{{actualite.date_creation}}</span>
 												</div>
 											</a>
 											<div class="edition-btn">
-												<span class="iconbox button soft-primary"><i type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" class="icofont-pen-alt-1"></i></span>
+												<span class="iconbox button soft-primary"><i data-bs-toggle="modal" data-bs-target="#exampleModal" class="icofont-pen-alt-1"></i></span>
 												<span class="iconbox button soft-danger"><i class="icofont-trash"></i></span>
 											</div>
 										</div>
@@ -111,7 +106,6 @@
 										{% else %}
 										Pas de post fait
 										{% endif %}
-										<div class="sp sp-bars"></div>
 									</div>	
 								 </li>
 								 <li>
@@ -124,11 +118,11 @@
 										<div class="dash-item">
 											<a href="#">
 												<div class="sl-avatar ">
-													<img alt="avatar" src="images/resources/small-pic5.png" class="img-responsive img-circle">
+													<img alt="avatar" src="{% static 'admin/images/resources/small-pic5.png' %}" class="img-responsive img-circle">
 												</div>
 												<div class="sl-content">
 													<p class="inline-block"><span class="txt-success">{{proposition.themes_cles.libelle_themes_cles}}</span><br><span>{{proposition.libelle_proposition}}</span></p>
-													<span class="">3 Min</span>
+													<span class="">{{proposition.date_creation}}</span>
 												</div>
 											</a>
 											<div class="edition-btn">
@@ -140,12 +134,10 @@
 										{% else %}
 										Pas de post fait
 										{% endif %}
-										<div class="sp sp-bars"></div>
 									</div>	
 								 </li>
 								
 							</ul>
-							<a href="#" title="" class="button primary circle mt-5">Save Changes</a>
 						</div>
 					</div>	
 				</div>
@@ -155,9 +147,6 @@
 	
 	{% comment %} Article edit {% endcomment %}
 	<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-	Launch demo modal
-  </button>
   
   <!-- Modal -->
   {% comment %} <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -232,7 +221,7 @@
 			<form class="row g-3" method="post" action="{% url 'CreateProp' %}">
 				{% csrf_token %}
 				<div class="col-md-12">
-					<select class="form-select" aria-label="Default select example">
+					<select class="form-select" name="themes_cles_id" aria-label="Default select example">
 						<option selected disabled>Selectionnez un thème</option>
 						{% if all_theme %}
 						{% for theme in all_theme %}

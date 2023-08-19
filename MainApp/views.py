@@ -122,6 +122,9 @@ def propositionfunc(request):
         }
     )
 
+def index(request):
+    return render(request, 'accueil.html')
+
 def enregistrer_photo(request):
     if request.method == 'POST':
         form = PhotoForm(request.POST, request.FILES)
