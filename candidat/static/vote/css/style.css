@@ -82,7 +82,7 @@ body {
 
 .tinder--card {
     display: inline-block;
-    width: 90vw;
+    width: 40vw;
     max-width: 400px;
     height: 50vh;
     background: #FFFFFF;
@@ -147,9 +147,9 @@ body {
 }
 
 .fa-heart {
-    color: #FFACE4;
+    color: #b7c2ae;
 }
 
 .fa-remove {
-    color: #CDD6DD;
+    color: #f73b31;
 }

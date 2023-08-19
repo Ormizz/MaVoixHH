@@ -13,12 +13,12 @@ from MainApp.models import *
 def index(request, id):
     # Récupérez la zone spécifique et les thèmes associés
     zone = Zone.objects.get(pk=id)
-    themes = Themes_cles.objects.filter(zone=zone.id_zone)
+    themes = Themes_cles.objects.all()
     
     # Calculez le nombre de réponses à obtenir par thème et par candidat
-    total_themes = themes.count()
+    # total_themes = themes.count()
     total_candidats = Candidat.objects.count()
-    reponses_par_candidat = 25 // total_candidats
+    reponses_par_candidat = 30 // total_candidats
     
     # propositions = Proposition.objects.all()
     
@@ -35,7 +35,7 @@ def index(request, id):
 
     # Parcourez chaque thème et récupérez les propositions liées
     for theme in themes:
-        propositions = Proposition.objects.filter(themes_cles=theme)
+        propositions = Proposition.objects.filter(themes_cles=theme, zone=zone.id_zone)
         propositions_liees.extend(propositions)
     
 
@@ -100,14 +100,20 @@ def resultat(request, id):
     premier_candidat = candidats_avec_votes_pour.first()
     deuxieme_candidat = candidats_avec_votes_pour[1] if len(candidats) >= 2 else None
     troisieme_candidat = candidats_avec_votes_pour[2] if len(candidats) >= 2 else None
-
+    
+    nbr_total_vote = 0
+    for cvpe in candidats_avec_votes_pour:
+        nbr_total_vote = nbr_total_vote + cvpe.num_votes_pour
+        
+    
     # Ajoutez le dictionnaire des résultats au liste
     resultats_par_candidat.append(resultat_candidat)
     return render(request,'sondages/resultat.html',{ 
         'vote': candidats_avec_votes_pour,
         'premier_candidat': premier_candidat,
         'deuxieme_candidat': deuxieme_candidat,
-        'troisieme_candidat': troisieme_candidat
+        'troisieme_candidat': troisieme_candidat,
+        'nbr_total_vote': nbr_total_vote
         })
 
 
