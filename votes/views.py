@@ -100,14 +100,20 @@ def resultat(request, id):
     premier_candidat = candidats_avec_votes_pour.first()
     deuxieme_candidat = candidats_avec_votes_pour[1] if len(candidats) >= 2 else None
     troisieme_candidat = candidats_avec_votes_pour[2] if len(candidats) >= 2 else None
-
+    
+    nbr_total_vote = 0
+    for cvpe in candidats_avec_votes_pour:
+        nbr_total_vote = nbr_total_vote + cvpe.num_votes_pour
+        
+    
     # Ajoutez le dictionnaire des résultats au liste
     resultats_par_candidat.append(resultat_candidat)
     return render(request,'sondages/resultat.html',{ 
         'vote': candidats_avec_votes_pour,
         'premier_candidat': premier_candidat,
         'deuxieme_candidat': deuxieme_candidat,
-        'troisieme_candidat': troisieme_candidat
+        'troisieme_candidat': troisieme_candidat,
+        'nbr_total_vote': nbr_total_vote
         })
 
 

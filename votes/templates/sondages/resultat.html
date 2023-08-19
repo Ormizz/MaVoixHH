@@ -29,7 +29,7 @@
   <body class="gradients">
     <header class="">
       <div class="topbar stick" style="background-color: white">
-        <div class="logo" style="width: 250px; height: 50px">
+        <div class="logo" style="width: 200px; height: 50px">
           <img
             id="logo"
             style="width: 100px; height: 50px"
@@ -148,17 +148,31 @@
         <li class="other-prize-li mt-4">
           <div class="other-prize-container">
             <div class="number">#</div>
-            <div class="other-prize">
-              {{ vot.num_votes_pour }} points commun avec:
-            </div>
+            <div class="other-prize">{{ vot.nom }} {{ vot.prenoms }}</div>
           </div>
           <div
             style="display: flex; justify-content: space-between"
             class="other-prize-winner-container"
           >
-            <p>{{ vot.nom }} {{ vot.prenoms }}</p>
+            <p></p>
             <a href="">Voir profile</a>
           </div>
+
+          <div class="progress" style="background: rgb(224, 224, 224)">
+            <div
+              class="progress-bar"
+              style="background: rgb(2, 115, 20)"
+              id="myDiv{{ vot.id_candidat }}"
+              style=""
+            ></div>
+          </div>
+          <script>
+            vale =  {{ vot.num_votes_pour }} / {{ nbr_total_vote }}
+            vale_pourcent = vale * 100
+            console.log(vale_pourcent)
+            var divElement = document.getElementById("myDiv{{ vot.id_candidat }}");
+            divElement.style.width = vale_pourcent+"%";
+          </script>
         </li>
         {% endfor %}
       </ul>
