@@ -1,7 +1,15 @@
 {% load static %}
 <!DOCTYPE html>
+<!-- 
+Template Name: i-Fact
+Version: 1.0.0
+doc_author: Webstrot
 
-<html lang="fr">
+-->
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
 
 <head>
     <meta charset="utf-8" />
@@ -9,37 +17,42 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Place favicon.ico in the root directory -->
-    <link rel="icon" type="image/png" sizes="16x16" href="images/doctor_01/Logovoix.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/doctor_01/Iconmavoix.png">
     <meta name="description" content="i-Fact, Start Up" />
     <meta name="keywords" content="i-Fact, Start Up" />
     <meta name="doc_author" content="" />
     <meta name="MobileOptimized" content="320" />
-    <!-- Bootstrap core CSS -->
-    <link href="{% static 'index/css/bootstrap.min.css' %}" rel="stylesheet">
-    <!-- font-awesome -->
-    <link href="{% static 'index/css/font-awesome.css' %}" rel="stylesheet">
-    <!-- Web Fonts -->
-    <link href="{% static 'index/css/fonts.css' %}" rel="stylesheet">
-    <!-- Animation Css -->
-    <link href="{% static 'index/css/animate.css' %}" rel="stylesheet">
-    <!-- Flaticon Css -->
-    <link href="{% static 'index/flaticon/doctor_01/flaticon.css' %}" rel="stylesheet">
-    <!-- Owl Carousel -->
-    <link href="{% static 'index/css/owl.theme.default.css' %}" rel="stylesheet">
-    <link href="{% static 'index/css/owl.carousel.css' %}" rel="stylesheet">
-    <!-- Style CSS -->
-    <link href="{% static 'index/css/style.css' %}" rel="stylesheet">
-    <!-- Responsive CSS -->
-    <link href="{% static 'index/css/responsive.css' %}" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
-
+     <!-- Bootstrap core CSS -->
+     <link href="{% static 'index/css/bootstrap.min.css' %}" rel="stylesheet">
+     <!-- font-awesome -->
+     <link href="{% static 'index/css/font-awesome.css' %}" rel="stylesheet">
+     <!-- Web Fonts -->
+     <link href="{% static 'index/css/fonts.css' %}" rel="stylesheet">
+     <!-- Animation Css -->
+     <link href="{% static 'index/css/animate.css' %}" rel="stylesheet">
+     <!-- Flaticon Css -->
+     <link href="{% static 'index/flaticon/doctor_01/flaticon.css' %}" rel="stylesheet">
+     <!-- Owl Carousel -->
+     <link href="{% static 'index/css/owl.theme.default.css' %}" rel="stylesheet">
+     <link href="{% static 'index/css/owl.carousel.css' %}" rel="stylesheet">
+     <!-- Style CSS -->
+     <link href="{% static 'index/css/style.css' %}" rel="stylesheet">
+     <!-- Responsive CSS -->
+     <link href="{% static 'index/css/responsive.css' %}" rel="stylesheet">
+ 
+     <link href="{% static 'index/modal/style.css' %}" rel="stylesheet">
+ 
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+ 
 </head>
 
 <body>
 
-    <a href="javascript:" id="return-to-top"><i class="fas fa-arrow-up"></i> <br>Haut</a>
+    <a href="javascript:" id="return-to-top"><i class="fas fa-arrow-up"></i> <br>top</a>
 
+    <!-- Preloader start -->
+    
+    <!-- Preloader end -->
 
     <div data-scroll='0' class="full_width">
         <!-- doc_serach_header start -->
@@ -61,15 +74,15 @@
                 <div class="doc_header_shape">
                     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="374.082px" height="225.598px" viewBox="0 0 374.082 225.598" enable-background="new 0 0 374.082 225.598" xml:space="preserve">
                         <path fill-rule="evenodd" clip-rule="evenodd" fill="#ff7200" d="M370.028,91.414c0,0-18.486,54.319-147,113.585
-                        c-65.21,22.047-129.206,46.766-188.241-44.27c-26.62-47.241-57.69-22.763-9.887-90.016C45.018,41.633,151.228-20.013,274.54,6.45
-                        C365.704,27.995,383.633,24.256,370.028,91.414z" />
+	c-65.21,22.047-129.206,46.766-188.241-44.27c-26.62-47.241-57.69-22.763-9.887-90.016C45.018,41.633,151.228-20.013,274.54,6.45
+	C365.704,27.995,383.633,24.256,370.028,91.414z" />
                     </svg>
                 </div>
                 <div class="row">
                     <div class="col-md-3 col-sm-6 col-6">
                         <div class="doc_logo_shape_wrapper">
                             <div class="doc_logo_wrapper">
-                                <a href="index.html">
+                                <a href="#">
                                     {% comment %} <img src="{% static 'index/images/doctor_01/logovoix.png' %}" alt="logo" /> {% endcomment %}
                                 </a>
                             </div>
@@ -106,8 +119,8 @@
                             <h4 class="wow fadeInUp animated">La plateforme interactive qui connecte les candidats et les élècteurs </h4>
                             <div class="doc_banner_btn wow fadeInUp animated">
                                 <ul>
-                                    <li><a href="#" class="doc_btn_style" data-bs-toggle="modal" data-bs-target="#Connexion">connexion </a></li>
-                                    <li> <a href="#">
+                                    <li><a href="#" class="doc_btn_style" data-bs-toggle="modal" data-bs-target="#connexion">connexion </a></li>
+                                    <li> <a href="#" data-bs-toggle="modal" data-bs-target="#inscription">
                                                inscription
                                             </a>
                                     </li>
@@ -135,63 +148,130 @@
                 <div class="row">
                     <div class="col-lg-8 col-md-12 col-12 col-sm-12 offset-lg-2">
                         <div class="doc_section_heading">
-                            <h3> POUR UNE MEILLEURE ELECTION </h3>
-                            <h2> JE DONNE MA VOIX </h2>
+                            <h3>COMPTE À REBOURS</h3>
+                            <h2> <p id="countdown"></p>
+                                <script>
+                                    function startCountdown(targetDate) {
+                                        const countdownElement = document.getElementById("countdown");
+
+                                        const intervalId = setInterval(() => {
+                                            const currentDate = new Date().getTime();
+                                            const timeLeft = targetDate - currentDate;
+
+                                            if (timeLeft <= 0) {
+                                                clearInterval(intervalId);
+                                                countdownElement.textContent = "Événement en cours !";
+                                            } else {
+                                                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                                                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                                                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                                                countdownElement.textContent = `${days} jours, ${hours} heures, ${minutes} minutes, ${seconds} secondes`;
+                                            }
+                                        }, 1000);
+                                    }
+
+                                    const threeMonthsInMillis = 3 * 30 * 24 * 60 * 60 * 1000;
+                                    const targetDate = new Date().getTime() + threeMonthsInMillis;
+
+                                    // Vérifiez si l'heure de départ est enregistrée dans le stockage local
+                                    const storedStartTime = localStorage.getItem("countdownStartTime");
+                                    if (storedStartTime) {
+                                        // Si l'heure de départ est enregistrée, utilisez-la pour le compte à rebours
+                                        const elapsedMillis = new Date().getTime() - parseInt(storedStartTime);
+                                        startCountdown(targetDate - elapsedMillis);
+                                    } else {
+                                        // Si l'heure de départ n'est pas enregistrée, enregistrez-la maintenant
+                                        localStorage.setItem("countdownStartTime", new Date().getTime());
+                                        startCountdown(targetDate);
+                                    }    
+                                </script>
+                                </h2>
                         </div>
                     </div>
 
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-
-                        <div class="doc_service_box">
-                            <div class="doc_icon_shape_wrapper">
-
-                                <i class="flaticon-support"></i>
-                            </div>
-                            <h4><a href="#">Comment <br> voter ? </a></h4>
-                            <p>Lorem ipsum dolor amet conse adipiscing elit tempor incididunt. </p>
-                        </div>
+                    <div data-scroll='1' class="full_width">
+                        
                     </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="doc_service_box doc_service_box2">
-                            <div class="doc_icon_shape_wrapper">
 
-                                <i class="flaticon-support"></i>
-                            </div>
-                            <h4><a href="#">Les centres de vote</a></h4>
-                            <p>Lorem ipsum dolor amet conse adipiscing elit tempor incididunt. </p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="doc_service_box">
-                            <div class="doc_icon_shape_wrapper">
-
-                                <i class="flaticon-support"></i>
-                            </div>
-                            <h4><a href="#">Procedure de vote </a></h4>
-                            <p>Lorem ipsum dolor amet conse adipiscing elit tempor incididunt. </p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12">
-                        <div class="doc_service_box doc_service_box2">
-                            <div class="doc_icon_shape_wrapper">
-
-                                <i class="flaticon-support"></i>
-                            </div>
-                            <h4><a href="#">Planning des vote </a></h4>
-                            <p>Lorem ipsum dolor amet conse adipiscing elit tempor incididunt. </p>
-                        </div>
-
-                    </div>
+                    
+                    
                 </div>
             </div>
+
+            
         </div>
     </div>
 
-    <!--doc_services_wrapper end-->
+    <div data-scroll='1' class="full_width">
+        <!--doc_services_wrapper start-->
+        <div class="doc_services_wrapper">
 
-    
-    <!-- doc_about_section end -->
-    <!-- doc_testimonial_section start-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-12 col-12 col-sm-12 offset-lg-2">
+                        <div class="doc_section_heading">
+                          
+                        </div>
+                    </div>
+
+                    <div data-scroll='1' class="full_width">
+                        <br>
+                    <h1></h1>
+                    <br>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+
+                        <div class="doc_service_box">
+                            <div class="doc_icon_shape_wrapper">
+
+                                <i class="flaticon-support"></i>
+                            </div>
+                            <h4><a href="#">Securité <br> Education </a></h4>
+                            <p>Lorem ipsum dolor amet conse adipiscing elit tempor incididunt. </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="doc_service_box doc_service_box2">
+                            <div class="doc_icon_shape_wrapper">
+
+                                <i class="flaticon-support"></i>
+                            </div>
+                            <h4><a href="#">Sante <br> société</a></h4>
+                            <p>Lorem ipsum dolor amet conse adipiscing elit tempor incididunt. </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="doc_service_box">
+                            <div class="doc_icon_shape_wrapper">
+
+                                <i class="flaticon-support"></i>
+                            </div>
+                            <h4><a href="#">Culture <br> Environnement </a></h4>
+                            <p>Lorem ipsum dolor amet conse adipiscing elit tempor incididunt. </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="doc_service_box doc_service_box2">
+                            <div class="doc_icon_shape_wrapper">
+
+                                <i class="flaticon-support"></i>
+                            </div>
+                            <h4><a href="#">Affaire sociaux & familliale </a></h4>
+                            <p>Lorem ipsum dolor amet conse adipiscing elit tempor incididunt. </p>
+                        </div>
+
+                    </div>
+                    
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
     <div data-scroll='3' class="full_width">
         <div class="doc_testimonial_section">
 
@@ -200,7 +280,7 @@
                     <div class="col-lg-10 offset-lg-1 col-md-12 col-sm-12">
                         <div class="doc_section_heading">
                             <h3>   </h3>
-                            <h2> CONSEILS DE VOTE </h2>
+                            <h2> LES ACTUALITÉS</h2>
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -305,18 +385,142 @@
         <!-- doc_testimonial_section end -->
     </div>
 
-    
+    <div data-scroll='4' class="full_width">
+        <!-- doc_pricing_section start -->
+        <div class="doc_pricing_section">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-10 offset-lg-1 col-md-12 col-sm-12">
+                        <div class="doc_section_heading">
+                            <h3>  </h3>
+                            <h2> PROGRAMME DES DEBATS  </h2>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-12">
+                                <div class="doc_pricing-table-default text-center">
+                                    <span class="price">19H30<br>GMT</span>
+
+                                    <h2>YOPOUGON</h2>
+                                    <ul class="doc_pricing-list">
+                                        <li>KOFFI MYLENE </li>
+                                        <li>CONTRE</li>
+                                        <li>KOUAKOU SERGE</li>
+                                    </ul>
+
+                                    <a href="#" class="doc_btn_style">SUIVRE LE DEBAT</a>
+                                </div>
+                                <!-- /.pricing-table-wrapper -->
+                            </div>
+                            <!-- /.col-sm-4 -->
+                            <div class="col-lg-4 col-md-12">
+                                <div class="doc_pricing-table-default text-center">
+                                    <span class="price">19H30<br>GMT</span>
+
+                                    <h2>COCODY</h2>
+                                    <ul class="doc_pricing-list">
+                                        <li>KOFFI MYLENE </li>
+                                        <li>CONTRE</li>
+                                        <li>KOUAKOU SERGE</li>
+                                    </ul>
+
+                                    <a href="#" class="doc_btn_style">SUIVRE LE DEBAT</a>
+                                </div>
+                                <!-- /.pricing-table-wrapper -->
+                            </div>
+                            <!-- /.col-sm-4 -->
+                            <div class="col-lg-4 col-md-12">
+                                <div class="doc_pricing-table-default text-center">
+                                    <span class="price">19H30<br>GMT</span>
+
+                                    <h2>PLATEAU</h2>
+                                    <ul class="doc_pricing-list">
+                                        <li>KOFFI MYLENE </li>
+                                        <li>CONTRE</li>
+                                        <li>KOUAKOU SERGE</li>
+                                    </ul>
+
+                                    <a href="#" class="doc_btn_style">SUIVRE LE DEBAT</a>
+                                </div>
+                                <!-- /.pricing-table-wrapper -->
+                            </div>
+                            <!-- /.col-sm-4 -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
     <div data-scroll='5' class="full_width">
         <!--location wrapper start-->
-        
+        <div class="doc_location_wrapper full_width">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-12 abt_section">
+                        <div class="doc_abt_heading_wrapper">
+                            <h1>contactez nous</h1>
+
+                        </div>
+                        <form>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                                    <div class="doc_contect_form1">
+                                        <input type="text" name="nom" placeholder="Nom" class="require">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="doc_contect_form1">
+                                        <input type="text" name="email" placeholder="Email" class="require" data-valid="email" data-error="Email should be valid.">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="doc_contect_form1">
+                                        <input type="text" name="contact" placeholder="Contact" class="require">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="doc_contect_form1">
+                                        <input type="text" name="objet" placeholder="Objet">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="doc_contect_form1">
+                                        <textarea rows="6" name="message" placeholder="Message" class="require"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="response"></div>
+                                    <div class="doc_contect_btn">
+                                        <button type="button" class="submitForm">soumettre</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                        <div class="doc_abt_heading_wrapper">
+                            <h1>Localisation</h1>
+                        </div>
+                        <div id='map'></div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!--location wrapper end-->
         <!-- footer wrapper start-->
         <div class="doc_footer_wrapper full_width">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12">
-                        <h3>MA-VOIX<a href="#">   </a></h3>
+                        <h3>MA-VOIX<a href="http://webstrot.com/" target="_blank">   </a></h3>
                         
 
                     </div>
@@ -325,52 +529,112 @@
         </div>
     </div>
 
+    
+<!-- Button trigger modal -->
+
   
-    <!-- Modal -->
-    <div class="modal fade" id="connexion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="inscription" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color:#027314">
+          <h5 class="modal-title" id="exampleModalLabel" style="color:white">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form class="row g-3" method="post" action="{% url 'SignUp' %}">
+                {% csrf_token %}
+                <div class="col-md-6">
+                  <label for="inputEmail4" class="form-label">Email</label>
+                  <input type="email" name="email" class="form-control" id="inputEmail4">
+                </div>
+                <div class="col-md-6">
+                  <label for="inputPassword4" class="form-label">Mot de passe</label>
+                  <input type="password" name="password" class="form-control" id="inputPassword4">
+                </div>
+                <div class="col-12">
+                  <label for="inputAddress" class="form-label">Nom</label>
+                  <input type="text" name="nom" class="form-control" id="inputAddress" placeholder="Nom">
+                </div>
+                <div class="col-12">
+                  <label for="inputAddress2" class="form-label">Prenoms</label>
+                  <input type="text" name="prenoms" class="form-control" id="inputAddress2" placeholder="Prenom">
+                </div>
+                
+                <div class="col-md-4">
+                  <label for="inputState" class="form-label">Sexe</label>
+                  <select id="inputState" name="sexe" class="form-select">
+                    <option disabled selected>Choisir...</option>
+                    <option value="Masculin">Masculin</option>
+                    <option value="Feminin">Feminin</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="inputCity" class="form-label">Date de naissance</label>
+                    <input type="date" name="date_naissance" class="form-control" id="inputCity">
+                </div>
+                <div class="col-md-6">
+                    <label for="inputPassword4" class="form-label">Lieu de naissance</label>
+                    <input type="password" name="lieu_naissance" class="form-control" id="inputPassword4">
+                </div>
+                <div class="col-md-6">
+                    <label for="inputCity" class="form-label">Commune</label>
+                    <input type="text" name="localisation" class="form-control" id="inputCity">
+                </div>
+                <div class="col-md-6">
+                    <label for="inputCity" class="form-label">Nom d'utilisateur</label>
+                    <input type="text" name="username" class="form-control" id="inputCity">
+                </div>
+              
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+          <button type="submit" style="background-color:#027314; color:white" class="btn btn-primary">M'inscrire</button>
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>
+  
+  
+  <!-- Modal -->
+  <div class="modal fade" id="connexion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#027314">
+                <h5 class="modal-title" id="exampleModalLabel">Connexion</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="form login_form">
-                        <form action="#">
-                          <h2>Connexion</h2>
-              
-                          <div class="input_box">
-                            <label for="uname" class="label"><b>Email/ Nom d'uttilisateur</b></label>
-                            <input type="email" placeholder="" required />
-                           
-                          </div>
-                          <div class="input_box">
-                            <label for="uname" class="label"><b>Mot de passe</b></label>
-                            <input type="password" placeholder="" required />
-                            
-                            <i class="uil uil-eye-slash pw_hide"></i>
-                          </div>
-              
-                          <div class="option_field">
-                            <span class="checkbox">
-                              <a href="#" class="forgot_pw">J'ai oublier mon mot de passe</a>
-                            </span>
-                            
-                          </div>
-              
-                          <button class="button-c">connexion</button>
-              
-                          <div class="login_signup">Pas de compte? <a href="#" id="signup">Inscrivez vous</a></div>
-                        </form>
-                      </div>
-                </div>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
             </div>
+            <div class="modal-body">
+                <form method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+    
+                <div class="input_box">
+                    <label for="uname" class="label"
+                    ><b>Nom d'uttilisateur</b></label
+                    >
+                    <input type="text" name="username" placeholder="username" />
+                </div>
+                <div class="input_box">
+                    <label for="uname" class="label"><b>Mot de passe</b></label>
+                    <input type="text" name="password" placeholder="password" required/>
+    
+                    <i class="uil uil-eye-slash pw_hide"></i>
+                </div>
+                <br><br><br>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn " style="background-color:#027314; color:white">Se connecter</button>
+            </div>
+            </form>
         </div>
     </div>
+  </div>
+  
+  
   
 
     <!-- custom js files -->
@@ -384,7 +648,29 @@
     <script src="{% static 'index/js/contact_form.js' %}"></script>
     <!-- Custom js -->
     <script src="{% static 'index/js/custom.js' %}"></script>
+
+    <script src="{% static 'index/modal/script.js' %}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBctr8WYTfFDi_oGbPEolSDzn4VZaAKVK0&callback=initMap">
+    </script>
+    <script>
+        function initMap() {
+            var abidjan = {
+                lat: 5.359952,
+                lng: -4.008256
+            };
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                scrollwheel: false,
+                center: abidjan
+            });
+            var marker = new google.maps.Marker({
+                position: abidjan,
+                map: map
+            });
+        }
     </script>
 </body>
 

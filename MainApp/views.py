@@ -39,14 +39,14 @@ def connexion(request):
 
 		else:
 			messages.info(request,"erreur d'authentification")
-			return redirect("login")
+			return redirect("index")
 
 	else:
-		return render(request,'login.html')
+		return render(request,'accueil.html')
 
 def deconnexion(request):
 	logout(request)
-	return redirect("login")
+	return redirect("index")
 
 def SignUp(request):
     if request.method == 'POST':
@@ -59,8 +59,8 @@ def SignUp(request):
         electeur = Electeur.objects.create(
             nom = request.POST['nom'],
             prenoms = request.POST['prenoms'],
-            date_naissance = request.POST['dateNais'],
-            lieu_naissance = request.POST['lieuNais'],
+            date_naissance = request.POST['date_naissance'],
+            lieu_naissance = request.POST['lieu_naissance'],
             localisation = request.POST['localisation'],
             sexe = request.POST['sexe'],
             user_id = user.pk,
@@ -68,8 +68,8 @@ def SignUp(request):
         electeur.save()
         electeurGroup = Group.objects.get(name='Electeur')
         user.groups.add(electeurGroup)
-        return redirect("login")
-    return render(request, 'EleCreate.html')
+        return redirect("index")
+    return render(request, 'index.html')
 
 
 @login_required
