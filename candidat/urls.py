@@ -9,6 +9,9 @@ urlpatterns = [
     path('listC', views.listC, name='listC'),
     path('form/<int:id>', views.formedit, name='formedit'),
     path('form/', views.form, name='form'),
+    path('profile', views.profile, name='profileC'),
+    path('profile/article', views.profileCreateArt, name='CreateArt'),
+    path('profile/prop', views.profileCreateArt, name='CreateProp'),
     
 ]
 

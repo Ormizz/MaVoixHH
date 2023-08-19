@@ -1,0 +1,264 @@
+{% extends 'candidat/base/base2.html' %}
+{% load static %}
+{% block content %}
+	<nav class="sidebar">
+		<ul class="menu-slide">
+			<li class="">
+				<a class="" href="index.html" title="">
+					<i><svg id="icon-home" class="feather feather-home" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></i> Dashboard
+				</a>
+			</li>
+			<li class="">
+				<a class="" href="analytics.html" title="">
+					<i class=""><svg id="ab7" class="feather feather-zap" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></i>Compte
+				</a>
+			</li>
+		</ul>
+	</nav><!-- sidebar -->
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="panel-content">
+					<h4 class="main-title">User Profile <i class="icofont-pen-alt-1"></i></h4>
+					<div class="row merged20 mb-4">
+						<div class="col-lg-4">
+							<div class="d-widget text-center">
+								<div class="user-avatar-edit">
+									<figure><img src="{% static 'admin/images/resources/user-mockupbg.jpg' %}" alt=""></figure>
+									<div class="fileupload">
+										<span class="btn-text">edit</span>
+										<input type="file" class="upload">
+									</div>
+								</div>
+								<div class="user-dp-edit">
+									<figure>
+										<img src="{% static 'admin/images/resources/admin.jpg' %}" alt="">
+											<div class="fileupload">
+											<span class="btn-text"><i class="icofont-camera"></i></span>
+											<input type="file" class="upload">
+										</div>
+									</figure>
+									<div class="users-name">
+										<h5>{{user.candidat.nom}} <br> {{user.candidat.prenoms}}</h5>
+										<span>{{user.candidat.parti_politique}}</span><br>
+										<span>{{user.candidat.localisation}}</span>
+									</div>
+								</div>
+								<ul class="folowerss">
+									<li><span>Proposition: </span> <i>{{user.candidat.Proposition_set.count}}</i></li>
+									<li><span>Article: </span> <i>{{user.candidat.article_set.count}}</i></li>
+								</ul>
+								<a class="button primary circle" href="#" title=""><i class="icofont-pen-alt-1"></i> Edit</a>
+								<a class="button primary circle	danger" href="#" title=""><i class="icofont-ban"></i> Block</a>
+							</div>	
+							<div class="d-widget mt-4">
+								<div class="d-widget-title"><h5>Social Links</h5></div>
+								<div class="social-links">
+									<i class="icofont-facebook"></i>
+									<input type="text" placeholder="Facebook Profile">
+									<em>Add your Facebook username (e.g. johndoe).</em>
+								</div>
+								<div class="social-links">
+									<i class="icofont-instagram"></i>
+									<input type="text" placeholder="Facebook Profile">
+									<em>Add your Facebook username (e.g. johndoe).</em>
+								</div>
+								<div class="social-links">
+									<i class="icofont-twitter"></i>
+									<input type="text" placeholder="Facebook Profile">
+									<em>Add your Facebook username (e.g. johndoe).</em>
+								</div>
+								<div class="social-links">
+									<i class="icofont-pinterest"></i>
+									<input type="text" placeholder="Facebook Profile">
+									<em>Add your Facebook username (e.g. johndoe).</em>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-8">
+							<nav class="responsive-tab style1">
+								<ul data-submenu-title="compounents"
+								uk-switcher="connect: #picturez ;animation: uk-animation-slide-left-medium, uk-animation-slide-right-medium" class="uk-grid" uk-sticky="offset:50;media : @m">
+									<li><a href="#">Timeline</a></li>
+									<li><a href="#">Proposition</a></li>
+								</ul>
+							</nav>
+							<ul class="uk-switcher" id="picturez">
+								 <li>
+									<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CreateArticle">
+										Creer un article
+									</button> <br><br>
+								 	<div class="streamline">
+										{% if actualites %}
+										{% for actualite in actualites %}
+										<div class="dash-item">
+											<a href="#">
+												<div class="sl-avatar ">
+													<img alt="avatar" src="images/resources/small-pic5.png" class="img-responsive img-circle">
+												</div>
+												<div class="sl-content">
+													<p class="inline-block"><span class="txt-success">{{actualite.titre}}</span><br><span>{{actualite.content}}</span></p>
+													<span class="">3 Min</span>
+												</div>
+											</a>
+											<div class="edition-btn">
+												<span class="iconbox button soft-primary"><i type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" class="icofont-pen-alt-1"></i></span>
+												<span class="iconbox button soft-danger"><i class="icofont-trash"></i></span>
+											</div>
+										</div>
+										{% endfor %}
+										{% else %}
+										Pas de post fait
+										{% endif %}
+										<div class="sp sp-bars"></div>
+									</div>	
+								 </li>
+								 <li>
+									<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CreateProp">
+										Faire une proposition
+									</button> <br><br>
+									<div class="posted-photo">
+										{% if propositions %}
+										{% for proposition in propositions %}
+										<div class="dash-item">
+											<a href="#">
+												<div class="sl-avatar ">
+													<img alt="avatar" src="images/resources/small-pic5.png" class="img-responsive img-circle">
+												</div>
+												<div class="sl-content">
+													<p class="inline-block"><span class="txt-success">{{proposition.themes_cles.libelle_themes_cles}}</span><br><span>{{proposition.libelle_proposition}}</span></p>
+													<span class="">3 Min</span>
+												</div>
+											</a>
+											<div class="edition-btn">
+												<span class="iconbox button soft-primary"><i class="icofont-pen-alt-1"></i></span>
+												<span class="iconbox button soft-danger"><i class="icofont-trash"></i></span>
+											</div>
+										</div>
+										{% endfor %}
+										{% else %}
+										Pas de post fait
+										{% endif %}
+										<div class="sp sp-bars"></div>
+									</div>	
+								 </li>
+								
+							</ul>
+							<a href="#" title="" class="button primary circle mt-5">Save Changes</a>
+						</div>
+					</div>	
+				</div>
+			</div>
+		</div>
+	</div><!-- main content -->
+	
+	{% comment %} Article edit {% endcomment %}
+	<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+	Launch demo modal
+  </button>
+  
+  <!-- Modal -->
+  {% comment %} <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog modal-dialog-centered modal-dialog-scrollable">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body">
+			<form class="row g-3" method="patch" action="{% url 'profile/Article/' actualite.id %}">
+				<div class="col-md-6">
+				  <label for="inputEmail4" class="form-label">Titre</label>
+				  <input type="text" class="form-control" id="inputEmail4" value="{{actualite.titre}}">
+				</div>
+				<div class="col-md-12">
+				  <div class="form-floating">
+					<textarea class="form-control" placeholder="Contenu" id="floatingTextarea2" style="height: 100px">{{actualite.content}}</textarea>
+					<label for="floatingTextarea2">Comments</label>
+				  </div>
+				</div>
+			  </form>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+		  <button type="button" class="btn btn-primary">Save changes</button>
+		</div>
+	  </div>
+	</div>
+  </div> {% endcomment %}
+
+  <div class="modal fade" id="CreateArticle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog modal-dialog-centered modal-dialog-scrollable">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLabel">Faire un article</h5>
+		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body">
+			<form class="row g-3" method="post" action="{% url 'CreateArt' %}">
+				{% csrf_token %}
+				<div class="col-md-6">
+				  <label for="inputEmail4" class="form-label">Titre</label>
+				  <input type="text" name="titre" class="form-control" id="inputEmail4">
+				</div>
+				<div class="col-md-12">
+				  <div class="form-floating">
+					<textarea class="form-control" name="content" placeholder="Contenu" id="floatingTextarea2" style="height: 100px"></textarea>
+					<label for="floatingTextarea2">Comments</label>
+				  </div>
+				</div>
+			  
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+		  <button type="submit" class="btn btn-primary">Save changes</button>
+		</div>
+		</form>
+	  </div>
+	</div>
+  </div>
+  
+  {% comment %} Create Propo {% endcomment %}
+  <div class="modal fade" id="CreateProp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog modal-dialog-centered modal-dialog-scrollable">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLabel">Faire un article</h5>
+		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body">
+			<form class="row g-3" method="post" action="{% url 'CreateProp' %}">
+				{% csrf_token %}
+				<div class="col-md-12">
+					<select class="form-select" aria-label="Default select example">
+						<option selected disabled>Selectionnez un thème</option>
+						{% if all_theme %}
+						{% for theme in all_theme %}
+						<option value="{{theme.pk}}">{{theme.libelle_themes_cles}}</option>
+						{% endfor %}
+						{% else %}
+						<option value="#">Pas de thème disponible</option>
+						{% endif %}
+					</select>
+				  </div>
+				
+				<div class="col-md-12">
+				  <div class="form-floating">
+					<textarea class="form-control" name="libelle_proposition" id="floatingTextarea2" style="height: 100px"></textarea>
+					<label for="floatingTextarea2">Proposition</label>
+				  </div>
+				</div>
+			  
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+		  <button type="submit" class="btn btn-primary">Save changes</button>
+		</div>
+		</form>
+	  </div>
+	</div>
+  </div>
+  
+	{% endblock content %}
