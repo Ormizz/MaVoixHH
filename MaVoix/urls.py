@@ -27,7 +27,7 @@ urlpatterns = [
     path('candidat/', include('candidat.urls')),
     path('', include('MainApp.urls')),
     path('crud/', include(router.urls)),
-    path('vote/', include('vote.urls')),
+    path('vote/', include('votes.urls')),
     path('AdminDash/', include('DashAdmin.urls')),
 ]
 

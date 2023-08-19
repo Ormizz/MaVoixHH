@@ -9,7 +9,7 @@ from django.contrib.auth import authenticate, login, logout
 from candidat.models import Article, Candidat
 
 from MainApp.models import *
-from vote.models import Proposition 
+from votes.models import Proposition 
 from MainApp.serializers import ElecteurSerialiser
 
 # Création des vues

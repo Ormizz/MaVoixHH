@@ -1,0 +1,175 @@
+@import "//fonts.googleapis.com/css?family=Montserrat:300,400,700";
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --grey: #ECF0F1;
+    --height: 22em;
+    --item-height: 12em;
+}
+
+body {
+    font-family: Montserrat, sans-serif;
+    font-size: 16px;
+}
+.gradients {
+    background: linear-gradient(to right, rgb(202, 143, 95), rgb(113, 225, 131));
+    /* Use the appropriate prefix for browser compatibility */
+}
+
+.container {
+    height: var(--height);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.item {
+    filter: grayscale(1) brightness(1);
+    opacity: 0.8;
+    text-align: center;
+    width: 20em;
+    padding: 1em;
+    margin-right: 1em;
+}
+
+.winner-item {
+    padding: 1em;
+}
+
+.prize-item {
+    background-color: var(--grey);
+    border-radius: 0.3em 0.3em 0 0;
+    padding: 1em;
+}
+
+.item:last-child {
+    margin-right: 0;
+}
+
+.third>.prize-item {
+    height: calc(var(--item-height) * (3 / 5));
+}
+
+.second>.prize-item {
+    height: calc(var(--item-height) * (4 / 5))
+}
+
+.first>.prize-item {
+    height: var(--item-height);
+}
+
+.award:after,
+.award:before {
+    content: "";
+    display: inline-block;
+    width: 1.4em;
+    height: 2.5em;
+    background-position: 50%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 50'%3E%3Cpath fill='%23592' d='M16.2 2c-2.2 2-5 5-2 7.8C16 8.8 17 5 16 2zm.8 6c4 0 5.6-2 7-5-3.2 0-6.4 1-7 5zm-6.3 8c3-3 2-6 .6-9-1.7 3-3 6-.6 9zM22 8c-3 0-8.2 1.8-7 4.3 1.6 1 5-1.3 7-4.3zM8 14c-.5 3-.6 5.8 2.6 7.2 1-3.2-.3-5.2-2.6-7.2zm4 5c3.7 0 5-3 6-6-3 1-6 2-6 6zm-6.4 1c.5 3 2.2 6.7 4.7 5.6C11 23 8.5 21 5.5 20zM16 18c-2.7 2-5.5 4.7-4 7.5 2-.7 4-3.5 4-7.5zm-5 13c0-4-3-5-6-6 1 3 2.4 6 6 6zm4.6-7c-2.6 2-5 4-3.3 7 2.5.2 3.5-4 3.3-7zm-9.2 7c1.4 3 4.2 5.5 6.7 4.5 0-3.3-3-4.5-6.3-4.5zm8.3 5c3.5-1 3-5 2-8-2 3-4.5 4.7-2 8zm-5.4 1c2 2 6.3 5 8 3-.2-3.2-4.8-4-8-3zm9.4-5c-1 3-2.7 6.5 1 8.3 1.6-1.5.7-5.3-1-8.3zM13 42c2.6 2 7.3 3.5 8 1.2-1.5-2.2-5-2.2-8-1.2zm13 2c1-4-2-5-5-7 .6 4 1.5 7 5 7zm-8.4 2c2.8 2 7.6 3.5 8.6.4-2-2.5-5.7-2.4-8.6-.4z' /%3E%3C/svg%3E");
+}
+
+.award:after {
+    transform: scaleX(-1);
+}
+
+.award {
+    display: inline-block;
+    opacity: .35;
+    height: 3em;
+    line-height: 3em;
+    white-space: nowrap;
+    margin: 0 .75em;
+}
+
+.award:after,
+.award:before {
+    fill: currentcolor;
+    display: inline-block;
+    width: 1.5em;
+    margin-bottom: -1.25em;
+    transition: all .3s cubic-bezier(.3, .7, .1, 1.5)
+}
+
+.item:hover {
+    opacity: 1;
+    filter: none;
+}
+
+.item:hover>.prize-item>.award {
+    filter: none;
+    opacity: 1;
+    cursor: default;
+}
+
+.item:hover>.prize-item>.award:before {
+    transform: scale(1.1) rotate(-12deg) translate(.25em, 0)
+}
+
+.item:hover>.prize-item>.award:after {
+    transform: rotate(12deg) scale(1.1) scaleX(-1) translate(.22em, 0) !important
+}
+
+.profile-picture {
+    height: 2.5em;
+    width: 2.5em;
+    border-radius: 50%;
+    box-shadow: 3px 3px 15px -7px rgba(0, 0, 0, 0.75)
+}
+
+.prize {
+    margin-bottom: 2em;
+}
+
+.other-prizes {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.other-prizes-ul {
+    width: 30em;
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.other-prize-li {
+    filter: grayscale(1) brightness(1);
+    background-color: var(--grey);
+    margin-right: 0;
+    padding: 0.5em;
+    border-radius: 0.5em;
+}
+
+.other-prize-li:hover {
+    filter: none;
+}
+
+.other-prize-container {
+    display: flex;
+    margin-bottom: 0.5em;
+}
+
+.other-prize {
+    margin-left: 2em;
+}
+
+.other-prize-winner-container {
+    display: flex;
+    align-content: center;
+}
+
+.other-prize-winner-container img {
+    height: 3em;
+    width: 2.8em;
+    margin-left: 3em;
+}
+
+.other-prize-winner-container p {
+    margin-left: 1em;
+}

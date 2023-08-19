@@ -1,0 +1,119 @@
+{% load static %}
+<html>
+  <head>
+    <title>Resultat</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+     <link rel="stylesheet" href="{%static 'css/main.min.css' %}">
+    <link rel="stylesheet" href="{%static 'css/styleC.css' %}">
+    <link rel="stylesheet" href="{%static 'css/responsive.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/vote/css/styleR.css' %}"
+    />
+  </head>
+
+  <body class="gradients">
+
+    <header class="">
+		<div class="topbar stick" style="background-color: white;">
+			<div class="logo" style="width:300px; height:50px"><img id="logo" style="width:500px; height:50px" src="{%static 'img/logo.png' %}" alt=""></div>
+			
+			<div class="searches">
+				<form method="post">
+					<input type="text" placeholder="Search...">
+					<button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+					<span class="cancel-search"><i class="icofont-close"></i></span>
+					
+				</form>
+			</div>
+			<ul class="web-elements">
+				
+				<li >
+					<a style="border: none; background-color:rgb(2, 115, 20)" href="#" title="Home" data-toggle="tooltip">
+						<i>
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></i>
+					</a>
+				</li>
+				
+				<li>
+					<a style="border: none; background-color:rgb(2, 115, 20)" class="mesg-notif" href="#" title="Notifications" data-toggle="tooltip">
+						<i>
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></i>
+					</a>
+					<span></span>
+				</li>
+				
+			</ul>
+		</div>
+		
+	</header><!-- header --> 
+    {% if vote %}
+    <div class="container">
+      {% if deuxieme_candidat %} {% if deuxieme_candidat != none %}
+      <div class="second item">
+        <div class="winner-item">
+          <p class="h1" style="color: black">{{ deuxieme_candidat.nom }}</p>
+        </div>
+        <div class="prize-item">
+          <p class="award">Choix #2</p>
+          <p class="prize">{{ deuxieme_candidat.biographie }}</p>
+        </div>
+      </div>
+      {% endif %} {% endif %} {% if premier_candidat %}
+      <div class="first item">
+        <div class="winner-item">
+          <p class="h1" style="color: black">{{ premier_candidat.nom }}</p>
+        </div>
+        <div class="prize-item">
+          <p class="award">Choix #1</p>
+          <p class="prize">{{ premier_candidat.biographie }}</p>
+        </div>
+      </div>
+      {% endif %} {% if troisieme_candidat %}
+      <div class="third item">
+        <div class="winner-item">
+          <p class="h1" style="color: black">{{ troisieme_candidat.nom }}</p>
+        </div>
+        <div class="prize-item">
+          <p class="award">Choix #3</p>
+          <p class="prize">{{ troisieme_candidat.biographie }}</p>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="other-prizes">
+      <ul class="other-prizes-ul">
+        {% for vot in vote %}
+        <li class="other-prize-li mt-4">
+          <div class="other-prize-container">
+            <div class="number">#</div>
+            <div class="other-prize">
+              {{ vot.num_votes_pour }} points commun avec:
+            </div>
+          </div>
+          <div class="other-prize-winner-container">
+            <p>{{ vot.nom }} {{ vot.prenoms }}</p>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  </body>
+  <script src="{% static '/vote/js/resulta.js' %}"></script>
+</html>
