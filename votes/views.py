@@ -54,8 +54,7 @@ def index(request, id):
         
     random.shuffle(resultat)
     nbr_proposition = len(resultat)
-    electeur_user = request.user
-    electeur = Electeur.objects.filter(themes_cles=electeur_user.id)
+    electeur = Electeur.objects.get(user=request.user.id)
     zones = Zone.objects.all().order_by('nom_zone')
     return render(request,'sondages/index.html',{ 
         'reponses': resultat,

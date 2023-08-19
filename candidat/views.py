@@ -37,9 +37,9 @@ class Proposition_electoralViewSet(viewsets.ModelViewSet):
 
     
 # Create your views here.
-def index(request):
+def index(request, id):
     return render(request,'candidat/Candidat.html',{
-        'candidat': Candidat.objects.get(pk=1),
+        'candidat': Candidat.objects.get(pk=id),
         'articles': Article.objects.all()
     })
 
