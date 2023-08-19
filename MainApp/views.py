@@ -12,6 +12,9 @@ from MainApp.models import *
 from votes.models import Proposition 
 from MainApp.serializers import ElecteurSerialiser
 
+from .forms import PhotoForm
+from .models import Photo
+
 # Création des vues
 
 # class UserViewSet(viewsets.ModelViewSet):
@@ -121,3 +124,20 @@ def propositionfunc(request):
 
 def index(request):
     return render(request, 'accueil.html')
+
+def enregistrer_photo(request):
+    if request.method == 'POST':
+        form = PhotoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('afficher_photos')
+    else:
+        form = PhotoForm()
+    return render(request, 'image.html', {'form': form})
+
+def afficher_photos(request):
+    photos = Photo.objects.all()
+    return render(request, 'afficher_img.html', {'photos': photos})
+
+def photo_test(request):
+    return render(request,'image.html')
