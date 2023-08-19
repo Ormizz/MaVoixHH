@@ -13,12 +13,12 @@ from MainApp.models import *
 def index(request, id):
     # Récupérez la zone spécifique et les thèmes associés
     zone = Zone.objects.get(pk=id)
-    themes = Themes_cles.objects.filter(zone=zone.id_zone)
+    themes = Themes_cles.objects.all()
     
     # Calculez le nombre de réponses à obtenir par thème et par candidat
-    total_themes = themes.count()
+    # total_themes = themes.count()
     total_candidats = Candidat.objects.count()
-    reponses_par_candidat = 25 // total_candidats
+    reponses_par_candidat = 30 // total_candidats
     
     # propositions = Proposition.objects.all()
     
@@ -35,7 +35,7 @@ def index(request, id):
 
     # Parcourez chaque thème et récupérez les propositions liées
     for theme in themes:
-        propositions = Proposition.objects.filter(themes_cles=theme)
+        propositions = Proposition.objects.filter(themes_cles=theme, zone=zone.id_zone)
         propositions_liees.extend(propositions)
     
 
