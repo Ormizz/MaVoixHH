@@ -1,9 +1,9 @@
-from django.db import models
 
 # Create your models here.
 from django.db import models
 from candidat.models import Candidat
 from MainApp.models import Electeur
+
 
 # Create your models here.
 class Zone(models.Model):
