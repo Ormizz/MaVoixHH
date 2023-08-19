@@ -5,7 +5,7 @@ from rest_framework import routers
 from candidat.views import *
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('<int:id>', views.index, name='index'),
     path('listC', views.listC, name='listC'),
     path('form/<int:id>', views.formedit, name='formedit'),
     path('form/', views.form, name='form'),
