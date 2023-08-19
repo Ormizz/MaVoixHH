@@ -118,3 +118,6 @@ def propositionfunc(request):
         'rdCandidat': random_candidat,
         }
     )
+
+def index(request):
+    return render(request, 'accueil.html')

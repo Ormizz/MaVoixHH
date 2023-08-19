@@ -109,12 +109,12 @@ def profileCreateArt(request):
     # Récupérer le nom du groupe du candidat
     # user_group = request
     if request.method == 'POST':
-        actu = Article.objects.create(
-            titre = request.POST['content'], 
-            content = request.POST['content'],
+        prop = Proposition.objects.create(
+            libelle_proposition = request.POST['libelle_proposition'], 
             candidat_id = request.user.candidat.pk,
+            themes_cles_id = request.POST['themes_cles_id'],
         )
-        actu.save()
+        prop.save()
         return redirect("profileC")
     return render(request, 'candidat/profile.html')
     
