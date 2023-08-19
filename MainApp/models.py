@@ -15,6 +15,14 @@ class Electeur(models.Model):
     def __str__(self):
         return f'Electeur:{self.id_electeur} {self.nom}'
     
+class Photo(models.Model):
+    titre = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='images/')
+
+    def __str__(self):
+        return self.titre
+
+    
 # class Type_utilisateur(models.Model):
 #     id_type_utilisateur = models.AutoField(primary_key=True)
 #     libelle_type_utilisateur = models.CharField(max_length=50)
