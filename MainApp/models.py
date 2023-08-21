@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from candidat.models import Ville
 
 # Create your models here.
 class Electeur(models.Model):
@@ -8,7 +9,7 @@ class Electeur(models.Model):
     prenoms = models.CharField(max_length=70)
     date_naissance = models.DateField()
     lieu_naissance = models.CharField(max_length=100, blank=True, null=True)
-    localisation = models.CharField(max_length=100)
+    Ville = models.ForeignKey(Ville, on_delete=models.SET_NULL, default="", null=True, blank=True)
     sexe = models.CharField(max_length=20)
     user = models.OneToOneField(User, on_delete=models.SET_NULL, default="", null=True, blank=True)
     

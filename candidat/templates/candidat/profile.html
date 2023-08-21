@@ -49,11 +49,10 @@
 									<li><span>Proposition: </span> <i>{{user.candidat.Proposition_set.count}}</i></li>
 									<li><span>Article: </span> <i>{{user.candidat.article_set.count}}</i></li>
 								</ul>
-								<a class="button primary circle" href="#" title=""><i class="icofont-pen-alt-1"></i> Edit</a>
-								<a class="button primary circle	danger" href="#" title=""><i class="icofont-ban"></i> Block</a>
+								<a class="button primary circle" data-bs-toggle="modal" data-bs-target="#EditInfo" style="background-color:#027314" href="#" title=""><i class="icofont-pen-alt-1"></i> Editer</a>
 							</div>	
 							<div class="d-widget mt-4">
-								<div class="d-widget-title"><h5>Social Links</h5></div>
+								<div class="d-widget-title"><h5>Liens Sociaux</h5></div>
 								<div class="social-links">
 									<i class="icofont-facebook"></i>
 									<input type="text" placeholder="Mon facebook">
@@ -81,7 +80,7 @@
 							</nav>
 							<ul class="uk-switcher" id="picturez">
 								 <li>
-									<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CreateArticle">
+									<button type="button" class="btn btn-primary" style="background-color:#027314; border-color:#027314" data-bs-toggle="modal" data-bs-target="#CreateArticle">
 										Creer un article
 									</button> <br><br>
 								 	<div class="streamline">
@@ -98,8 +97,40 @@
 												</div>
 											</a>
 											<div class="edition-btn">
-												<span class="iconbox button soft-primary"><i data-bs-toggle="modal" data-bs-target="#exampleModal" class="icofont-pen-alt-1"></i></span>
+												<span class="iconbox button soft-primary"><i data-bs-toggle="modal" data-bs-target="#modifArt" class="icofont-pen-alt-1"></i></span>
 												<span class="iconbox button soft-danger"><i class="icofont-trash"></i></span>
+											</div>
+										</div>
+										 {% comment %} ModifArt {% endcomment %}
+
+										<div class="modal fade" id="modifArt" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal-dialog modal-dialog modal-dialog-centered modal-dialog-scrollable">
+											<div class="modal-content">
+												<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLabel">Modifier un article</h5>
+												<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+												</div>
+												<div class="modal-body">
+													<form class="row g-3" method="post" action="{% url 'editArt' actualite.pk %}">
+														{% csrf_token %}
+														<div class="col-md-6">
+														<label for="inputEmail4" class="form-label">Titre</label>
+														<input type="text" value="{{actualite.titre}}" name="titre" class="form-control" id="inputEmail4">
+														</div>
+														<div class="col-md-12">
+														<div class="form-floating">
+															<textarea class="form-control" name="content" placeholder="Contenu" id="floatingTextarea2" style="height: 100px">{{actualite.content}}</textarea>
+															<label for="floatingTextarea2">Comments</label>
+														</div>
+														</div>
+													
+												</div>
+												<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+												<button type="submit" class="btn btn-primary">Save changes</button>
+												</div>
+												</form>
+											</div>
 											</div>
 										</div>
 										{% endfor %}
@@ -109,7 +140,7 @@
 									</div>	
 								 </li>
 								 <li>
-									<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CreateProp">
+									<button type="button" class="btn btn-primary" style="background-color:#027314; border-color:#027314" data-bs-toggle="modal" data-bs-target="#CreateProp">
 										Faire une proposition
 									</button> <br><br>
 									<div class="posted-photo">
@@ -128,6 +159,47 @@
 											<div class="edition-btn">
 												<span class="iconbox button soft-primary"><i class="icofont-pen-alt-1"></i></span>
 												<span class="iconbox button soft-danger"><i class="icofont-trash"></i></span>
+											</div>
+										</div>
+
+										 {% comment %} Modif Propo {% endcomment %}
+										<div class="modal fade" id="modifProp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal-dialog modal-dialog modal-dialog-centered modal-dialog-scrollable">
+											<div class="modal-content">
+												<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLabel">Faire une proposition</h5>
+												<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+												</div>
+												<div class="modal-body">
+													<form class="row g-3" method="post" action="{% url 'editProp' proposition.pk %}">
+														{% csrf_token %}
+														<div class="col-md-12">
+															<select class="form-select" name="themes_cles_id" aria-label="Default select example">
+																<option selected disabled>Selectionnez un thème</option>
+																{% if all_theme %}
+																{% for theme in all_theme %}
+																<option value="{{theme.pk}}" {% if theme.libelle_themes_cles == proposition.themes_cles.libelle_themes_cles %} selected {% endif %}>{{theme.libelle_themes_cles}}</option>
+																{% endfor %}
+																{% else %}
+																<option value="#">Pas de thème disponible</option>
+																{% endif %}
+															</select>
+														</div>
+														
+														<div class="col-md-12">
+														<div class="form-floating">
+															<textarea class="form-control" name="libelle_proposition" id="floatingTextarea2" style="height: 100px"></textarea>
+															<label for="floatingTextarea2">Proposition</label>
+														</div>
+														</div>
+													
+												</div>
+												<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+												<button type="submit" class="btn btn-primary">Save changes</button>
+												</div>
+												</form>
+											</div>
 											</div>
 										</div>
 										{% endfor %}
@@ -208,13 +280,15 @@
 	  </div>
 	</div>
   </div>
+
+
   
   {% comment %} Create Propo {% endcomment %}
   <div class="modal fade" id="CreateProp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-dialog modal-dialog-centered modal-dialog-scrollable">
 	  <div class="modal-content">
 		<div class="modal-header">
-		  <h5 class="modal-title" id="exampleModalLabel">Faire un article</h5>
+		  <h5 class="modal-title" id="exampleModalLabel">Faire une proposition</h5>
 		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		</div>
 		<div class="modal-body">
@@ -244,6 +318,90 @@
 		<div class="modal-footer">
 		  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 		  <button type="submit" class="btn btn-primary">Save changes</button>
+		</div>
+		</form>
+	  </div>
+	</div>
+  </div>
+  
+  {% comment %} edit candidant {% endcomment %}
+  <div class="modal fade" id="EditInfo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog modal-dialog-centered modal-dialog-scrollable">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLabel">Mes infos</h5>
+		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body">
+			<form class="row g-3" method="post" action="{% url 'edit-candidat' %}">
+				{% csrf_token %}
+				
+				<div class="col-md-6">
+					<div class="form-floating">
+						<input type="text" name="nom" value="{{user.candidat.nom}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+						<label for="floatingTextarea2">Nom</label>
+				  </div>
+				</div>
+				<div class="col-md-6">
+				  	<div class="form-floating">
+						<input type="text" name="prenoms" value="{{user.candidat.prenoms}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+						<label for="floatingTextarea2">Prenoms</label>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-floating">
+						<input type="text" name="surnom" value="{{user.candidat.surnom}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+						<label for="floatingTextarea2">Surnom</label>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-floating">
+						<input type="date" name="date_naissance" value="{{user.candidat.date_naissance|date:'Y-m-d'}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+						<label for="floatingTextarea2">date_naissance</label>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-floating">
+						<input type="text" name="lieu_naissance" value="{{user.candidat.lieu_naissance}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+						<label for="floatingTextarea2">lieu_naissance</label>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-floating">
+						<input type="text" name="parti_politique" value="{{user.candidat.parti_politique}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+						<label for="floatingTextarea2">parti_politique</label>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<select class="form-select" name="Ville" aria-label="Default select example">
+						<option selected disabled>localisation</option>
+
+						{% for localisation in localisations %}
+						<option value="{{localisation.pk}}" {% if localisation.pk == user.candidat.Ville.pk %} selected {% endif %}>{{localisation.libelle}}</option>
+						{% endfor %}
+						
+					</select>
+				</div>
+				<div class="col-md-6">
+					<select class="form-select" name="sexe" aria-label="">
+						<option disabled>Sexe</option>
+
+						<option value="Masculin" {% if user.candidat.sexe == 'Masculin' %} selected {% endif %}>Masculin</option>
+						
+						<option value="Feminin" {% if user.candidat.sexe == 'Feminin' %} selected {% endif %}>Feminin</option>
+					</select>
+				</div>
+				<div class="col-md-12">
+					<div class="form-floating">
+					  <textarea class="form-control" name="biographie" id="floatingTextarea2" style="height: 100px">{{user.candidat.biographie}}</textarea>
+					  <label for="floatingTextarea2">Biographie</label>
+					</div>
+				</div>
+			  
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+		  <button type="submit" class="btn btn-primary">Enregistrer</button>
 		</div>
 		</form>
 	  </div>

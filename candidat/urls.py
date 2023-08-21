@@ -11,7 +11,10 @@ urlpatterns = [
     path('form/', views.form, name='form'),
     path('profile', views.profile, name='profileC'),
     path('profile/article', views.profileCreateArt, name='CreateArt'),
-    path('profile/prop', views.profileCreateArt, name='CreateProp'),
+    path('profile/prop', views.profileCreateProp, name='CreateProp'),
+    path('profile/editarticle/<int:id>', views.profileModifArt, name='editArt'),
+    path('profile/editproposition/<int:id>', views.profileModifProp, name='editProp'),
+    path('profile/editcandidat', views.editcandidat, name='edit-candidat')
     
 ]
 

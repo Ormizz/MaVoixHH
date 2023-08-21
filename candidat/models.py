@@ -12,6 +12,13 @@ class Election(models.Model):
     def __str__(self):
         return f'Election:{self.id_election} {self.description}'
     
+class Ville(models.Model):
+    id_Ville = models.AutoField(primary_key=True)
+    libelle = models.CharField(max_length=100)
+    
+    def __str__(self):
+        return f'Question_electoral:{self.id_Ville} {self.libelle}'
+    
 class Candidat(models.Model):
     id_candidat = models.AutoField(primary_key=True)
     nom = models.CharField(max_length=50)
@@ -19,12 +26,15 @@ class Candidat(models.Model):
     surnom = models.CharField(max_length=50)
     date_naissance = models.DateField()
     lieu_naissance = models.CharField(max_length=100)
-    localisation = models.CharField(max_length=100)
+    Ville = models.ForeignKey(Ville, on_delete=models.SET_NULL, default="", null=True, blank=True)
     parti_politique = models.CharField(max_length=100)
     biographie = models.CharField(max_length=255)
     motivation = models.CharField(max_length=255)
+    sexe = models.CharField(max_length=255, null=True, blank=True)
     election = models.ForeignKey(Election, on_delete=models.CASCADE)
     user = models.OneToOneField(User, on_delete=models.SET_NULL, default="", null=True, blank=True)
+    image = models.ImageField(upload_to='imagesPPC/', null=True, blank=True)
+    fond = models.ImageField(upload_to='imagesFondC/', null=True, blank=True)
    
     def __str__(self):
         return f'Candidat:{self.id_candidat} {self.prenoms}'

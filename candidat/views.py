@@ -94,6 +94,8 @@ def profile(request):
     actualite = Article.objects.filter(candidat=utilisateur.candidat.pk)
     all_theme = Themes_cles.objects.all()
     propositions = Proposition.objects.filter(candidat=utilisateur.candidat.pk)
+    localisations = Ville.objects.all()
+    print(utilisateur.candidat.Ville)
     # print(actualite)
     if (str(request.user.groups.first())=="Candidat"):
         return render(request, 'candidat/profile.html',{
@@ -101,11 +103,12 @@ def profile(request):
             'actualites':actualite,
             'propositions':propositions,
             'all_theme':all_theme,
+            'localisations': localisations
         })
     return render(request, 'candidat/Candidat.html')
     
 @login_required  
-def profileCreateArt(request):
+def profileCreateProp(request):
     # Récupérer le nom du groupe du candidat
     # user_group = request
     if request.method == 'POST':
@@ -115,6 +118,71 @@ def profileCreateArt(request):
             themes_cles_id = request.POST['themes_cles_id'],
         )
         prop.save()
+        return redirect("profileC")
+    return render(request, 'candidat/profile.html')
+
+@login_required  
+def profileCreateArt(request):
+    # Récupérer le nom du groupe du candidat
+    # user_group = request
+    candidat_id = request.user.candidat.pk
+    candidatInstance = Ville.objects.get(pk=candidat_id)
+    if request.method == 'POST':
+        article = Article.objects.create(
+            titre = request.POST['titre'], 
+            candidat_id = candidatInstance,
+            content = request.POST['content'],
+        )
+        article.save()
+        return redirect("profileC")
+    return render(request, 'candidat/profile.html')
+
+@login_required  
+def profileModifProp(request, id):
+    # Récupérer le nom du groupe du candidat
+    # user_group = request
+    propo = Proposition.objects.get(pk=id)
+    if request.method == 'POST':
+        propo.libelle_proposition = request.POST['libelle_proposition'], 
+        propo.candidat_id = request.user.candidat.pk,
+        propo.themes_cles_id = request.POST['themes_cles_id'],
+    
+        propo.save()
+        return redirect("profileC")
+    return render(request, 'candidat/profile.html')
+
+@login_required  
+def profileModifArt(request, id):
+    # Récupérer le nom du groupe du candidat
+    # user_group = request
+    actu = Article.objects.get(pk=id)
+    if request.method == 'POST':
+        actu.titre = request.POST['titre'], 
+        actu.candidat_id = request.user.candidat.pk,
+        actu.content = request.POST['content'],
+    
+        actu.save()
+        return redirect("profileC")
+    return render(request, 'candidat/profile.html')
+
+@login_required  
+def editcandidat(request):
+    # Récupérer le nom du groupe du candidat
+    # user_group = request
+    candidat = Candidat.objects.get(pk=request.user.candidat.pk)
+    if request.method == 'POST':
+        candidat.nom = request.POST["nom"]
+        candidat.prenoms = request.POST["prenoms"]
+        candidat.surnom = request.POST["surnom"]
+        candidat.date_naissance = request.POST["date_naissance"]
+        candidat.lieu_naissance = request.POST["lieu_naissance"]
+        candidat.parti_politique = request.POST["parti_politique"]
+        candidat.sexe = request.POST["sexe"]
+        candidat.biographie = request.POST["biographie"]
+        ville_id = request.POST['Ville']
+        ville_instance = Ville.objects.get(pk=ville_id)
+        candidat.Ville = ville_instance
+        candidat.save()
         return redirect("profileC")
     return render(request, 'candidat/profile.html')
     
