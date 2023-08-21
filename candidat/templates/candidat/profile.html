@@ -97,13 +97,15 @@
 												</div>
 											</a>
 											<div class="edition-btn">
-												<span class="iconbox button soft-primary"><i data-bs-toggle="modal" data-bs-target="#modifArt" class="icofont-pen-alt-1"></i></span>
-												<span class="iconbox button soft-danger"><i class="icofont-trash"></i></span>
+												<span class="iconbox button soft-primary"><i data-bs-toggle="modal" data-bs-target="#modifArt{{ actualite.pk }}" class="icofont-pen-alt-1"></i></span>
+												<span class="iconbox button soft-danger"><a href="{% url 'deleteArt' actualite.pk %}" data-bs-toggle="modal" data-bs-target="#confirmDeleteArt{{ actualite.pk }}">
+													<i class="icofont-trash"></i>
+												</a></span>
 											</div>
 										</div>
 										 {% comment %} ModifArt {% endcomment %}
 
-										<div class="modal fade" id="modifArt" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal fade" id="modifArt{{ actualite.pk }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 											<div class="modal-dialog modal-dialog modal-dialog-centered modal-dialog-scrollable">
 											<div class="modal-content">
 												<div class="modal-header">
@@ -133,11 +135,35 @@
 											</div>
 											</div>
 										</div>
+										{% comment %} suppression {% endcomment %}
+										<div class="modal fade" id="confirmDeleteArt{{ actualite.pk }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="exampleModalLabel">Confirmer la suppression</h5>
+														<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+													</div>
+													<form class="row g-3" method="post" action="{% url 'deleteArt' actualite.pk %}">
+														{% csrf_token %}
+													<div class="modal-body">
+														Êtes-vous sûr de vouloir supprimer cet article ?
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+														<button type="submit" class="btn btn-primary" data-bs-dismiss="modal">success</button>
+													</div>
+													</form>
+												</div>
+											</div>
+										</div>
 										{% endfor %}
 										{% else %}
 										Pas de post fait
 										{% endif %}
+										
 									</div>	
+
+									
 								 </li>
 								 <li>
 									<button type="button" class="btn btn-primary" style="background-color:#027314; border-color:#027314" data-bs-toggle="modal" data-bs-target="#CreateProp">
@@ -157,13 +183,15 @@
 												</div>
 											</a>
 											<div class="edition-btn">
-												<span class="iconbox button soft-primary"><i class="icofont-pen-alt-1"></i></span>
-												<span class="iconbox button soft-danger"><i class="icofont-trash"></i></span>
+												<span class="iconbox button soft-primary"><i class="icofont-pen-alt-1" data-bs-toggle="modal" data-bs-target="#modifProp{{ proposition.pk }}"></i></span>
+												<span class="iconbox button soft-danger">
+													<i class="icofont-trash" data-bs-toggle="modal" data-bs-target="#confirmDeleteProp{{ proposition.pk }}"></i>
+												</span>
 											</div>
 										</div>
 
 										 {% comment %} Modif Propo {% endcomment %}
-										<div class="modal fade" id="modifProp" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal fade" id="modifProp{{ proposition.pk }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 											<div class="modal-dialog modal-dialog modal-dialog-centered modal-dialog-scrollable">
 											<div class="modal-content">
 												<div class="modal-header">
@@ -188,7 +216,7 @@
 														
 														<div class="col-md-12">
 														<div class="form-floating">
-															<textarea class="form-control" name="libelle_proposition" id="floatingTextarea2" style="height: 100px"></textarea>
+															<textarea class="form-control" name="libelle_proposition" id="floatingTextarea2" style="height: 100px">{{proposition.libelle_proposition}}</textarea>
 															<label for="floatingTextarea2">Proposition</label>
 														</div>
 														</div>
@@ -202,11 +230,35 @@
 											</div>
 											</div>
 										</div>
+										{% comment %} suppression {% endcomment %}
+										<div class="modal fade" id="confirmDeleteProp{{ proposition.pk }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="exampleModalLabel">Confirmer la suppression</h5>
+														<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+													</div>
+													<form class="row g-3" method="post" action="{% url 'deleteProp' proposition.pk %}">
+														{% csrf_token %}
+													<div class="modal-body">
+														Êtes-vous sûr de vouloir supprimer cette proposition ?
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+														<button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Sucess</button>
+													</div>
+													</form>
+												</div>
+											</div>
+										</div>
+										
 										{% endfor %}
 										{% else %}
 										Pas de post fait
 										{% endif %}
 									</div>	
+									
+								 </li>
 								 </li>
 								
 							</ul>

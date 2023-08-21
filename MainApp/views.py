@@ -125,6 +125,37 @@ def propositionfunc(request):
 def index(request):
     return render(request, 'accueil.html')
 
+
+@login_required  
+def profileU(request):
+    # Récupérer le nom du groupe du candidat
+    # user_group = request
+    utilisateur = request.user
+    localisations = Ville.objects.all()
+    # print(actualite)
+    return render(request, 'profile.html',{
+            'user':utilisateur,
+            'localisations': localisations
+        })
+    
+@login_required  
+def editUser(request):
+    # Récupérer le nom du groupe du candidat
+    # user_group = request
+    electeur = Electeur.objects.get(pk=request.user.electeur.pk)
+    if request.method == 'POST':
+        electeur.nom = request.POST["nom"]
+        electeur.prenoms = request.POST["prenoms"]
+        electeur.date_naissance = request.POST["date_naissance"]
+        electeur.lieu_naissance = request.POST["lieu_naissance"]
+        electeur.sexe = request.POST["sexe"]
+        ville_id = request.POST['Ville']
+        ville_instance = Ville.objects.get(pk=ville_id)
+        electeur.Ville = ville_instance
+        electeur.save()
+        return redirect("profileU")
+    return render(request, 'profileU.html')
+
 def enregistrer_photo(request):
     if request.method == 'POST':
         form = PhotoForm(request.POST, request.FILES)

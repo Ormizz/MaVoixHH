@@ -125,12 +125,10 @@ def profileCreateProp(request):
 def profileCreateArt(request):
     # Récupérer le nom du groupe du candidat
     # user_group = request
-    candidat_id = request.user.candidat.pk
-    candidatInstance = Ville.objects.get(pk=candidat_id)
     if request.method == 'POST':
         article = Article.objects.create(
             titre = request.POST['titre'], 
-            candidat_id = candidatInstance,
+            candidat_id = request.user.candidat.pk,
             content = request.POST['content'],
         )
         article.save()
@@ -139,16 +137,18 @@ def profileCreateArt(request):
 
 @login_required  
 def profileModifProp(request, id):
-    # Récupérer le nom du groupe du candidat
-    # user_group = request
     propo = Proposition.objects.get(pk=id)
+    
     if request.method == 'POST':
-        propo.libelle_proposition = request.POST['libelle_proposition'], 
-        propo.candidat_id = request.user.candidat.pk,
-        propo.themes_cles_id = request.POST['themes_cles_id'],
+        propo.libelle_proposition = request.POST['libelle_proposition']
+        propo.candidat = request.user.candidat
+        themes_cles_id = request.POST['themes_cles_id']
+        theme_cles = Themes_cles.objects.get(pk=themes_cles_id)
+        propo.themes_cles = theme_cles
     
         propo.save()
         return redirect("profileC")
+    
     return render(request, 'candidat/profile.html')
 
 @login_required  
@@ -157,10 +157,10 @@ def profileModifArt(request, id):
     # user_group = request
     actu = Article.objects.get(pk=id)
     if request.method == 'POST':
-        actu.titre = request.POST['titre'], 
-        actu.candidat_id = request.user.candidat.pk,
-        actu.content = request.POST['content'],
-    
+        actu.titre = request.POST['titre']
+        actu.candidat = request.user.candidat  # Utilisez l'attribut candidat de l'article
+        actu.content = request.POST['content']
+        
         actu.save()
         return redirect("profileC")
     return render(request, 'candidat/profile.html')
@@ -185,4 +185,24 @@ def editcandidat(request):
         candidat.save()
         return redirect("profileC")
     return render(request, 'candidat/profile.html')
+  
+@login_required     
+def profileDeleteProp(request, id):
+    propo = Proposition.objects.get(pk=id)
     
+    if request.method == 'POST':
+        propo.delete()
+        return redirect("profileC")
+    
+    return render(request, 'candidat/profile.html')
+
+@login_required  
+def profileDeleteArticle(request, id):
+    article = Article.objects.get(pk=id)
+    
+    if request.method == 'POST':
+        article.delete()
+        return redirect("profileC")
+    
+    return render(request, 'candidat/profile.html')
+

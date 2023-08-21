@@ -1,0 +1,168 @@
+{% extends 'candidat/base/base2.html' %}
+{% load static %}
+{% block content %}
+	<nav class="sidebar">
+		<ul class="menu-slide">
+			<li class="">
+				<a class="" href="index.html" title="">
+					<i><svg id="icon-home" class="feather feather-home" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></i> Infos
+				</a>
+			</li>
+		</ul>
+	</nav><!-- sidebar -->
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="panel-content">
+					<h4 class="main-title">Mon profil <i class="icofont-pen-alt-1"></i></h4>
+					<div class="row merged20 mb-4">
+						<div class="col-lg-4">
+							<div class="d-widget text-center">
+								<div class="user-avatar-edit">
+									<figure><img src="{% static 'admin/images/resources/user-mockupbg.jpg' %}" alt=""></figure>
+									<div class="fileupload">
+										<span class="btn-text">editer</span>
+										<input type="file" class="upload">
+									</div>
+								</div>
+								<div class="user-dp-edit">
+									<figure>
+										<img src="{% static 'admin/images/resources/admin.jpg' %}" alt="">
+											<div class="fileupload">
+											<span class="btn-text"><i class="icofont-camera"></i></span>
+											<input type="file" class="upload">
+										</div>
+									</figure>
+									<div class="users-name">
+										<h5>{{user.electeur.nom}} <br> {{user.electeur.prenoms}}</h5>
+										<span>{{user.electeur.date_naissance}}</span><br>
+										<span>{{user.electeur.Ville.libelle}}</span>
+									</div>
+								</div>
+								<br><br>
+								<a class="button primary circle" data-bs-toggle="modal" data-bs-target="#EditInfo" style="background-color:#027314" href="#" title=""><i class="icofont-pen-alt-1"></i> Editer</a>
+							</div>
+						</div>
+						<div class="col-lg-8">
+							<nav class="responsive-tab style1">
+								<ul data-submenu-title="compounents"
+								uk-switcher="connect: #picturez ;animation: uk-animation-slide-left-medium, uk-animation-slide-right-medium" class="uk-grid" uk-sticky="offset:50;media : @m">
+									<li><a href="#">Mes infos</a></li>
+								</ul>
+							</nav>
+							<ul class="uk-switcher" id="picturez">
+								 <li>
+									<div class="posted-photo">
+										<div class="dash-item">
+											<a href="#">
+												
+												<div class="sl-content">
+													<p class="inline-block"><span class="txt-success">Nom : </span><span>{{user.electeur.nom}}</span></p>
+													<span class=""></span>
+												</div>
+												<div class="sl-content">
+													<p class="inline-block"><span class="txt-success">Prenoms : </span><span>{{user.electeur.prenoms}}</span></p>
+													<span class=""></span>
+												</div>
+												<div class="sl-content">
+													<p class="inline-block"><span class="txt-success">Date de naissance : </span><span>{{user.electeur.date_naissance}}</span></p>
+													<span class=""></span>
+												</div>
+												<div class="sl-content">
+													<p class="inline-block"><span class="txt-success">Lieu de naissance : </span><span>{{user.electeur.lieu_naissance}}</span></p>
+													<span class=""></span>
+												</div>
+												<div class="sl-content">
+													<p class="inline-block"><span class="txt-success">Sexe : </span><span>{{user.electeur.sexe}}</span></p>
+													<span class=""></span>
+												</div>
+												<div class="sl-content">
+													<p class="inline-block"><span class="txt-success">Commune : </span><span>{{user.electeur.Ville.libelle}}</span></p>
+													<span class=""></span>
+												</div>
+											</a>
+										</div>
+									</div>	
+									
+								 </li>
+								 </li>
+								
+							</ul>
+						</div>
+					</div>	
+				</div>
+			</div>
+		</div>
+	</div><!-- main content -->
+	
+
+
+  
+  {% comment %} edit candidant {% endcomment %}
+  <div class="modal fade" id="EditInfo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog modal-dialog-centered modal-dialog-scrollable">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLabel">Mes infos</h5>
+		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body">
+			<form class="row g-3" method="post" action="{% url 'edit-User' %}">
+				{% csrf_token %}
+				
+				<div class="col-md-6">
+					<div class="form-floating">
+						<input type="text" name="nom" value="{{user.electeur.nom}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+						<label for="floatingTextarea2">Nom</label>
+				  </div>
+				</div>
+				<div class="col-md-6">
+				  	<div class="form-floating">
+						<input type="text" name="prenoms" value="{{user.electeur.prenoms}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+						<label for="floatingTextarea2">Prenoms</label>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-floating">
+						<input type="date" name="date_naissance" value="{{user.electeur.date_naissance|date:'Y-m-d'}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+						<label for="floatingTextarea2">Date de naissance</label>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-floating">
+						<input type="text" name="lieu_naissance" value="{{user.electeur.lieu_naissance}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+						<label for="floatingTextarea2">Lieu de naissance</label>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<select class="form-select" name="Ville" aria-label="Default select example">
+						<option selected disabled>localisation</option>
+
+						{% for localisation in localisations %}
+						<option value="{{localisation.pk}}" {% if localisation.pk == user.electeur.Ville.pk %} selected {% endif %}>{{localisation.libelle}}</option>
+						{% endfor %}
+						
+					</select>
+				</div>
+				<div class="col-md-6">
+					<select class="form-select" name="sexe" aria-label="">
+						<option disabled>Sexe</option>
+
+						<option value="Masculin" {% if user.electeur.sexe == 'Masculin' %} selected {% endif %}>Masculin</option>
+						
+						<option value="Feminin" {% if user.electeur.sexe == 'Feminin' %} selected {% endif %}>Feminin</option>
+					</select>
+				</div>
+			  
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+		  <button type="submit" class="btn btn-primary">Enregistrer</button>
+		</div>
+		</form>
+	  </div>
+	</div>
+  </div>
+  
+	{% endblock content %}

@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 from rest_framework import routers
 
@@ -14,8 +14,10 @@ urlpatterns = [
     path('profile/prop', views.profileCreateProp, name='CreateProp'),
     path('profile/editarticle/<int:id>', views.profileModifArt, name='editArt'),
     path('profile/editproposition/<int:id>', views.profileModifProp, name='editProp'),
-    path('profile/editcandidat', views.editcandidat, name='edit-candidat')
-    
+    path('profile/editcandidat', views.editcandidat, name='edit-candidat'),
+    path('profile/deleteroposition/<int:id>', views.profileDeleteProp, name='deleteProp'),
+    path('profile/deletearticle/<int:id>', views.profileDeleteArticle, name='deleteArt'),
+    path('MainApp/', include('MainApp.urls'))
 ]
 
 router = routers.DefaultRouter()
