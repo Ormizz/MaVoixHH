@@ -9,6 +9,7 @@ from MainApp.models import Electeur
 class Zone(models.Model):
     id_zone = models.AutoField(primary_key=True)
     nom_zone = models.CharField(max_length=100)
+    point = models.CharField(max_length=1000,blank=True,null=True)
     
     def __str__(self):
         return f'Zone:{self.id_zone} {self.nom_zone}'
