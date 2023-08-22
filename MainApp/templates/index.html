@@ -20,7 +20,7 @@
 									<div class="widget" data-aos="fade-right"
                                     data-aos-duration="1000"
                                     data-aos-easing="ease-in-sine">
-										<h4 class="widget-title">Recent  <a class="see-all" href="#" title="">See All</a></h4>
+										{% comment %} <h4 class="widget-title">Recent</h4> {% endcomment %}
 										<ul class="recent-links">
 											<li>
 												<figure><img alt="" src="images/resources/recentlink-1.jpg"></figure>
@@ -40,7 +40,7 @@
 												<figure><img alt="" src="images/resources/recentlink-2.jpg"></figure>
 												<div class="re-links-meta" style="display: flex;">
 													<img style="height: 15px; margin-right: 15px" src="{% static 'img/localisation.png' %}" alt=""></i>
-													<h6><a title=""  href="#">Cartographie</a></h6>
+													<h6><a title=""  href="/vote/carte/">Cartographie</a></h6>
 												</div>
 											</li>
 										</ul>
@@ -54,7 +54,7 @@
 											<img src="{% static 'img/game_img.jfif' %}" alt="">
 										</p>
 										
-										<a  class="main-btn" href="vote/1"style="background: rgb(255, 238, 224);   color: rgb(255, 114, 0);" title="" data-ripple="">view profile</a>
+										<a  class="main-btn" href="vote/3"style="background: rgb(255, 238, 224);   color: rgb(255, 114, 0);" title="" data-ripple="">FAIRE LE TEST</a>
 									</div><!-- your profile -->
 								</aside>
 							</div>
@@ -64,12 +64,7 @@
 								data-aos-easing="ease-in-sine">
 									<li style="background: "><a style="color: rgb(216, 233, 218); background: rgb(2, 115, 20);"  class="active" href="#" title="">Article</a></li>
 									<li><a href="proposition" style="background: rgb(216, 233, 218); color: rgb(2, 115, 20);" title="">Propositions</a></li>
-<<<<<<< HEAD
-									<li><a href="candidatL" style="background: rgb(216, 233, 218); color: rgb(2, 115, 20);" title="">Candidat</a></li>
-=======
 									<li><a href="{% url 'carteC' %}" style="background: rgb(216, 233, 218); color: rgb(2, 115, 20);" title="">Candidat</a></li>
-									<li><a href="vote/1" style="background: rgb(216, 233, 218); color: rgb(2, 115, 20);" title="">Sondage</a></li>
->>>>>>> c30d02efce9dff77918cf73099773ec832b83ad2
 								</ul><!-- tab buttons -->
 								{% if articles %}
 									{% for article in articles %}
@@ -142,21 +137,6 @@
 											{% endif %}
 										</div>	
 									</div><!-- suggested group -->
-									<div class="widget" data-aos="fade-left"
-                                    data-aos-duration="1000"
-                                    data-aos-easing="ease-in-sine">
-										<h4 class="widget-title">Explor Events</h4>
-										<div class="rec-events bg-purple">
-											<i class="icofont-gift"></i>
-											<h6><a title="" href="">BZ University good night event in columbia</a></h6>
-											<img alt="" src="images/clock.png">
-										</div>
-										<div class="rec-events bg-blue">
-											<i class="icofont-microphone"></i>
-											<h6><a title="" href="">The 3rd International Conference 2020</a></h6>
-											<img alt="" src="images/clock.png">
-										</div>
-									</div><!-- event widget -->
 								</aside>
 							</div>
 						</div>
