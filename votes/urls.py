@@ -13,7 +13,7 @@ router.register('Themes_cles', Themes_clesViewSet)
 
 urlpatterns = [
     path('<int:id>', views.index, name='index'),
-    path('resultat/<int:id>', views.resultat, name='resultat'),
+    path('resultat/<int:id>/<int:id2>/', views.resultat, name='resultat'),
     path('carte/', views.carte, name='carte'),
     path('api/', include(router.urls)),
 ]
