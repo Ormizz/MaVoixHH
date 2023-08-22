@@ -13,7 +13,7 @@
                                     data-aos-duration="1000"
                                     data-aos-easing="ease-in-sine">
 										<figure>
-											<a href="#" title="Advertisment"><img src="images/resources/ad-widget2.gif" alt=""></a>
+											<a href="#" title="Advertisment"><img src="{% static 'img/images/resources/ad-widget2.gif' %}" alt=""></a>
 										</figure>
 									</div><!-- adversment widget -->
 									
@@ -64,7 +64,12 @@
 								data-aos-easing="ease-in-sine">
 									<li style="background: "><a style="color: rgb(216, 233, 218); background: rgb(2, 115, 20);"  class="active" href="#" title="">Article</a></li>
 									<li><a href="proposition" style="background: rgb(216, 233, 218); color: rgb(2, 115, 20);" title="">Propositions</a></li>
+<<<<<<< HEAD
 									<li><a href="candidatL" style="background: rgb(216, 233, 218); color: rgb(2, 115, 20);" title="">Candidat</a></li>
+=======
+									<li><a href="{% url 'carteC' %}" style="background: rgb(216, 233, 218); color: rgb(2, 115, 20);" title="">Candidat</a></li>
+									<li><a href="vote/1" style="background: rgb(216, 233, 218); color: rgb(2, 115, 20);" title="">Sondage</a></li>
+>>>>>>> c30d02efce9dff77918cf73099773ec832b83ad2
 								</ul><!-- tab buttons -->
 								{% if articles %}
 									{% for article in articles %}
@@ -86,7 +91,7 @@
 														</div>
 													</div>
 													<ins><a title="" href="time-line.html">{{ article.candidat.nom }} {{ article.candidat.prenoms }}  </a> {{article.candidat.parti_politique}}</ins>
-													<span><i class="icofont-globe"></i> published: Sep,15 2020</span>
+													<span><i class="icofont-globe"></i> publié : {{article.date_creation}}</span>
 												</div>
 												<div class="post-meta">
 													<figure>
@@ -128,7 +133,7 @@
 															<a title="" href="#">{{ candidat.nom }} {{ candidat.prenoms }}</a>
 															<span>@{{ candidat.surnom }}</span>
 														</div>
-														<a class="main-btn2" style="" href="#" title="">Voir profile</a>
+														<a class="main-btn2" href="candidat/{{candidat.pk}}" title="">Voir profile</a>
 													</div>
 												</div>
 												{% endfor %}

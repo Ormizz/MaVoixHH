@@ -18,11 +18,16 @@
     <link rel="stylesheet" href="{%static 'css/styleC.css' %}">
     <!-- <link rel="stylesheet" href="css/color.css"> -->
     <link rel="stylesheet" href="{%static 'css/responsive.css' %}">
+	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 	<style>
 		#modif .nav-item a{
 			color: #ff7200;
 		}
 	</style>
+	<link
+      href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
 </head>
 <body style="background-color:rgb(224,224,224)">
 
@@ -75,7 +80,7 @@
 			<ul class="web-elements">
 				<li>
 					<div class="user-dp">
-						<a href="profile" title="">
+						<a href="#" title="">
 							<img alt="" src="images/resources/user.jpg">
 							<div class="name">
 								{% comment %} <h4>{{user.username}}</h4> {% endcomment %}
@@ -99,6 +104,10 @@
 					</a>
 					<ul class="dropdown">
 						<li><a title=""  href="{% url 'profileU' %}"><i class="icofont-user-alt-3"></i> Mon Profil utilisateur</a></li>
+						
+						{% if is_candidat %}
+						<li><a title=""  href="{% url 'profileC' %}"><i class="icofont-user-alt-3"></i> Mon Profil Candidat</a></li>
+						{% endif %}
 						<li class="logout"><a href="{% url 'logout' %}" title=""><i class="icofont-power"></i> Logout</a></li>
 					</ul>
 				</li>
@@ -125,6 +134,11 @@
 </div>
 	
 	<script src="{%static 'js/script.js'%}"></script>
+	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+	<script>
+		AOS.init();
+  	</script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	{% comment %} <script src="js/main.min.js"></script> {% endcomment %}
 	{% comment %} <script src="{% static 'js/vivus.min.js' %}"></script> {% endcomment %}
 	{% comment %} <script src="{% static 'js/script.js' %}"></script> {% endcomment %}

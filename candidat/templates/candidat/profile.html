@@ -34,9 +34,9 @@
 								<div class="user-dp-edit">
 									<figure>
 										<img src="{% static 'admin/images/resources/admin.jpg' %}" alt="">
-											<div class="fileupload">
+										<div class="fileupload">
 											<span class="btn-text"><i class="icofont-camera"></i></span>
-											<input type="file" class="upload">
+											<input type="file" class="upload" id="fileInputPP">
 										</div>
 									</figure>
 									<div class="users-name">
@@ -344,7 +344,7 @@
 		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		</div>
 		<div class="modal-body">
-			<form class="row g-3" method="post" action="{% url 'CreateProp' %}">
+			<form class="row g-3" method="post" enctype="multipart/form-data" action="{% url 'CreateProp' %}">
 				{% csrf_token %}
 				<div class="col-md-12">
 					<select class="form-select" name="themes_cles_id" aria-label="Default select example">
@@ -449,6 +449,15 @@
 					  <label for="floatingTextarea2">Biographie</label>
 					</div>
 				</div>
+				<div class="mb-3">
+					<label for="formFile" class="form-label">Photo de profiile</label>
+					<input class="form-control" name="photoPP" type="file" id="">
+				</div>
+				<div class="mb-3">
+					<label for="formFile" class="form-label">Photo de fond</label>
+					<input class="form-control" name="photoFond" type="file" id="">
+				</div>
+									
 			  
 		</div>
 		<div class="modal-footer">
@@ -459,5 +468,4 @@
 	  </div>
 	</div>
   </div>
-  
 	{% endblock content %}

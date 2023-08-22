@@ -1,6 +1,7 @@
 {% extends 'candidat/base/base.html' %}
 {% load static %}
 {% block content %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<section>
 		<div class="gap">
 			<div class="container">
@@ -53,14 +54,11 @@
 									</div>
 									<div class="grp-info about">
 										<h4>{{ candidat.nom }} {{ candidat.prenoms }} <span>Surnom: @{{ candidat.surnom }}</span> <span>Partie Politique: {{ candidat.parti_politique }}</span></h4>
-										<ul class="joined-info">
-											<li><span>Abonnés:</span> 2.2K</li>
-											<li><span>Posts:</span> 932</li>
-										</ul>
+										<br>
 										<ul class="nav nav-tabs about-btn" id="modif">
-											<li class="nav-item"><a class="active perso" href="#posts" data-toggle="tab" style="color: white; background-color: #ff7200;">Fil d'actualité</a></li>
-											<li class="nav-item"><a class="perso" href="#pictures" data-toggle="tab">Propositions</a></li>
-											<li class="nav-item"><a class="perso" href="#videos" data-toggle="tab">Sondages</a></li>
+											<li class="nav-item"><a class="active perso" id="actushow" href="#pictures" data-toggle="tab" style="color: white; background-color: #ff7200;">Fil d'actualité</a></li>
+											<li class="nav-item"><a class="perso" id="proposhow" href="#pictures" data-toggle="tab">Propositions</a></li>
+											{% comment %} <li class="nav-item"><a class="perso" href="#videos" data-toggle="tab">Sondages</a></li> {% endcomment %}
 										</ul>
 									</div>
 									<div class="main-wraper">
@@ -89,7 +87,7 @@
 											<div class="tab-content">
 												<div class="tab-pane active fade show " id="posts" >
 													<div class="row merged20">
-														<div class="col-lg-8">
+														<div class="col-lg-8" id="actu">
 															{% if articles %} {% for article in articles %}
 															<div class="main-wraper">
 																<div class="user-post">
@@ -99,12 +97,38 @@
 																		</figure>
 																		<div class="friend-name">
 																			<ins><a title="" href="time-line.html">{{ candidat.nom }} {{ candidat.prenoms }}</a></ins>
-																			<span><i class="icofont-globe"></i> Publé: Sep,15 2023</span>
+																			<span><i class="icofont-globe"></i> Publé: {{article.date_creation}} </span>
 																		</div>
 																		<div class="post-meta">
 																			<a href="post-detail.html" class="post-title">{{ article.titre }}</a>
 																			<p>
 																				{{ article.content }}
+																			</p>
+																		</div>
+																	</div>
+																</div>
+															</div><!-- share post without image -->
+															{% endfor %} {% else %}
+															<h5 class="mt-4" style="text-align: center">Pas d'article</h5>
+															{% endif %}
+														</div>
+
+														<div class="col-lg-8" id="propo">
+															{% if propositions %} {% for proposition in propositions %}
+															<div class="main-wraper">
+																<div class="user-post">
+																	<div class="friend-info">
+																		<figure>
+																			<img alt="" src="{%static 'img/images/resources/user4.jpg' %}">
+																		</figure>
+																		<div class="friend-name">
+																			<ins><a title="" href="time-line.html">{{ candidat.nom }} {{ candidat.prenoms }}</a></ins>
+																			<span><i class="icofont-globe"></i> Publé: {{proposition.date_creation}} </span>
+																		</div>
+																		<div class="post-meta">
+																			<a href="post-detail.html" class="post-title">{{ proposition.themes_cles.libelle_themes_cles }}</a>
+																			<p>
+																				{{ proposition.libelle_proposition }}
 																			</p>
 																		</div>
 																	</div>
@@ -167,5 +191,17 @@
 			</div>
 		</div>
 	</section>
-	
+	<script>
+		$(document).ready(function(){
+			$("#propo").hide();
+			$("#proposhow").click(function(){
+				$("#actu").hide(1000);
+				$("#propo").show(1000);
+			});
+			$("#actushow").click(function(){
+				$("#propo").hide(1000);
+				$("#actu").show(1000);
+			});
+		});
+	</script>
 {% endblock content %}
