@@ -94,18 +94,25 @@ def profile(request):
     # Récupérer le nom du groupe du candidat
     # user_group = request
     utilisateur = request.user
-    actualite = Article.objects.filter(candidat=utilisateur.candidat.pk)
     all_theme = Themes_cles.objects.all()
-    propositions = Proposition.objects.filter(candidat=utilisateur.candidat.pk)
     localisations = Ville.objects.all()
+    if(hasattr(utilisateur, 'candidat')):
+        actualite = Article.objects.filter(candidat=utilisateur.candidat.pk)
+        propositions = Proposition.objects.filter(candidat=utilisateur.candidat.pk)
+        if (request.user.groups.filter(name='Candidat').exists()):
+            return render(request, 'candidat/profile.html',{
+                'user':utilisateur,
+                'actualites':actualite,
+                'propositions':propositions,
+                'all_theme':all_theme,
+                'localisations': localisations
+            })
     if (request.user.groups.filter(name='Candidat').exists()):
-        return render(request, 'candidat/profile.html',{
-            'user':utilisateur,
-            'actualites':actualite,
-            'propositions':propositions,
-            'all_theme':all_theme,
-            'localisations': localisations
-        })
+            return render(request, 'candidat/profile.html',{
+                'user':utilisateur,
+                'all_theme':all_theme,
+                'localisations': localisations
+            })
     return render(request, 'candidat/Candidat.html')
     
 @login_required  
@@ -127,10 +134,13 @@ def profileCreateArt(request):
     # Récupérer le nom du groupe du candidat
     # user_group = request
     if request.method == 'POST':
+        photoPP = request.FILES.get('photoPP')
+
         article = Article.objects.create(
             titre = request.POST['titre'], 
             candidat_id = request.user.candidat.pk,
             content = request.POST['content'],
+            image = photoPP,
         )
         article.save()
         return redirect("profileC")
@@ -161,6 +171,9 @@ def profileModifArt(request, id):
         actu.titre = request.POST['titre']
         actu.candidat = request.user.candidat  # Utilisez l'attribut candidat de l'article
         actu.content = request.POST['content']
+        photoPP = request.FILES.get('photoPP')
+        if (photoPP):
+            actu.image = photoPP
         
         actu.save()
         return redirect("profileC")
@@ -184,8 +197,36 @@ def editcandidat(request):
         ville_id = request.POST['Ville']
         ville_instance = Ville.objects.get(pk=ville_id)
         candidat.Ville = ville_instance
+        photoPP = request.FILES.get('photoPP')
+        if photoPP:
+            candidat.image = photoPP
+        photoFond = request.FILES.get('photoFond')
+        if photoFond:
+            candidat.fond = photoFond
         candidat.save()
         return redirect("profileC")
+    
+    if request.method == 'POST':
+        candidat.nom = request.POST["nom"]
+        candidat.prenoms = request.POST["prenoms"]
+        candidat.surnom = request.POST["surnom"]
+        candidat.date_naissance = request.POST["date_naissance"]
+        candidat.lieu_naissance = request.POST["lieu_naissance"]
+        candidat.parti_politique = request.POST["parti_politique"]
+        candidat.sexe = request.POST["sexe"]
+        candidat.biographie = request.POST["biographie"]
+        ville_id = request.POST['Ville']
+        ville_instance = Ville.objects.get(pk=ville_id)
+        candidat.Ville = ville_instance
+        photoPP = request.FILES.get('photoPP')
+        if photoPP:
+            candidat.image = photoPP
+        photoFond = request.FILES.get('photoFond')
+        if photoFond:
+            candidat.fond = photoFond
+        candidat.save()
+        return redirect("profileC")
+    
     return render(request, 'candidat/profile.html')
   
 @login_required     

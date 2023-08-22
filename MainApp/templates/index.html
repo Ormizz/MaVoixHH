@@ -91,7 +91,11 @@
 												<div class="post-meta">
 													<figure>
 														<a data-toggle="modal" data-target="#img-comt" href="{% static 'img/images/resources/album1.jpg' %}">
-															<img src="{% static 'img/images/resources/study.jpg' %}" alt="">
+															{% if article.image %}
+															<img  src="/media/{{article.image}}" alt="">
+															{% else %}
+															<img style="width:1024px;height:683px;" src="{% static 'img/images/resources/study.jpg' %}" alt="">
+															{% endif %}
 														</a>	
 													</figure>
 													<a href="post-detail.html" class="post-title">{{article.titre}}</a>
@@ -120,10 +124,19 @@
 												{% for candidat in rdCandidat %}												
 												<div class="friend-box">
 													<figure>
-														<img alt="" src="{% static 'img/images/resources/sidebar-info2.jpg' %}">
+														{% if candidat.fond %}
+														<img style="width:310px;height:110px;" src="/media/{{candidat.fond}}" alt="">
+														{% else %}
+														<img alt="" style="width:310px;height:110px;" src="{% static 'img/images/resources/sidebar-info2.jpg' %}">
+														{% endif %}
 													</figure>
 													<div class="frnd-meta">
-														<img alt="" src="{% static 'img/images/resources/frnd-figure3.jpg' %}">
+														{% if candidat.image %}
+														<img style="width:110px;height:110px;" src="/media/{{candidat.image}}" alt="">
+														{% else %}
+														<img alt="" style="width:110px;height:110px;"  src="{% static 'img/images/resources/frnd-figure3.jpg' %}">
+														{% endif %} 
+														<br>
 														<div class="frnd-name">
 															<a title="" href="#">{{ candidat.nom }} {{ candidat.prenoms }}</a>
 															<span>@{{ candidat.surnom }}</span>

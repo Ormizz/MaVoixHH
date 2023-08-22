@@ -20,6 +20,7 @@ urlpatterns = [
     path('MainApp/', include('MainApp.urls'))
 ]
 
+
 router = routers.DefaultRouter()
 router.register('Article', ArticleViewSet)
 router.register('Election', ElectionViewSet)

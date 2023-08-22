@@ -25,19 +25,13 @@
 						<div class="col-lg-4">
 							<div class="d-widget text-center">
 								<div class="user-avatar-edit">
-									<figure><img src="{% static 'admin/images/resources/user-mockupbg.jpg' %}" alt=""></figure>
-									<div class="fileupload">
-										<span class="btn-text">editer</span>
-										<input type="file" class="upload">
-									</div>
+									<figure><img src="{{ settings.MEDIA_URL }}/media/{{user.candidat.fond}}" alt="dada"></figure>
+									
 								</div>
 								<div class="user-dp-edit">
 									<figure>
-										<img src="{% static 'admin/images/resources/admin.jpg' %}" alt="">
-										<div class="fileupload">
-											<span class="btn-text"><i class="icofont-camera"></i></span>
-											<input type="file" class="upload" id="fileInputPP">
-										</div>
+										<img height="110px" width="110px"src="{{user.candidat.image.url}}" alt="">
+										
 									</figure>
 									<div class="users-name">
 										<h5>{{user.candidat.nom}} <br> {{user.candidat.prenoms}}</h5>
@@ -89,7 +83,7 @@
 										<div class="dash-item">
 											<a href="#">
 												<div class="sl-avatar ">
-													<img alt="avatar" src="{% static 'admin/images/resources/small-pic5.png' %}" class="img-responsive img-circle">
+													<img alt="avatar" src="/media/{{actualite.image}}" class="img-responsive img-circle">
 												</div>
 												<div class="sl-content">
 													<p class="inline-block"><span class="txt-success">{{actualite.titre}}</span><br><span>{{actualite.content}}</span></p>
@@ -113,7 +107,7 @@
 												<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 												</div>
 												<div class="modal-body">
-													<form class="row g-3" method="post" action="{% url 'editArt' actualite.pk %}">
+													<form class="row g-3" method="post" enctype="multipart/form-data" action="{% url 'editArt' actualite.pk %}">
 														{% csrf_token %}
 														<div class="col-md-6">
 														<label for="inputEmail4" class="form-label">Titre</label>
@@ -125,6 +119,11 @@
 															<label for="floatingTextarea2">Comments</label>
 														</div>
 														</div>
+														<div class="mb-3">
+															<label for="formFile" class="form-label">Photo</label>
+															<input class="form-control" name="photoPP" type="file">
+														</div>
+														
 													
 												</div>
 												<div class="modal-footer">
@@ -310,7 +309,7 @@
 		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		</div>
 		<div class="modal-body">
-			<form class="row g-3" method="post" action="{% url 'CreateArt' %}">
+			<form class="row g-3" method="post" action="{% url 'CreateArt' %}" enctype="multipart/form-data">
 				{% csrf_token %}
 				<div class="col-md-6">
 				  <label for="inputEmail4" class="form-label">Titre</label>
@@ -321,6 +320,10 @@
 					<textarea class="form-control" name="content" placeholder="Contenu" id="floatingTextarea2" style="height: 100px"></textarea>
 					<label for="floatingTextarea2">Comments</label>
 				  </div>
+				</div>
+				<div class="mb-3">
+					<label for="formFile" class="form-label">Photo</label>
+					<input class="form-control" name="photoPP" type="file">
 				</div>
 			  
 		</div>
@@ -385,7 +388,7 @@
 		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		</div>
 		<div class="modal-body">
-			<form class="row g-3" method="post" action="{% url 'edit-candidat' %}">
+			<form class="row g-3" method="post" action="{% url 'edit-candidat' %}" enctype="multipart/form-data">
 				{% csrf_token %}
 				
 				<div class="col-md-6">
@@ -450,12 +453,12 @@
 					</div>
 				</div>
 				<div class="mb-3">
-					<label for="formFile" class="form-label">Photo de profiile</label>
-					<input class="form-control" name="photoPP" type="file" id="">
+					<label for="formFile" class="form-label">Photo de profile</label>
+					<input class="form-control" name="photoPP" type="file">
 				</div>
 				<div class="mb-3">
 					<label for="formFile" class="form-label">Photo de fond</label>
-					<input class="form-control" name="photoFond" type="file" id="">
+					<input class="form-control" name="photoFond" type="file">
 				</div>
 									
 			  

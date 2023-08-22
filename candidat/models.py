@@ -62,6 +62,7 @@ class Article(models.Model):
     content = models.TextField(max_length=400, default="un contenu")
     date_creation = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     candidat = models.ForeignKey(Candidat, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='imagesArt/', null=True, blank=True)
     
     def __str__(self):
         return f'Article:{self.id_article} {self.titre} {self.content} {self.candidat}'
