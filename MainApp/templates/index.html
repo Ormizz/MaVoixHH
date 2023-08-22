@@ -12,7 +12,6 @@
 									<div class="advertisment-box" data-aos="fade-right"
                                     data-aos-duration="1000"
                                     data-aos-easing="ease-in-sine">
-										<h4 class=""><i class="icofont-info-circle"></i> advertisment</h4>
 										<figure>
 											<a href="#" title="Advertisment"><img src="images/resources/ad-widget2.gif" alt=""></a>
 										</figure>
@@ -21,39 +20,41 @@
 									<div class="widget" data-aos="fade-right"
                                     data-aos-duration="1000"
                                     data-aos-easing="ease-in-sine">
-										<h4 class="widget-title">Recent Blogs <a class="see-all" href="#" title="">See All</a></h4>
+										<h4 class="widget-title">Recent  <a class="see-all" href="#" title="">See All</a></h4>
 										<ul class="recent-links">
 											<li>
 												<figure><img alt="" src="images/resources/recentlink-1.jpg"></figure>
-												<div class="re-links-meta">
-													<h6><a title="" href="#">Moira's fade reach much farther...</a></h6>
-													<span>2 weeks ago </span>
-												</div>
-											</li>
-											<li>
-												<figure><img alt="" src="images/resources/recentlink-2.jpg"></figure>
-												<div class="re-links-meta">
-													<h6><a title="" href="#">Daniel asks The voice of doomfist...</a></h6>
-													<span>3 months ago </span>
+												<div class="re-links-meta" style="display: flex;">
+													<img style="height: 15px; margin-right: 15px" src="{% static 'img/debat.png' %}" alt=""></i>
+													<h6><a title=""  href="#">Débat</a></h6>
 												</div>
 											</li>
 											<li>
 												<figure><img alt="" src="images/resources/recentlink-3.jpg"></figure>
-												<div class="re-links-meta">
-													<h6><a title="" href="#">The socimo over watch scandals.</a></h6>
-													<span>1 day before</span>
+												<div class="re-links-meta" style="display: flex;">
+													<img style="height: 15px; margin-right: 15px" src="{% static 'img/sondage.png' %}" alt=""></i>
+													<h6><a title=""  href="#">Sondage</a></h6>
+												</div>
+											</li>
+											<li>
+												<figure><img alt="" src="images/resources/recentlink-2.jpg"></figure>
+												<div class="re-links-meta" style="display: flex;">
+													<img style="height: 15px; margin-right: 15px" src="{% static 'img/localisation.png' %}" alt=""></i>
+													<h6><a title=""  href="#">Cartographie</a></h6>
 												</div>
 											</li>
 										</ul>
 									</div><!-- recent blog -->
-									<div class="widget"  data-aos="fade-up"
+									<div class="widget" style="text-align: center;"  data-aos="fade-up"
                                     data-aos-duration="1000"
                                     data-aos-easing="ease-in-sine">
-										<h4 class="widget-title">Your profile has a new Experience section</h4>
-										<p>
-											Showcase your professional experience and education to help potential employers and collaborators find and contact you about career opportunities.
+										<h4 class="widget-title" style="text-align: left;">Sondage</h4>
+										<p style="text-align: left;">
+											Trouver le candidats qui correspond a vos convictions en répondant a des questions d'ordre
+											<img src="{% static 'img/game_img.jfif' %}" alt="">
 										</p>
-										<a  class="main-btn" href="profile.html" title="" data-ripple="">view profile</a>
+										
+										<a  class="main-btn" href="vote/1"style="background: rgb(255, 238, 224);   color: rgb(255, 114, 0);" title="" data-ripple="">view profile</a>
 									</div><!-- your profile -->
 								</aside>
 							</div>
@@ -64,7 +65,6 @@
 									<li style="background: "><a style="color: rgb(216, 233, 218); background: rgb(2, 115, 20);"  class="active" href="#" title="">Article</a></li>
 									<li><a href="proposition" style="background: rgb(216, 233, 218); color: rgb(2, 115, 20);" title="">Propositions</a></li>
 									<li><a href="candidatL" style="background: rgb(216, 233, 218); color: rgb(2, 115, 20);" title="">Candidat</a></li>
-									<li><a href="vote/1" style="background: rgb(216, 233, 218); color: rgb(2, 115, 20);" title="">Sondage</a></li>
 								</ul><!-- tab buttons -->
 								{% if articles %}
 									{% for article in articles %}
@@ -114,14 +114,13 @@
 									<div class="widget" data-aos="fade-left"
                                     data-aos-duration="1000"
                                     data-aos-easing="ease-in-sine">
-										<h4 class="widget-title">Candidat</h4>
+										<h4 class="widget-title">Suggestions</h4>
 										<div class="sug-caro">
 											{% if rdCandidat %}
 												{% for candidat in rdCandidat %}												
 												<div class="friend-box">
 													<figure>
 														<img alt="" src="{% static 'img/images/resources/sidebar-info2.jpg' %}">
-														<span>Suivi: 505K</span>
 													</figure>
 													<div class="frnd-meta">
 														<img alt="" src="{% static 'img/images/resources/frnd-figure3.jpg' %}">
@@ -129,7 +128,7 @@
 															<a title="" href="#">{{ candidat.nom }} {{ candidat.prenoms }}</a>
 															<span>@{{ candidat.surnom }}</span>
 														</div>
-														<a class="main-btn2" href="#" title="">Voir la page</a>
+														<a class="main-btn2" style="" href="#" title="">Voir profile</a>
 													</div>
 												</div>
 												{% endfor %}
@@ -138,20 +137,10 @@
 											{% endif %}
 										</div>	
 									</div><!-- suggested group -->
-									<div class="widget" data-aos="fade-up"
-                                    data-aos-duration="1000"
-                                    data-aos-easing="ease-in-sine">
-										<h4 class="widget-title">Ask Research Question?</h4>
-										<div class="ask-question">
-											<i class="icofont-question-circle"></i>
-											<h6>Ask questions in Q&A to get help from experts in your field.</h6>
-											<a class="ask-qst" href="#" title="">Ask a question</a>
-										</div>
-									</div><!-- ask question widget -->
 									<div class="widget" data-aos="fade-left"
                                     data-aos-duration="1000"
                                     data-aos-easing="ease-in-sine">
-										<h4 class="widget-title">Explor Events <a class="see-all" href="#" title="">See All</a></h4>
+										<h4 class="widget-title">Explor Events</h4>
 										<div class="rec-events bg-purple">
 											<i class="icofont-gift"></i>
 											<h6><a title="" href="">BZ University good night event in columbia</a></h6>

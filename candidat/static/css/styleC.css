@@ -7688,9 +7688,9 @@ table.table-striped tbody tr td a.button:hover {
     width: 100%;
 }
 a.main-btn2, button.main-btn2 {
-    border: 1px solid #088dcd;
+    border: 1px solid rgb(224, 224, 224);
     border-radius: 35px;
-    color: #088dcd;
+    color: rgb(2, 115, 20);
     display: inline-block;
     font-size: 13px;
     font-weight: 500;
@@ -7700,7 +7700,7 @@ a.main-btn2, button.main-btn2 {
     width: 100%;
 }
 a.main-btn2:hover, button.main-btn2:hover {
-    background: #088dcd none repeat scroll 0 0;
+    background: rgb(2, 115, 20) none repeat scroll 0 0;
     color: #fff;
 }
 .create-meta > p {
