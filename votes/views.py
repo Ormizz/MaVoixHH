@@ -10,6 +10,8 @@ from votes.models import *
 from MainApp.models import *
 from django.db.models import Count, Q
 from django.db.models import OuterRef, Subquery
+from django.db.models import Max, F, Subquery
+from django.db.models.functions import Coalesce
 
 
 # Create your views here.
@@ -139,23 +141,8 @@ class Themes_clesViewSet(viewsets.ModelViewSet):
     serializer_class = Themes_clesSerializer
     
 def carte(request):
-    # Sous-requête pour obtenir le nombre de votes "pour" par candidat dans chaque zone
-    # votes_pour_subquery = Vote.objects.filter(
-    #     nature_vote="pour",
-    #     ville=OuterRef('id_ville')
-    # ).values('candidat').annotate(num_votes_pour=Count('id_Vote')).order_by('-num_votes_pour')
-
-    # # Requête pour obtenir la liste des candidats ayant le plus de votes "pour" dans chaque zone
-    # candidats_plus_votes_pour = Candidat.objects.filter(
-    #     Q(id_candidat__in=Subquery(votes_pour_subquery.values('candidat')[:1])),
-    #     Q(vote__nature_vote="pour", vote__ville=OuterRef('id_ville'))
-    # ).annotate(num_votes_pour=Count('vote'))
-
-    # # Requête pour obtenir la liste des zones avec les candidats ayant le plus de votes "pour"
-    # zones_with_candidats_plus_votes_pour = Zone.objects.annotate(
-    #     candidats_plus_votes_pour=Subquery(candidats_plus_votes_pour.values('num_votes_pour')[:1]),
-    #     candidats=candidats_plus_votes_pour
-    # )
+    zones = Ville.objects.all()
+    
     return render(request,'sondages/carte.html', {
         'zone': Ville.objects.all()
     })
