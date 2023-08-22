@@ -84,7 +84,7 @@
     {% if zones %}
       {% for commune in zones  %}
         <div class="mb-3">
-          <a href="/vote/{{ commune.id_zone }}" class="btn-zone btn bg-white">{{ commune.nom_zone }}</a> 
+          <a href="/vote/{{ commune.id_Ville }}" class="btn-zone btn bg-white">{{ commune.libelle }}</a> 
         </div>
       {% endfor %}
     {% endif %}
@@ -98,7 +98,7 @@
   <div class="form-group">
     <label for=""></label>
     <input type="text"
-      class="form-control" hidden name="" value="{{zone.id_zone}}" id="zone_courante" aria-describedby="helpId" placeholder="">
+      class="form-control" hidden name="" value="{{zone.id_Ville}}" id="zone_courante" aria-describedby="helpId" placeholder="">
   </div>
   {% if reponses %}
   <div class="tinder--cards">
@@ -108,11 +108,12 @@
     <div class="tinder--card">
       <h3>{{ reponse.themes_cles.libelle_themes_cles }}</h3>
       <p>{{ reponse.libelle_proposition }}</p>
+      {{ reponse.candidat.id_candidat }}
       <div class="form-group">
         <label for=""></label>
         
         <input type="text" hidden class="form-control vall{{ reponse.id_proposition }}" name="" id="" value="{{ reponse.id_proposition }}" aria-describedby="helpId" placeholder="">
-        <input type="text" hidden class="form-control prop{{ reponse.id_proposition }}" name="" id="" value="{{ reponse.themes_cles.zone.id_zone }}" aria-describedby="helpId" placeholder="">
+        <input type="text" hidden class="form-control prop{{ reponse.id_proposition }}" name="" id="" value="{{ reponse.ville.id_Ville }}" aria-describedby="helpId" placeholder="">
         <input type="text" hidden class="form-control cand{{ reponse.id_proposition }}" name="" id="" value="{{ reponse.candidat.id_candidat }}" aria-describedby="helpId" placeholder="">
         
         <script>
@@ -160,7 +161,7 @@
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">{{ zone.nom_zone }}</h4>
+        <h4 class="modal-title">{{ zone.libelle }}</h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
 
@@ -204,16 +205,17 @@
         ff3 = document.getElementById("cand"+nbrC).value
         const donnees = {
             proposition: ff,
-            zone: ff2,
+            ville: ff2,
             candidat: ff3,
             nature_vote: "Pour",
-            electeur: 1
+            electeur: electeur
             // Ajoutez d'autres champs et valeurs ici
         };
+        console.log(donnees)
         enregistrerDonnees(donnees)
         if(nbr==0){
             alert("Merci d'avoir participer au sondage") 
-            window.location.href = "/vote/resultat/"+electeur;
+            window.location.href = "/vote/resultat/"+electeur+"/"+zone_id;
         }
     }
     function voteC() {
@@ -226,25 +228,43 @@
         ff3 = document.getElementById("cand"+nbrC).value
         const donnees = {
             proposition: ff,
-            zone: ff2,
+            ville: ff2,
             candidat: ff3,
             nature_vote: "contre",
-            electeur: 1
+            electeur: electeur
             // Ajoutez d'autres champs et valeurs ici
         };
         enregistrerDonnees(donnees)
         if(nbr==0){
             alert("Merci d'avoir participer au sondage") 
-            window.location.href = "/vote/resultat/"+electeur;
+            window.location.href = "/vote/resultat/"+electeur+"/"+zone_id;
         }
     }
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    // Récupérez le jeton CSRF depuis les cookies
+    var csrftoken = getCookie('csrftoken');
 
     function enregistrerDonnees(donnees) {
 
-        fetch('/vote/api/Vote/', {
+        fetch('http://127.0.0.1:8000/vote/api/Vote/', {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken,
             // Ajoutez d'autres en-têtes si nécessaire
             },
             body: JSON.stringify(donnees)

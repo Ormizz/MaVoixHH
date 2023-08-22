@@ -1,8 +1,8 @@
 
 # Create your models here.
 from django.db import models
-from candidat.models import Candidat
-from MainApp.models import Electeur
+from candidat.models import *
+from MainApp.models import *
 
 
 # Create your models here.
@@ -27,7 +27,7 @@ class Proposition(models.Model):
     candidat = models.ForeignKey(Candidat, on_delete=models.CASCADE, blank=True,null=True)
     date_creation = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     themes_cles = models.ForeignKey(Themes_cles, on_delete=models.CASCADE, blank=True,null=True)
-    zone = models.ForeignKey(Zone, on_delete=models.CASCADE,blank=True,null=True)
+    ville = models.ForeignKey(Ville, on_delete=models.CASCADE,blank=True,null=True)
     
     def __str__(self):
         return f'Proposition:{self.id_proposition} {self.libelle_proposition}'
@@ -36,7 +36,7 @@ class Vote(models.Model):
     id_Vote = models.AutoField(primary_key=True)
     nature_vote = models.CharField(max_length=70)
     proposition = models.ForeignKey(Proposition, on_delete=models.CASCADE, blank=True,null=True)
-    zone = models.ForeignKey(Zone, on_delete=models.CASCADE, blank=True,null=True)
+    ville = models.ForeignKey(Ville, on_delete=models.CASCADE, blank=True,null=True)
     electeur = models.ForeignKey(Electeur, on_delete=models.CASCADE, blank=True,null=True)
     candidat = models.ForeignKey(Candidat, on_delete=models.CASCADE, blank=True,null=True)
     

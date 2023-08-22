@@ -15,6 +15,7 @@ class Election(models.Model):
 class Ville(models.Model):
     id_Ville = models.AutoField(primary_key=True)
     libelle = models.CharField(max_length=100)
+    point = models.CharField(max_length=1000,blank=True,null=True)
     
     def __str__(self):
         return f'Question_electoral:{self.id_Ville} {self.libelle}'

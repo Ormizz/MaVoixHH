@@ -15,7 +15,7 @@ from django.db.models import OuterRef, Subquery
 # Create your views here.
 def index(request, id):
     # Récupérez la zone spécifique et les thèmes associés
-    zone = Zone.objects.get(pk=id)
+    zone = Ville.objects.get(pk=id)
     themes = Themes_cles.objects.all()
     
     # Calculez le nombre de réponses à obtenir par thème et par candidat
@@ -38,7 +38,7 @@ def index(request, id):
 
     # Parcourez chaque thème et récupérez les propositions liées
     for theme in themes:
-        propositions = Proposition.objects.filter(themes_cles=theme, zone=zone.id_zone)
+        propositions = Proposition.objects.filter(themes_cles=theme, ville=zone.id_Ville)
         propositions_liees.extend(propositions)
     
 
@@ -58,7 +58,7 @@ def index(request, id):
     random.shuffle(resultat)
     nbr_proposition = len(resultat)
     electeur = Electeur.objects.get(user=request.user.id)
-    zones = Zone.objects.all().order_by('nom_zone')
+    zones = Ville.objects.all().order_by('libelle')
     return render(request,'sondages/index.html',{ 
         'reponses': resultat,
         'nbr': nbr_proposition,
@@ -69,12 +69,13 @@ def index(request, id):
         })
     
 
-def resultat(request, id):
+def resultat(request, id, id2):
     electeur = Electeur.objects.get(pk=id)
     candidat = Candidat.objects.all()
     vote = Vote.objects.filter(electeur=electeur.id_electeur)
     
-    candidats = Candidat.objects.all()
+    ville_id = id2     
+    candidats = Candidat.objects.filter(Ville__id_Ville=ville_id)
 
     # Liste pour stocker les résultats par candidat
     resultats_par_candidat = []
@@ -84,25 +85,25 @@ def resultat(request, id):
         candidat_id = candidat.id_candidat
         
         # Obtenez le nombre de votes "pour" par zone pour le candidat spécifié
-        resultats = Vote.objects.filter(candidat_id=candidat_id, nature_vote='pour').values('zone').annotate(nombre_votes_pour=Count('nature_vote'))
+        resultats = Vote.objects.filter(candidat_id=candidat_id, nature_vote='pour').values('ville').annotate(nombre_votes_pour=Count('nature_vote'))
 
         # Stockez les résultats pour ce candidat dans le dictionnaire
         resultat_candidat = {
             'candidat': f"{candidat.nom} {candidat.prenoms}",
             'resultats': [
-                {'zone': resultat['zone'], 'nombre_votes_pour': resultat['nombre_votes_pour']}
+                {'zone': resultat['ville'], 'nombre_votes_pour': resultat['nombre_votes_pour']}
                 for resultat in resultats
             ]
         }
         
-    electeur_id = 1  # Remplacez par l'ID de l'électeur souhaité
+    electeur_id = id  # Remplacez par l'ID de l'électeur souhaité
 
     candidats_avec_votes_pour = Candidat.objects.filter(
-        vote__electeur_id=electeur_id, vote__nature_vote='pour'
+        vote__electeur_id=electeur_id, vote__nature_vote='pour', Ville__id_Ville=ville_id
     ).annotate(num_votes_pour=Count('vote')).order_by('-num_votes_pour')
     premier_candidat = candidats_avec_votes_pour.first()
     deuxieme_candidat = candidats_avec_votes_pour[1] if len(candidats) >= 2 else None
-    troisieme_candidat = candidats_avec_votes_pour[2] if len(candidats) >= 2 else None
+    troisieme_candidat = candidats_avec_votes_pour[2] if len(candidats) >= 3 else None
     
     nbr_total_vote = 0
     for cvpe in candidats_avec_votes_pour:
@@ -116,7 +117,8 @@ def resultat(request, id):
         'premier_candidat': premier_candidat,
         'deuxieme_candidat': deuxieme_candidat,
         'troisieme_candidat': troisieme_candidat,
-        'nbr_total_vote': nbr_total_vote
+        'nbr_total_vote': nbr_total_vote,
+        'candidats': candidats
         })
 
 
@@ -137,16 +139,16 @@ class Themes_clesViewSet(viewsets.ModelViewSet):
     serializer_class = Themes_clesSerializer
     
 def carte(request):
-    # # Sous-requête pour obtenir le nombre de votes "pour" par candidat dans chaque zone
+    # Sous-requête pour obtenir le nombre de votes "pour" par candidat dans chaque zone
     # votes_pour_subquery = Vote.objects.filter(
     #     nature_vote="pour",
-    #     zone=OuterRef('id_zone')
+    #     ville=OuterRef('id_ville')
     # ).values('candidat').annotate(num_votes_pour=Count('id_Vote')).order_by('-num_votes_pour')
 
     # # Requête pour obtenir la liste des candidats ayant le plus de votes "pour" dans chaque zone
     # candidats_plus_votes_pour = Candidat.objects.filter(
     #     Q(id_candidat__in=Subquery(votes_pour_subquery.values('candidat')[:1])),
-    #     Q(vote__nature_vote="pour", vote__zone=OuterRef('id_zone'))
+    #     Q(vote__nature_vote="pour", vote__ville=OuterRef('id_ville'))
     # ).annotate(num_votes_pour=Count('vote'))
 
     # # Requête pour obtenir la liste des zones avec les candidats ayant le plus de votes "pour"
@@ -155,5 +157,5 @@ def carte(request):
     #     candidats=candidats_plus_votes_pour
     # )
     return render(request,'sondages/carte.html', {
-        'zone': Zone.objects.all()
+        'zone': Ville.objects.all()
     })
