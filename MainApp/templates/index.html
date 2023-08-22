@@ -14,7 +14,7 @@
                                     data-aos-easing="ease-in-sine">
 										<h4 class=""><i class="icofont-info-circle"></i> advertisment</h4>
 										<figure>
-											<a href="#" title="Advertisment"><img src="images/resources/ad-widget2.gif" alt=""></a>
+											<a href="#" title="Advertisment"><img src="{% static 'img/images/resources/ad-widget2.gif' %}" alt=""></a>
 										</figure>
 									</div><!-- adversment widget -->
 									
@@ -63,7 +63,7 @@
 								data-aos-easing="ease-in-sine">
 									<li style="background: "><a style="color: rgb(216, 233, 218); background: rgb(2, 115, 20);"  class="active" href="#" title="">Article</a></li>
 									<li><a href="proposition" style="background: rgb(216, 233, 218); color: rgb(2, 115, 20);" title="">Propositions</a></li>
-									<li><a href="candidatL" style="background: rgb(216, 233, 218); color: rgb(2, 115, 20);" title="">Candidat</a></li>
+									<li><a href="{% url 'carteC' %}" style="background: rgb(216, 233, 218); color: rgb(2, 115, 20);" title="">Candidat</a></li>
 									<li><a href="vote/1" style="background: rgb(216, 233, 218); color: rgb(2, 115, 20);" title="">Sondage</a></li>
 								</ul><!-- tab buttons -->
 								{% if articles %}
@@ -86,7 +86,7 @@
 														</div>
 													</div>
 													<ins><a title="" href="time-line.html">{{ article.candidat.nom }} {{ article.candidat.prenoms }}  </a> {{article.candidat.parti_politique}}</ins>
-													<span><i class="icofont-globe"></i> published: Sep,15 2020</span>
+													<span><i class="icofont-globe"></i> publié : {{article.date_creation}}</span>
 												</div>
 												<div class="post-meta">
 													<figure>
@@ -121,7 +121,6 @@
 												<div class="friend-box">
 													<figure>
 														<img alt="" src="{% static 'img/images/resources/sidebar-info2.jpg' %}">
-														<span>Suivi: 505K</span>
 													</figure>
 													<div class="frnd-meta">
 														<img alt="" src="{% static 'img/images/resources/frnd-figure3.jpg' %}">
@@ -129,7 +128,7 @@
 															<a title="" href="#">{{ candidat.nom }} {{ candidat.prenoms }}</a>
 															<span>@{{ candidat.surnom }}</span>
 														</div>
-														<a class="main-btn2" href="#" title="">Voir la page</a>
+														<a class="main-btn2" href="candidat/{{candidat.pk}}" title="">Voir la page</a>
 													</div>
 												</div>
 												{% endfor %}

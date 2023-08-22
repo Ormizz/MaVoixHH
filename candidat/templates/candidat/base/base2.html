@@ -19,11 +19,16 @@
     <link rel="stylesheet" href="{%static 'admin/css/style.css' %}">
     <!-- <link rel="stylesheet" href="css/color.css"> -->
     <link rel="stylesheet" href="{%static 'admin/css/responsive.css' %}">
+	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 	<style>
 		#modif .nav-item a{
 			color: #ff7200;
 		}
 	</style>
+	<link
+      href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
 </head>
 <body>
 
@@ -34,7 +39,7 @@
 	<div class="responsive-header">
 		<div class="logo res"><img src="{% static 'img/Logo.png' %}" alt=""><span></span></div>
 		<div class="user-avatar mobile">
-			<a href="profile.html" title="View Profile"><img alt="" src="images/resources/user.jpg"></a>
+			<a href="#" title="View Profile"><img alt="" src="images/resources/user.jpg"></a>
 			<div class="name">
 				<h4>{{user.username}}</h4>
 				<span>{{user.account.localisation}}</span>
@@ -74,7 +79,7 @@
 			<ul class="web-elements">
 				<li>
 					<div class="user-dp">
-						<a href="profile" title="">
+						<a href="{% url 'actuality' %}" title="">
 							<img alt="" src="images/resources/user.jpg">
 							<div class="name">
 								{% comment %} <h4>{{user.username}}</h4> {% endcomment %}
@@ -126,6 +131,11 @@
 	<script src="{%static 'admin/js/script.js'%}"></script>
 	<script src="{% static 'admin/js/main.min.js' %}"></script>
 	<script src="{% static 'admin/js/vivus.min.js' %}"></script>
+	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+	<script>
+		AOS.init();
+  	</script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	{% comment %} <script src="{% static 'js/script.js' %}"></script> {% endcomment %}
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>	

@@ -1,4 +1,5 @@
 import random
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -9,7 +10,7 @@ from django.contrib.auth import authenticate, login, logout
 from candidat.models import Article, Candidat
 
 from MainApp.models import *
-from votes.models import Proposition 
+from votes.models import Proposition, Zone
 from MainApp.serializers import ElecteurSerialiser
 
 from .forms import PhotoForm
@@ -56,20 +57,22 @@ def SignUp(request):
             password = request.POST['password'], 
         )
         user.save()
+        ville_id = request.POST['Ville']
+        ville_instance = Ville.objects.get(pk=ville_id)
         electeur = Electeur.objects.create(
             nom = request.POST['nom'],
             prenoms = request.POST['prenoms'],
             date_naissance = request.POST['date_naissance'],
             lieu_naissance = request.POST['lieu_naissance'],
-            localisation = request.POST['localisation'],
             sexe = request.POST['sexe'],
             user_id = user.pk,
+            Ville_id = request.POST['Ville'],
         )
         electeur.save()
         electeurGroup = Group.objects.get(name='Electeur')
         user.groups.add(electeurGroup)
         return redirect("index")
-    return render(request, 'index.html')
+    return render(request, 'accueil.html')
 
 
 @login_required
@@ -89,11 +92,13 @@ def actuality(request):
         print(cand.nom)
     
     actualite = Article.objects.all()
+    is_candidat = request.user.groups.filter(name='Candidat').exists()
     utilisateur = request.user
     return render(request, 'index.html', {
         'user': utilisateur, 
         'articles': actualite,
         'rdCandidat': random_candidat,
+        'is_candidat':is_candidat,
         }
     )
     
@@ -123,7 +128,9 @@ def propositionfunc(request):
     )
 
 def index(request):
-    return render(request, 'accueil.html')
+    return render(request, 'accueil.html',{
+        'localisations':Ville.objects.all()
+    })
 
 
 @login_required  
@@ -172,3 +179,14 @@ def afficher_photos(request):
 
 def photo_test(request):
     return render(request,'image.html')
+
+def carte(request):
+       return render(request,'carte.html', {
+            'candidats' : Candidat.objects.all(),
+            'zone': Zone.objects.all()
+    })
+
+def get_candidats(request):
+    zone = request.GET.get('zone')
+    candidats = Candidat.objects.filter(Ville__libelle=zone).values('nom', 'prenoms', 'parti_politique', 'pk')
+    return JsonResponse(list(candidats), safe=False)

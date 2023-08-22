@@ -36,11 +36,16 @@ class Proposition_electoralViewSet(viewsets.ModelViewSet):
     serializer_class = Proposition_electoralSerializer
 
     
-# Create your views here.
+# Create your views here
+@login_required
 def index(request, id):
+    is_candidat = request.user.groups.filter(name='Candidat').exists()
+    print(is_candidat)
     return render(request,'candidat/Candidat.html',{
         'candidat': Candidat.objects.get(pk=id),
-        'articles': Article.objects.all()
+        'articles': Article.objects.filter(candidat_id = id).order_by('date_creation'),
+        'propositions' : Proposition.objects.filter(candidat_id = id),
+        'is_candidat': is_candidat
     })
 
 def listC(request):
@@ -78,8 +83,6 @@ def form(request):
         
     #reconduction des pages
     
-    if candidat_id:
-        return render(request, 'candidat/form.html', context)
     
 def formedit(request, id):
     # Récupérer l'id du candidat
@@ -95,9 +98,7 @@ def profile(request):
     all_theme = Themes_cles.objects.all()
     propositions = Proposition.objects.filter(candidat=utilisateur.candidat.pk)
     localisations = Ville.objects.all()
-    print(utilisateur.candidat.Ville)
-    # print(actualite)
-    if (str(request.user.groups.first())=="Candidat"):
+    if (request.user.groups.filter(name='Candidat').exists()):
         return render(request, 'candidat/profile.html',{
             'user':utilisateur,
             'actualites':actualite,
@@ -170,6 +171,7 @@ def editcandidat(request):
     # Récupérer le nom du groupe du candidat
     # user_group = request
     candidat = Candidat.objects.get(pk=request.user.candidat.pk)
+  
     if request.method == 'POST':
         candidat.nom = request.POST["nom"]
         candidat.prenoms = request.POST["prenoms"]

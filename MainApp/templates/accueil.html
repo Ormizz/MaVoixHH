@@ -580,9 +580,16 @@ doc_author: Webstrot
                     <input type="text" name="lieu_naissance" class="form-control" id="inputPassword4">
                 </div>
                 <div class="col-md-6">
-                    <label for="inputCity" class="form-label">Commune</label>
-                    <input type="text" name="localisation" class="form-control" id="inputCity">
-                </div>
+                    <label for="inputPassword4" class="form-label">Commune</label>
+					<select class="form-control" name="Ville" aria-label="Default select example">
+						<option selected disabled>Commune</option>
+
+						{% for localisation in localisations %}
+						<option value="{{localisation.pk}}">{{localisation.libelle}}</option>
+						{% endfor %}
+						
+					</select>
+				</div>
                 <div class="col-md-6">
                     <label for="inputCity" class="form-label">Nom d'utilisateur</label>
                     <input type="text" name="username" class="form-control" id="inputCity">
