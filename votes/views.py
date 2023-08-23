@@ -24,7 +24,7 @@ def index(request, id):
     # Calculez le nombre de réponses à obtenir par thème et par candidat
     # total_themes = themes.count()
     total_candidats = Candidat.objects.count()
-    reponses_par_candidat = 30 // total_candidats
+    reponses_par_candidat = 25 // total_candidats
     
     # propositions = Proposition.objects.all()
     
