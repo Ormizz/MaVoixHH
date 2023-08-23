@@ -1,5 +1,6 @@
 import random
 from django.http import JsonResponse
+from django.db.models import Count, Q
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -10,11 +11,9 @@ from django.contrib.auth import authenticate, login, logout
 from candidat.models import Article, Candidat
 
 from MainApp.models import *
-from votes.models import Proposition, Zone
+from votes.models import Proposition, Vote, Zone
 from MainApp.serializers import ElecteurSerialiser
 
-from .forms import PhotoForm
-from .models import Photo
 
 # Création des vues
 
@@ -163,23 +162,6 @@ def editUser(request):
         return redirect("profileU")
     return render(request, 'profileU.html')
 
-def enregistrer_photo(request):
-    if request.method == 'POST':
-        form = PhotoForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('afficher_photos')
-    else:
-        form = PhotoForm()
-    return render(request, 'image.html', {'form': form})
-
-def afficher_photos(request):
-    photos = Photo.objects.all()
-    return render(request, 'afficher_img.html', {'photos': photos})
-
-def photo_test(request):
-    return render(request,'image.html')
-
 def carte(request):
        return render(request,'carte.html', {
             'candidats' : Candidat.objects.all(),
@@ -190,3 +172,33 @@ def get_candidats(request):
     zone = request.GET.get('zone')
     candidats = Candidat.objects.filter(Ville__libelle=zone).values('nom', 'prenoms', 'parti_politique', 'pk')
     return JsonResponse(list(candidats), safe=False)
+
+def listCandidat(request, id):
+
+    # Obtenez tous les candidats avec leur cote de popularité, le nombre de votes "pour" et le nombre de votes "contre"
+    candidats_vote_info = Candidat.objects.filter(Ville=id).annotate(
+        num_votes=Count('vote'),
+        num_votes_pour=Count('vote', filter=Q(vote__nature_vote='Pour')),
+        num_votes_contre=Count('vote', filter=Q(vote__nature_vote='Contre')),
+    )
+    nbre_vote_ville = Vote.objects.filter(ville= id).count()
+
+    for candidat in candidats_vote_info:
+        candidat.nbre_vote_ville = nbre_vote_ville
+        if nbre_vote_ville != 0:
+            candidat.ratio_vote_ville = int((candidat.num_votes_pour / nbre_vote_ville) * 100)
+        else:
+            candidat.ratio_vote_ville = 0.0
+    candidats_vote_info_trie = sorted(candidats_vote_info, key=lambda candidat: candidat.ratio_vote_ville, reverse=True)
+    
+    candidats_vote_info = sorted(
+    candidats_vote_info,
+    key=lambda candidat:  candidat.nom,
+    reverse=True)[:3]
+
+    return render(request, 'listCandidat.html', {
+        'candidats' : candidats_vote_info,
+        'villes' : Ville.objects.all(),
+        'id':id,
+        'candidats_vote_podium':candidats_vote_info_trie,
+    })

@@ -11,8 +11,7 @@ urlpatterns = [
     path('Logout', views.deconnexion,name='logout'),
     path('profileU', views.profileU,name='profileU'),
     path('profileU/editUser', views.editUser, name='edit-User'),
-    path('image', views.enregistrer_photo,name='photo_test'),
     path('carte', views.carte ,name='carteC'),
-    path('afficher_photos', views.afficher_photos,name='afficher_photos'),
     path('get_candidats/', views.get_candidats, name='get_candidats'),
+    path('listCandidat/<int:id>', views.listCandidat, name='listCandidat'),
 ]
