@@ -193,12 +193,12 @@ def listCandidat(request, id):
             candidat.ratio_vote_ville = int((candidat.num_votes_pour / nbre_vote_ville) * 100)
         else:
             candidat.ratio_vote_ville = 0.0
-    candidats_vote_info_trie = sorted(candidats_vote_info, key=lambda candidat: candidat.ratio_vote_ville, reverse=True)
+    candidats_vote_info_trie = sorted(candidats_vote_info, key=lambda candidat: candidat.ratio_vote_ville, reverse=True)[:3]
     
     candidats_vote_info = sorted(
     candidats_vote_info,
     key=lambda candidat:  candidat.nom,
-    reverse=True)[:3]
+    reverse=True)
 
     return render(request, 'listCandidat.html', {
         'candidats' : candidats_vote_info,

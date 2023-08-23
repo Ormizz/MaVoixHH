@@ -66,3 +66,13 @@ class Article(models.Model):
     
     def __str__(self):
         return f'Article:{self.id_article} {self.titre} {self.content} {self.candidat}'
+
+class Equipe(models.Model):
+    id_Equipier = models.AutoField(primary_key=True)
+    nomPrenom = models.CharField(max_length=100)
+    poste = models.TextField(max_length=400, default="un contenu")
+    candidat = models.ForeignKey(Candidat, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='imagesEquipe/', null=True, blank=True)
+    
+    def __str__(self):
+        return f'Article:{self.id_Equipier} {self.nomPrenom} {self.poste} {self.candidat}'

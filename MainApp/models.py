@@ -9,6 +9,7 @@ class Electeur(models.Model):
     prenoms = models.CharField(max_length=70)
     date_naissance = models.DateField()
     lieu_naissance = models.CharField(max_length=100, blank=True, null=True)
+    contact = models.CharField(max_length=100, blank=True, null=True)
     Ville = models.ForeignKey(Ville, on_delete=models.SET_NULL, default="", null=True, blank=True)
     sexe = models.CharField(max_length=20)
     user = models.OneToOneField(User, on_delete=models.SET_NULL, default="", null=True, blank=True)
