@@ -126,10 +126,14 @@ def propositionfunc(request):
         }
     )
 
-def index(request):
-    return render(request, 'accueil.html',{
-        'localisations':Ville.objects.all()
+def login2(request):
+    localisations = Ville.objects.all()
+    return render(request, 'login2.html',{
+        'localisations': localisations
     })
+
+def index(request):
+    return render(request, 'accueil2.html')
 
 
 @login_required  
