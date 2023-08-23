@@ -12,6 +12,7 @@ from django.db.models import Count, Q
 from django.db.models import OuterRef, Subquery
 from django.db.models import Max, F, Subquery
 from django.db.models.functions import Coalesce
+from django.shortcuts import get_object_or_404
 
 
 # Create your views here.
@@ -145,4 +146,13 @@ def carte(request):
     
     return render(request,'sondages/carte.html', {
         'zone': Ville.objects.all()
+    })
+    
+def detail(request, id):
+    electeur = request.user.electeur
+    
+    votes_pour = Vote.objects.filter(electeur=electeur.id_electeur, candidat=id)
+    
+    return render(request,'sondages/detail.html', {
+        'votes': votes_pour
     })

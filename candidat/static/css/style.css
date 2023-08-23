@@ -68,7 +68,7 @@ body{
     background-color: rgb(2, 115, 20);
     position: relative;
     height: 50%;
-   
+    text-align: center;
 }
 .corp .zone2 .box .user_img {
     position: absolute;
