@@ -219,38 +219,10 @@
         polygon.addEventListener("click", (event) => {
           const polygonName = event.target.getAttribute("data-name");
           const polygonId = event.target.getAttribute("id");
-      
-          fetch(`/get_candidats/?zone=${polygonName}`)
-              .then(response => response.json())
-              .then(data => {
-                  detailsPanel.innerHTML = `
-                      <h2>${polygonName}</h2>
-                      <div class="mb-2 mt-2"> 
-                          <p>Liste des candidats :</p>
-                      </div>
-                      <div class="mb-2 mt-2">
-                        <ul>
-                          ${data.map(candidat => `
-                              <li>
-                                  <h4>${candidat.nom} ${candidat.prenoms}</h4>
-                                  <p>${candidat.parti_politique}</p>
-                                  <a class="btn btn-success" href="candidat/${candidat.pk}">Voir la page</a>
-                              </li>
-                          `).join("")}
-                        </ul>
-                      </div>
-                  `;
-      
-                  detailsPanel.style.bottom = "20px";
-                  detailsPanel.style.right = "20px";
-                  detailsPanel.style.display = "block";
-      
-                  const closeButton = detailsPanel.querySelector("#closeButton");
-                  closeButton.addEventListener("click", () => {
-                      detailsPanel.style.display = "none";
-                  });
-              })
-              .catch(error => console.error("Erreur :", error));
+          const redirectionUrl = `/listCandidat/${polygonId}`;
+
+          // Effectuez la redirection
+          window.location.href = redirectionUrl;
       });
       
       });

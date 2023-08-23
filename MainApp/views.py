@@ -49,13 +49,16 @@ def deconnexion(request):
 	return redirect("index")
 
 def SignUp(request):
+    print("dzad")
     if request.method == 'POST':
+        print("in")
         user = User.objects.create_user(
             username = request.POST['username'], 
             email = request.POST['email'],
             password = request.POST['password'], 
         )
         user.save()
+        print("user ok")
         ville_id = request.POST['Ville']
         ville_instance = Ville.objects.get(pk=ville_id)
         electeur = Electeur.objects.create(
@@ -65,13 +68,15 @@ def SignUp(request):
             lieu_naissance = request.POST['lieu_naissance'],
             sexe = request.POST['sexe'],
             user_id = user.pk,
-            Ville_id = request.POST['Ville'],
+            Ville = ville_instance,
+            contact = request.POST['contact'],
         )
         electeur.save()
+        print("electeur ok")
         electeurGroup = Group.objects.get(name='Electeur')
         user.groups.add(electeurGroup)
-        return redirect("index")
-    return render(request, 'accueil.html')
+        return redirect("login2")
+    return render(request, 'login2.html')
 
 
 @login_required
@@ -169,7 +174,7 @@ def editUser(request):
 def carte(request):
        return render(request,'carte.html', {
             'candidats' : Candidat.objects.all(),
-            'zone': Zone.objects.all()
+            'zone': Ville.objects.all(),
     })
 
 def get_candidats(request):
