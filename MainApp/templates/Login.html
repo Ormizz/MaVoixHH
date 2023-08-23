@@ -50,7 +50,7 @@
         <i class="uil uil-times form_close"></i>
         <!-- Login From -->
         <div class="form login_form">
-          <form method="post">
+          <form method="POST" action="#">
              {% csrf_token %}
             <h2>Connexion</h2>
 
@@ -62,7 +62,7 @@
             </div>
             <div class="input_box">
               <label for="uname" class="label"><b>Mot de passe</b></label>
-              <input type="text" name="password" placeholder="password²" required/>
+              <input type="text" name="password" placeholder="password" required/>
 
               <i class="uil uil-eye-slash pw_hide"></i>
             </div>

@@ -141,11 +141,10 @@ class Themes_clesViewSet(viewsets.ModelViewSet):
     queryset = Themes_cles.objects.all()
     serializer_class = Themes_clesSerializer
     
-def carte(request):
-    zones = Ville.objects.all()
-    
+def carte(request):    
     return render(request,'sondages/carte.html', {
-        'zone': Ville.objects.all()
+        'zone': Ville.objects.all(),
+        'candidats': Candidat.objects.all()
     })
     
 def detail(request, id):
