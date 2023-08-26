@@ -43,13 +43,18 @@
 			<div class="col-lg-12">
 				<div class="panel-content">
 					<h4 class="main-title">Tableau de bord</h4>
+					<h4 style="margin-bottom:10px">Effectif global</h4>	
 					<div class="row merged20 mb-4">
-						<h4 style="margin-bottom:10px">Effectif global</h4>	
 						<div class="col-lg-3 col-md-6">
 							<div class="w-chart-section">
 								<div class="w-detail">
 									<p class="w-title">Nombre d'utilisateur: </p>
-									<p class="w-stats">423,964</p>
+									{% if user_count %}
+									<p class="w-stats">{{user_count}}</p>
+									{% else %}
+									<p class="w-stats">Indisponible</p>
+									{% endif %}
+									
 									<span>
 									<svg id="user-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
 								</div>
@@ -61,8 +66,12 @@
 						<div class="col-lg-3 col-md-6">
 							<div class="w-chart-section">
 								<div class="w-detail">
-									<p class="w-title">Nombre de post</p>
-									<p class="w-stats">7,929</p>
+									<p class="w-title">Nombre de candidats:</p>
+									{% if candidat_count %}
+									<p class="w-stats">{{candidat_count}}</p>
+									{% else %}
+									<p class="w-stats">Indisponible</p>
+									{% endif %}
 									<span>
 
 									<svg id="bag" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-briefcase"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg></span>
@@ -76,7 +85,11 @@
 							<div class="w-chart-section">
 								<div class="w-detail">
 									<p class="w-title">Nombre de thématiques</p>
-									<p class="w-stats">7,929</p>
+									{% if theme_count %}
+									<p class="w-stats">{{theme_count}}</p>
+									{% else %}
+									<p class="w-stats">Indisponible</p>
+									{% endif %}
 									<span>
 									<svg id="download" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-download-cloud"><polyline points="8 17 12 21 16 17"></polyline><line x1="12" y1="12" x2="12" y2="21"></line><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"></path></svg></span>
 								</div>
@@ -88,8 +101,12 @@
 						<div class="col-lg-3 col-md-12">
 							<div class="w-chart-section">
 								<div class="w-detail">
-									<p class="w-title">Nombre de thématiques</p>
-									<p class="w-stats">7,929</p>
+									<p class="w-title">Nombre d'articles</p>
+									{% if Article_count %}
+									<p class="w-stats">{{Article_count}}</p>
+									{% else %}
+									<p class="w-stats">Indisponible</p>
+									{% endif %}
 									<span>
 									<svg id="download" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-download-cloud"><polyline points="8 17 12 21 16 17"></polyline><line x1="12" y1="12" x2="12" y2="21"></line><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"></path></svg></span>
 								</div>

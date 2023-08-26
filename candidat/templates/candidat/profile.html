@@ -4,7 +4,7 @@
 	<nav class="sidebar">
 		<ul class="menu-slide">
 			<li class="">
-				<a class="" href="index.html" title="">
+				<a class="" href="{% url 'Dashboard' %}" title="">
 					<i><svg id="icon-home" class="feather feather-home" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></i> Dashboard
 				</a>
 			</li>
@@ -70,6 +70,7 @@
 								uk-switcher="connect: #picturez ;animation: uk-animation-slide-left-medium, uk-animation-slide-right-medium" class="uk-grid" uk-sticky="offset:50;media : @m">
 									<li><a href="#">Timeline</a></li>
 									<li><a href="#">Proposition</a></li>
+									<li><a href="#">Mon equipe</a></li>
 								</ul>
 							</nav>
 							<ul class="uk-switcher" id="picturez">
@@ -256,8 +257,97 @@
 										Pas de post fait
 										{% endif %}
 									</div>	
-									
+								
 								 </li>
+								
+								 {% comment %} Equipe {% endcomment %}
+								 <li>
+									<button type="button" class="btn btn-primary" style="background-color:#027314; border-color:#027314" data-bs-toggle="modal" data-bs-target="#CreateEquipe">
+										Nouveau membre
+									</button> <br><br>
+									<div class="posted-photo">
+										{% if equipes %}
+										{% for equipe in equipes %}
+										<div class="dash-item">
+											<a href="#">
+												<div class="sl-avatar ">
+													<img alt="avatar" src="{% static 'admin/images/resources/small-pic5.png' %}" class="img-responsive img-circle">
+												</div>
+												<div class="sl-content">
+													<p class="inline-block"><span class="txt-success">{{equipe.nomPrenom}}</span><br><span>{{equipe.poste}}</span></p>
+												</div>
+											</a>
+											<div class="edition-btn">
+												<span class="iconbox button soft-primary"><i class="icofont-pen-alt-1" data-bs-toggle="modal" data-bs-target="#ModifEquipe"></i></span>
+												<span class="iconbox button soft-danger">
+													<i class="icofont-trash" data-bs-toggle="modal" data-bs-target="#confirmDeleteEquipe{{ equipe.pk }}"></i>
+												</span>
+											</div>
+										</div>
+
+										 {% comment %} Modif Equipe {% endcomment %}
+										 <div class="modal fade" id="ModifEquipe" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal-dialog modal-dialog modal-dialog-centered modal-dialog-scrollable">
+											  <div class="modal-content">
+												<div class="modal-header">
+												  <h5 class="modal-title" id="exampleModalLabel">Modifier membre</h5>
+												  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+												</div>
+												<div class="modal-body">
+													<form class="row g-3" method="post" enctype="multipart/form-data" action="{% url 'editEquipe' equipe.pk %}">
+														{% csrf_token %}
+														<div class="col-md-6">
+															<label for="inputEmail4" class="form-label">Nom et Prenoms</label>
+															<input type="text" name="nomPrenom" value="{{equipe.nomPrenom}}" class="form-control" id="inputEmail4">
+														</div>
+														
+														<div class="col-md-6">
+															<label for="inputEmail4" class="form-label">Poste</label>
+															<input type="text" name="poste" value="{{equipe.poste}}" class="form-control" id="inputEmail4">
+														</div>
+														
+														<div class="mb-3">
+															<label for="formFile" class="form-label">Photo de profile</label>
+															<input class="form-control" value="{{equipe.image}}" name="photoPP" type="file">
+														</div>
+													  
+												</div>
+												<div class="modal-footer">
+												  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+												  <button type="submit" class="btn btn-primary">Save changes</button>
+												</div>
+												</form>
+											  </div>
+											</div>
+										  </div>
+										{% comment %} suppression {% endcomment %}
+										<div class="modal fade" id="confirmDeleteEquipe{{ equipe.pk }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="exampleModalLabel">Confirmer la suppression</h5>
+														<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+													</div>
+													<form class="row g-3" method="post" action="{% url 'deleteEquipe' equipe.pk %}">
+														{% csrf_token %}
+													<div class="modal-body">
+														Êtes-vous sûr de vouloir supprimer ce membre ?
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+														<button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Sucess</button>
+													</div>
+													</form>
+												</div>
+											</div>
+										</div>
+										
+										{% endfor %}
+										{% else %}
+										Pas de post fait
+										{% endif %}
+									</div>	
+								
 								 </li>
 								
 							</ul>
@@ -367,6 +457,42 @@
 					<textarea class="form-control" name="libelle_proposition" id="floatingTextarea2" style="height: 100px"></textarea>
 					<label for="floatingTextarea2">Proposition</label>
 				  </div>
+				</div>
+			  
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+		  <button type="submit" class="btn btn-primary">Save changes</button>
+		</div>
+		</form>
+	  </div>
+	</div>
+  </div>
+  
+  {% comment %} Create Membre {% endcomment %}
+  <div class="modal fade" id="CreateEquipe" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog modal-dialog-centered modal-dialog-scrollable">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLabel">Nouveau membre</h5>
+		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body">
+			<form class="row g-3" method="post" enctype="multipart/form-data" action="{% url 'CreateEquipe' %}">
+				{% csrf_token %}
+				<div class="col-md-6">
+					<label for="inputEmail4" class="form-label">Nom et Prenoms</label>
+					<input type="text" name="nomPrenom" class="form-control" id="inputEmail4">
+				</div>
+				
+				<div class="col-md-6">
+					<label for="inputEmail4" class="form-label">Poste</label>
+					<input type="text" name="poste" class="form-control" id="inputEmail4">
+				</div>
+				
+				<div class="mb-3">
+					<label for="formFile" class="form-label">Photo de profile</label>
+					<input class="form-control" name="photoPP" type="file">
 				</div>
 			  
 		</div>

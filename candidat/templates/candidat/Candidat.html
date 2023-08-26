@@ -59,7 +59,7 @@
 									<div class="group-avatar">
 										<img src="{{ settings.MEDIA_URL }}/media/{{candidat.fond}}" alt="">
 										<a href="#" title=""><i class="icofont-check-circled"></i>Suivre</a>
-										<figure class="group-dp"><img src="{{candidat.image}}" alt=""></figure>
+										<figure class="group-dp"><img src="{{candidat.image.url}}" alt=""></figure>
 									</div>
 									<div class="grp-info about">
 										<h4>{{ candidat.nom }} {{ candidat.prenoms }} <span>Surnom: @{{ candidat.surnom }}</span> <span>Partie Politique: {{ candidat.parti_politique }}</span></h4>
@@ -67,6 +67,7 @@
 										<ul class="nav nav-tabs about-btn" id="modif">
 											<li class="nav-item"><a class="active perso" id="actushow" href="#pictures" data-toggle="tab" style="color: white; background-color: #ff7200;">Fil d'actualité</a></li>
 											<li class="nav-item"><a class="perso" id="proposhow" href="#pictures" data-toggle="tab">Propositions</a></li>
+											<li class="nav-item"><a class="perso" id="equipeshow" href="#pictures" data-toggle="tab">Equipe</a></li>
 											{% comment %} <li class="nav-item"><a class="perso" href="#videos" data-toggle="tab">Sondages</a></li> {% endcomment %}
 										</ul>
 									</div>
@@ -147,6 +148,24 @@
 															<h5 class="mt-4" style="text-align: center">Pas de Propositions</h5>
 															{% endif %}
 														</div>
+
+														<div class="col-lg-8" id="equipe">
+															{% if equipes %} {% for equipe in equipes %}
+															<div class="row">
+																<div class="col-lg-2">
+																	<div class="card" style="width: 18rem;">
+																		<img class="card-img-top" src="{{ settings.MEDIA_URL }}{{equipe.image.url}}" alt="Card image cap">
+																		<div class="card-body">
+																			<h5 class="card-title">{{equipe.nomPrenom}}</h5>
+																			<p class="card-text">Poste : {{equipe.poste}}</p>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															{% endfor %} {% else %}
+															<h5 class="mt-4" style="text-align: center">Pas d'equipe</h5>
+															{% endif %}
+														</div>
 														<div class="col-lg-4">
 															<aside class="sidebar static left">
 																<div class="advertisment-box">
@@ -203,13 +222,21 @@
 	<script>
 		$(document).ready(function(){
 			$("#propo").hide();
+			$("#equipe").hide();
 			$("#proposhow").click(function(){
 				$("#actu").hide(1000);
+				$("#equipe").hide(1000);
 				$("#propo").show(1000);
 			});
 			$("#actushow").click(function(){
 				$("#propo").hide(1000);
+				$("#equipe").hide(1000);
 				$("#actu").show(1000);
+			});
+			$("#equipeshow").click(function(){
+				$("#propo").hide(1000);
+				$("#equipe").show(1000);
+				$("#actu").hide(1000);
 			});
 		});
 	</script>

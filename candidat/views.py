@@ -4,10 +4,11 @@ from django.contrib.auth.models import User, Group
 from django.contrib.auth import authenticate, login, logout
 import requests
 from rest_framework import viewsets
-
+from itertools import groupby
+from MainApp.models import Electeur
 from candidat.models import *
 from candidat.serializers import *
-from votes.models import Proposition, Themes_cles
+from votes.models import Proposition, Themes_cles, Vote
 
 
 class ArticleViewSet(viewsets.ModelViewSet):
@@ -45,7 +46,8 @@ def index(request, id):
         'candidat': Candidat.objects.get(pk=id),
         'articles': Article.objects.filter(candidat_id = id).order_by('date_creation'),
         'propositions' : Proposition.objects.filter(candidat_id = id),
-        'is_candidat': is_candidat
+        'is_candidat': is_candidat,
+        'equipes' : Equipe.objects.filter(candidat_id = request.user.candidat.pk)
     })
 
 def listC(request):
@@ -105,13 +107,8 @@ def profile(request):
                 'actualites':actualite,
                 'propositions':propositions,
                 'all_theme':all_theme,
-                'localisations': localisations
-            })
-    if (request.user.groups.filter(name='Candidat').exists()):
-            return render(request, 'candidat/profile.html',{
-                'user':utilisateur,
-                'all_theme':all_theme,
-                'localisations': localisations
+                'localisations': localisations,
+                'equipes' : Equipe.objects.filter(candidat_id = request.user.candidat.pk)
             })
     return render(request, 'candidat/Candidat.html')
     
@@ -144,6 +141,40 @@ def profileCreateArt(request):
         )
         article.save()
         return redirect("profileC")
+    return render(request, 'candidat/profile.html')
+
+@login_required  
+def profileCreateEquipe(request):
+    # Récupérer le nom du groupe du candidat
+    # user_group = request
+    if request.method == 'POST':
+        photoPP = request.FILES.get('photoPP')
+
+        equipe = Equipe.objects.create(
+            nomPrenom = request.POST['nomPrenom'], 
+            candidat_id = request.user.candidat.pk,
+            poste = request.POST['poste'],
+            image = photoPP,
+        )
+        equipe.save()
+        return redirect("profileC")
+    return render(request, 'candidat/profile.html')
+
+@login_required  
+def profileModifEquipe(request, id):
+    equipe = Equipe.objects.get(pk=id)
+    
+    if request.method == 'POST':
+        equipe.nomPrenom = request.POST['nomPrenom']
+        equipe.candidat_id = request.user.candidat.pk
+        equipe.poste = request.POST['poste']
+        if (request.FILES.get('photoPP')):
+            photoPP = request.FILES.get('photoPP')
+            equipe.image = photoPP
+    
+        equipe.save()
+        return redirect("profileC")
+    
     return render(request, 'candidat/profile.html')
 
 @login_required  
@@ -239,6 +270,16 @@ def profileDeleteProp(request, id):
     
     return render(request, 'candidat/profile.html')
 
+@login_required     
+def profileDeleteEquipe(request, id):
+    equipe = Equipe.objects.get(pk=id)
+    
+    if request.method == 'POST':
+        equipe.delete()
+        return redirect("profileC")
+    
+    return render(request, 'candidat/profile.html')
+
 @login_required  
 def profileDeleteArticle(request, id):
     article = Article.objects.get(pk=id)
@@ -249,3 +290,85 @@ def profileDeleteArticle(request, id):
     
     return render(request, 'candidat/profile.html')
 
+
+def Dashboard(request):
+    return render(request, 'candidat/analytics.html')
+
+def thematique(request):
+    #general info
+    user_count = Electeur.objects.filter(Ville = request.user.candidat.Ville).count()
+    proposition_count = Proposition.objects.filter(candidat_id = request.user.candidat.pk).count()
+    
+    # # Obtention des propositions par thematiques
+    # all_purposes = Proposition.objects.filter(candidat_id=request.user.candidat.pk)
+
+    # # Triez les propositions par thématique
+    # all_purposes = sorted(all_purposes, key=lambda purpose: purpose.themes_cles_id)
+
+    # # Groupement des propositions par thématique
+    # grouped_purposes = {}
+    # for theme, group in groupby(all_purposes, key=lambda purpose: purpose.themes_cles_id):
+    #     grouped_purposes[theme] = list(group)
+
+    # # Calcul des informations de vote pour chaque groupe de propositions
+    # for theme, purposes in grouped_purposes.items():
+    #     for purpose in purposes:
+    #         print(theme, purpose)
+    #         # Obtenir la liste des propositions votées
+    #         all_purposes_voted = Vote.objects.filter(proposition_id=purpose.pk)
+    #         # Compter les votes "pour" et les votes "contre"
+    #         num_votes_pour = all_purposes_voted.filter(nature_vote='Pour').count()
+    #         num_votes_contre = all_purposes_voted.filter(nature_vote='Contre').count()
+    #         num_votes_total = num_votes_contre + num_votes_pour
+    #         ratio_votes_contre = num_votes_contre / num_votes_total if num_votes_total > 0 else 0
+    #         ratio_votes_pour = num_votes_pour / num_votes_total if num_votes_total > 0 else 0
+    #         # Ajout des informations aux attributs temporaires de l'instance Proposition
+    #         setattr(purpose, 'num_votes_pour', num_votes_pour)
+    #         setattr(purpose, 'num_votes_contre', num_votes_contre)
+    #         setattr(purpose, 'num_votes_total', num_votes_total)
+    #         setattr(purpose, 'ratio_votes_contre', ratio_votes_contre)
+    #         setattr(purpose, 'ratio_votes_pour', ratio_votes_pour)
+            
+    # Obtention des propositions par thématiques
+    all_purposes = Proposition.objects.filter(candidat_id=request.user.candidat.pk)
+
+    # Calcul des informations de vote pour chaque proposition
+    for purpose in all_purposes:
+        # Obtenir la liste des propositions votées
+        all_purposes_voted = Vote.objects.filter(proposition_id=purpose.pk)
+        # Compter les votes "pour" et les votes "contre"
+        num_votes_pour = all_purposes_voted.filter(nature_vote='Pour').count()
+        num_votes_contre = all_purposes_voted.filter(nature_vote='Contre').count()
+        num_votes_total = num_votes_contre + num_votes_pour
+        ratio_votes_contre = (num_votes_contre / num_votes_total)*100 if num_votes_total > 0 else 0
+        ratio_votes_pour = (num_votes_pour / num_votes_total)*100 if num_votes_total > 0 else 0
+        # Ajout des informations aux attributs temporaires de l'instance Proposition
+        setattr(purpose, 'num_votes_pour', num_votes_pour)
+        setattr(purpose, 'num_votes_contre', num_votes_contre)
+        setattr(purpose, 'num_votes_total', num_votes_total)
+        setattr(purpose, 'ratio_votes_contre', ratio_votes_contre)
+        setattr(purpose, 'ratio_votes_pour', ratio_votes_pour)
+
+    # Triez les propositions par thématique
+    all_purposes = sorted(all_purposes, key=lambda purpose: purpose.themes_cles_id)
+
+    # Groupement des propositions par thématique
+    grouped_purposes = {}
+    for theme, group in groupby(all_purposes, key=lambda purpose: purpose.themes_cles_id):
+        grouped_purposes[theme] = sorted(list(group), key=lambda purpose: purpose.ratio_votes_pour, reverse=True)
+
+    # Afficher les informations triées
+    for theme, purposes in grouped_purposes.items():
+        for purpose in purposes:
+            print(theme, purpose, purpose.ratio_votes_pour, purpose.num_votes_pour, purpose.num_votes_contre)
+
+   
+   
+    return render(request, 'candidat/thematique.html', {
+        'all_purposes' : grouped_purposes.items(),
+        'Article_count' : Article.objects.filter(candidat_id = request.user.candidat.pk).count(),
+        'proposition_count' : Proposition.objects.filter(candidat_id = request.user.candidat.pk).count(),
+        'user_count' : user_count,
+        'theme_count' : Themes_cles.objects.count(),
+        'proposition_count' : proposition_count,
+        })

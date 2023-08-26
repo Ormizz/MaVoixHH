@@ -15,4 +15,5 @@ urlpatterns = [
     path('carte', views.carte ,name='carteC'),
     path('get_candidats/', views.get_candidats, name='get_candidats'),
     path('listCandidat/<int:id>', views.listCandidat, name='listCandidat'),
+    path('analytic', views.analytic, name='analytic'),
 ]

@@ -1,3 +1,4 @@
+from itertools import groupby
 import random
 from django.http import JsonResponse
 from django.db.models import Count, Q
@@ -11,7 +12,7 @@ from django.contrib.auth import authenticate, login, logout
 from candidat.models import Article, Candidat
 
 from MainApp.models import *
-from votes.models import Proposition, Vote, Zone
+from votes.models import Proposition, Themes_cles, Vote, Zone
 from MainApp.serializers import ElecteurSerialiser
 
 
@@ -209,5 +210,70 @@ def listCandidat(request, id):
         'candidats' : candidats_vote_info,
         'villes' : Ville.objects.all(),
         'id':id,
+        'candidats_vote_podium':candidats_vote_info_trie,
+    })
+  
+    
+def analytic(request):
+    
+
+    # Obtention des propositions par thematiques
+    all_purposes = Proposition.objects.filter(candidat_id=request.user.candidat.pk)
+
+    # Triez les propositions par thématique
+    all_purposes = sorted(all_purposes, key=lambda purpose: purpose.themes_cles_id)
+
+    # Groupement des propositions par thématique
+    grouped_purposes = {}
+    for theme, group in groupby(all_purposes, key=lambda purpose: purpose.themes_cles_id):
+        grouped_purposes[theme] = list(group)
+
+    # Calcul des informations de vote pour chaque groupe de propositions
+    for theme, purposes in grouped_purposes.items():
+        for purpose in purposes:
+            print(theme, purpose)
+            # Obtenir la liste des propositions votées
+            all_purposes_voted = Vote.objects.filter(proposition_id=purpose.pk)
+            # Compter les votes "pour" et les votes "contre"
+            num_votes_pour = all_purposes_voted.filter(nature_vote='Pour').count()
+            num_votes_contre = all_purposes_voted.filter(nature_vote='Contre').count()
+            num_votes_total = num_votes_contre + num_votes_pour
+            ratio_votes_contre = num_votes_contre / num_votes_total if num_votes_total > 0 else 0
+            ratio_votes_pour = num_votes_pour / num_votes_total if num_votes_total > 0 else 0
+            # Ajout des informations aux attributs temporaires de l'instance Proposition
+            setattr(purpose, 'num_votes_pour', num_votes_pour)
+            setattr(purpose, 'num_votes_contre', num_votes_contre)
+            setattr(purpose, 'num_votes_total', num_votes_total)
+            setattr(purpose, 'ratio_votes_contre', ratio_votes_contre)
+            setattr(purpose, 'ratio_votes_pour', ratio_votes_pour)
+
+     # Obtenez tous les candidats avec leur cote de popularité, le nombre de votes "pour" et le nombre de votes "contre"
+    candidats_vote_info = Candidat.objects.filter(Ville=1).annotate(
+        num_votes=Count('vote'),
+        num_votes_pour=Count('vote', filter=Q(vote__nature_vote='Pour')),
+        num_votes_contre=Count('vote', filter=Q(vote__nature_vote='Contre')),
+    )
+    nbre_vote_ville = Vote.objects.filter(ville= 1).count()
+
+    for candidat in candidats_vote_info:
+        candidat.nbre_vote_ville = nbre_vote_ville
+        if nbre_vote_ville != 0:
+            candidat.ratio_vote_ville = int((candidat.num_votes_pour / nbre_vote_ville) * 100)
+        else:
+            candidat.ratio_vote_ville = 0.0
+    candidats_vote_info_trie = sorted(candidats_vote_info, key=lambda candidat: candidat.ratio_vote_ville, reverse=True)[:3]
+    
+    candidats_vote_info = sorted(
+    candidats_vote_info,
+    key=lambda candidat:  candidat.nom,
+    reverse=True)
+    
+    return render(request, 'analytics.html', {
+        'candidat_count' : Candidat.objects.count(),
+        'Article_count' : Article.objects.count(),
+        'user_count' : Electeur.objects.count(),
+        'theme_count' : Themes_cles.objects.count(),
+        'purposes' : all_purposes,
+        
         'candidats_vote_podium':candidats_vote_info_trie,
     })

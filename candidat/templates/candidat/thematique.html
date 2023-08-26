@@ -1,0 +1,441 @@
+{% extends 'candidat/base/base2.html' %}
+{% load static %}
+{% block content %}
+	<div class="top-sub-bar">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-6 col-md-6 col-sm-6">
+					<div class="menu-btn">
+						<i class="">
+<svg id="menu-btn" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></i>
+					</div>
+					<div class="page-title">
+						<h4>Analytics</h4>
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-6">
+					<ul class="breadcrumb">
+						<li><a href="#" title="">Home</a></li>
+						<li><a href="#" title="">Analytics</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>	
+	</div><!-- top sub bar -->
+	
+	<nav class="sidebar">
+		<ul class="menu-slide">
+			<li class="">
+				<a class="" href="index.html" title="">
+					<i><svg id="icon-home" class="feather feather-home" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></i> Dashboard
+				</a>
+			</li>
+			<li class="">
+				<a class="" href="analytics.html" title="">
+					<i class=""><svg id="ab7" class="feather feather-zap" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></i>Gestion de mon compte
+				</a>
+			</li>
+		</ul>
+	</nav><!-- sidebar -->
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="panel-content">
+					<h4 class="main-title">Tableau de bord</h4>
+					<div class="row merged20 mb-4">
+						<h4 style="margin-bottom:10px">Effectif global</h4>	
+						<div class="col-lg-3 col-md-6">
+							<div class="w-chart-section">
+								<div class="w-detail">
+									<p class="w-title">Nombre d'utilisateur: </p>
+									<p class="w-stats">{{user_count}}</p>
+									<span>
+									<svg id="user-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+								</div>
+								<div class="w-chart-render-one">
+									<div id="total-users"></div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-6">
+							<div class="w-chart-section">
+								<div class="w-detail">
+									<p class="w-title">Nombre d'articles</p>
+									<p class="w-stats">{{Article_count}}</p>
+									<span>
+
+									<svg id="bag" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-briefcase"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg></span>
+								</div>
+								<div class="w-chart-render-one">
+									<div id="paid-visits"></div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-12">
+							<div class="w-chart-section">
+								<div class="w-detail">
+									<p class="w-title">Nombre de thématiques</p>
+									<p class="w-stats">{{theme_count}}</p>
+									<span>
+									<svg id="download" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-download-cloud"><polyline points="8 17 12 21 16 17"></polyline><line x1="12" y1="12" x2="12" y2="21"></line><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"></path></svg></span>
+								</div>
+								<div class="w-chart-render-one">
+									<div id="total-downloads"></div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3 col-md-12">
+							<div class="w-chart-section">
+								<div class="w-detail">
+									<p class="w-title">Nombre de propositions</p>
+									<p class="w-stats">{{proposition_count}}</p>
+									<span>
+									<svg id="download" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-download-cloud"><polyline points="8 17 12 21 16 17"></polyline><line x1="12" y1="12" x2="12" y2="21"></line><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"></path></svg></span>
+								</div>
+								<div class="w-chart-render-one">
+									<div id="total-downloads"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="container">
+						<h3>Thematique: Économie et Emploi</h3>
+						<ul class="cards">
+							{% if all_purposes %}
+							{% for theme, purposes in all_purposes %}
+							{% for purpose in purposes %}
+							{% if purpose.themes_cles_id == 1 %}
+							<li class="card">
+								<div>
+									<h3 class="card-title">{{purpose.themes_cles.libelle_themes_cles}}</h3>
+									<div class="card-content">
+										<p>{{purpose.libelle_proposition}}</p>
+									</div>
+								</div>
+								<div class="card-link-wrapper">
+									{% if purpose.num_votes_pour != 0 or purpose.num_votes_contre != 0 %}
+									<div class="progress">
+										<div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{purpose.ratio_votes_pour}}%; background-color: #027314" aria-valuenow="{{purpose.ratio_votes_pour}}" aria-valuemin="0" aria-valuemax="100"></div>
+										<div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{purpose.ratio_votes_contre}}%; background-color: #ff7200" aria-valuenow="{{purpose.ratio_votes_contre}}" aria-valuemin="0" aria-valuemax="100"></div>
+									</div>
+									{% else %}
+									Indisponible
+									{% endif %}
+								</div>
+							</li>
+							{% else %}
+							
+							{% endif %}
+							{% endfor %}
+							{% endfor %}
+							{% else %}
+							
+							{% endif %}
+							
+						</ul>
+						
+					</div>
+					
+					<div class="container">
+						<h3>Thematique: Santé </h3>
+						<ul class="cards">
+							{% if all_purposes %}
+							{% for theme, purposes in all_purposes %}
+							{% for purpose in purposes %}
+							{% if purpose.themes_cles_id == 2 %}
+							<li class="card">
+								<div>
+									<h3 class="card-title">{{purpose.themes_cles.libelle_themes_cles}}</h3>
+									<div class="card-content">
+										<p>{{purpose.libelle_proposition}}</p>
+									</div>
+								</div>
+								<div class="card-link-wrapper">
+									{% if purpose.num_votes_pour != 0 or purpose.num_votes_contre != 0 %}
+									<div class="progress">
+										<div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{purpose.ratio_votes_pour}}%; background-color: #027314" aria-valuenow="{{purpose.ratio_votes_pour}}" aria-valuemin="0" aria-valuemax="100"></div>
+										<div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{purpose.ratio_votes_contre}}%; background-color: #ff7200" aria-valuenow="{{purpose.ratio_votes_contre}}" aria-valuemin="0" aria-valuemax="100"></div>
+									</div>
+									{% else %}
+									Indisponible
+									{% endif %}
+								</div>
+							</li>
+							{% else %}
+							
+							{% endif %}
+							{% endfor %}
+							{% endfor %}
+							{% else %}
+							
+							{% endif %}
+							
+						</ul>
+						
+					</div>
+					
+					<div class="container">
+						<h3>Thematique: Éducation  </h3>
+						<ul class="cards">
+							{% if all_purposes %}
+							{% for theme, purposes in all_purposes %}
+							{% for purpose in purposes %}
+							{% if purpose.themes_cles_id == 3 %}
+							<li class="card">
+								<div>
+									<h3 class="card-title">{{purpose.themes_cles.libelle_themes_cles}}</h3>
+									<div class="card-content">
+										<p>{{purpose.libelle_proposition}}</p>
+									</div>
+								</div>
+								<div class="card-link-wrapper">
+									{% if purpose.num_votes_pour != 0 or purpose.num_votes_contre != 0 %}
+									<div class="progress">
+										<div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{purpose.ratio_votes_pour}}%; background-color: #027314" aria-valuenow="{{purpose.ratio_votes_pour}}" aria-valuemin="0" aria-valuemax="100"></div>
+										<div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{purpose.ratio_votes_contre}}%; background-color: #ff7200" aria-valuenow="{{purpose.ratio_votes_contre}}" aria-valuemin="0" aria-valuemax="100"></div>
+									</div>
+									{% else %}
+									Indisponible
+									{% endif %}
+								</div>
+							</li>
+							{% else %}
+							
+							{% endif %}
+							{% endfor %}
+							{% endfor %}
+							{% else %}
+							
+							{% endif %}
+							
+						</ul>
+						
+					</div>
+					
+					<div class="container">
+						<h3>Thematique: Sécurité </h3>
+						<ul class="cards">
+							{% if all_purposes %}
+							{% for theme, purposes in all_purposes %}
+							{% for purpose in purposes %}
+							{% if purpose.themes_cles_id == 4 %}
+							<li class="card">
+								<div>
+									<h3 class="card-title">{{purpose.themes_cles.libelle_themes_cles}}</h3>
+									<div class="card-content">
+										<p>{{purpose.libelle_proposition}}</p>
+									</div>
+								</div>
+								<div class="card-link-wrapper">
+									{% if purpose.num_votes_pour != 0 or purpose.num_votes_contre != 0 %}
+									<div class="progress">
+										<div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{purpose.ratio_votes_pour}}%; background-color: #027314" aria-valuenow="{{purpose.ratio_votes_pour}}" aria-valuemin="0" aria-valuemax="100"></div>
+										<div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{purpose.ratio_votes_contre}}%; background-color: #ff7200" aria-valuenow="{{purpose.ratio_votes_contre}}" aria-valuemin="0" aria-valuemax="100"></div>
+									</div>
+									{% else %}
+									Indisponible
+									{% endif %}
+								</div>
+							</li>
+							{% else %}
+							
+							{% endif %}
+							{% endfor %}
+							{% endfor %}
+							{% else %}
+							
+							{% endif %}
+							
+						</ul>
+						
+					</div>
+
+					<div class="container">
+						<h3>Thematique: Environnement </h3>
+						<ul class="cards">
+							{% if all_purposes %}
+							{% for theme, purposes in all_purposes %}
+							{% for purpose in purposes %}
+							{% if purpose.themes_cles_id == 5 %}
+							<li class="card">
+								<div>
+									<h3 class="card-title">{{purpose.themes_cles.libelle_themes_cles}}</h3>
+									<div class="card-content">
+										<p>{{purpose.libelle_proposition}}</p>
+									</div>
+								</div>
+								<div class="card-link-wrapper">
+									{% if purpose.num_votes_pour != 0 or purpose.num_votes_contre != 0 %}
+									<div class="progress">
+										<div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{purpose.ratio_votes_pour}}%; background-color: #027314" aria-valuenow="{{purpose.ratio_votes_pour}}" aria-valuemin="0" aria-valuemax="100"></div>
+										<div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{purpose.ratio_votes_contre}}%; background-color: #ff7200" aria-valuenow="{{purpose.ratio_votes_contre}}" aria-valuemin="0" aria-valuemax="100"></div>
+									</div>
+									{% else %}
+									Indisponible
+									{% endif %}
+								</div>
+							</li>
+							{% else %}
+							
+							{% endif %}
+							{% endfor %}
+							{% endfor %}
+							{% else %}
+							
+							{% endif %}
+							
+						</ul>
+						
+					</div>
+
+					<div class="container">
+						<h3>Thematique: Culture et Patrimoine </h3>
+						<ul class="cards">
+							{% if all_purposes %}
+							{% for theme, purposes in all_purposes %}
+							{% for purpose in purposes %}
+							{% if purpose.themes_cles_id == 6 %}
+							<li class="card">
+								<div>
+									<h3 class="card-title">{{purpose.themes_cles.libelle_themes_cles}}</h3>
+									<div class="card-content">
+										<p>{{purpose.libelle_proposition}}</p>
+									</div>
+								</div>
+								<div class="card-link-wrapper">
+									{% if purpose.num_votes_pour != 0 or purpose.num_votes_contre != 0 %}
+									<div class="progress">
+										<div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{purpose.ratio_votes_pour}}%; background-color: #027314" aria-valuenow="{{purpose.ratio_votes_pour}}" aria-valuemin="0" aria-valuemax="100"></div>
+										<div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{purpose.ratio_votes_contre}}%; background-color: #ff7200" aria-valuenow="{{purpose.ratio_votes_contre}}" aria-valuemin="0" aria-valuemax="100"></div>
+									</div>
+									{% else %}
+									Indisponible
+									{% endif %}
+								</div>
+							</li>
+							{% else %}
+							
+							{% endif %}
+							{% endfor %}
+							{% endfor %}
+							{% else %}
+							Indisponible
+							{% endif %}
+							
+						</ul>
+						
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div><!-- main content -->
+
+<style>
+	.cards {
+		display: flex;
+		padding: 25px 0px;
+		list-style: none;
+		overflow-x: scroll;
+		-ms-scroll-snap-type: x mandatory;
+		scroll-snap-type: x mandatory;
+	}
+	
+	.card {
+		display: flex;
+		flex-direction: column;
+		flex: 0 0 100%;
+		padding: 20px;
+		background: var(--white);
+		border-radius: 12px;
+		box-shadow: 0 5px 15px rgba(0, 0, 0, 15%);
+		scroll-snap-align: start;
+		transition: all 0.2s;
+	}
+	
+	.card:not(:last-child) {
+		margin-right: 10px;
+	}
+	
+	.card:hover {
+		color: white;
+		background: #e0e0e0;
+	}
+	
+	.card .card-title {
+		font-size: 20px;
+	}
+	
+	.card .card-content {
+		margin: 20px 0;
+		max-width: 85%;
+	}
+	
+	.card .card-link-wrapper {
+		margin-top: auto;
+	}
+	
+	.card .card-link {
+		display: inline-block;
+		text-decoration: none;
+		color: white;
+		background: var(--red);
+		padding: 6px 12px;
+		border-radius: 8px;
+		transition: background 0.2s;
+	}
+	
+	.card:hover .card-link {
+		background: var(--darkred);
+	}
+	
+	.cards::-webkit-scrollbar {
+		height: 12px;
+	}
+	
+	.cards::-webkit-scrollbar-thumb,
+	.cards::-webkit-scrollbar-track {
+		border-radius: 92px;
+	}
+	
+	.cards::-webkit-scrollbar-thumb {
+		background: var(--darkred);
+	}
+	
+	.cards::-webkit-scrollbar-track {
+		background: var(--thumb);
+	}
+	
+	@media (min-width: 500px) {
+		.card {
+			flex-basis: calc(50% - 10px);
+		}
+	
+		.card:not(:last-child) {
+			margin-right: 20px;
+		}
+	}
+	
+	@media (min-width: 700px) {
+		.card {
+			flex-basis: calc(calc(100% / 3) - 20px);
+		}
+	
+		.card:not(:last-child) {
+			margin-right: 30px;
+		}
+	}
+	
+	@media (min-width: 1100px) {
+		.card {
+			flex-basis: calc(25% - 30px);
+		}
+	
+		.card:not(:last-child) {
+			margin-right: 40px;
+		}
+	}
+</style>
+	{% endblock content %}
+	

@@ -12,11 +12,16 @@ urlpatterns = [
     path('profile', views.profile, name='profileC'),
     path('profile/article', views.profileCreateArt, name='CreateArt'),
     path('profile/prop', views.profileCreateProp, name='CreateProp'),
+    path('profile/membre', views.profileCreateEquipe, name='CreateEquipe'),
     path('profile/editarticle/<int:id>', views.profileModifArt, name='editArt'),
     path('profile/editproposition/<int:id>', views.profileModifProp, name='editProp'),
+    path('profile/editequipe/<int:id>', views.profileModifEquipe, name='editEquipe'),
     path('profile/editcandidat', views.editcandidat, name='edit-candidat'),
     path('profile/deleteroposition/<int:id>', views.profileDeleteProp, name='deleteProp'),
     path('profile/deletearticle/<int:id>', views.profileDeleteArticle, name='deleteArt'),
+    path('profile/deleteequipe/<int:id>', views.profileDeleteEquipe, name='deleteEquipe'),
+    path('profile/dashboard', views.Dashboard, name='Dashboard'),
+    path('profile/thematique', views.thematique, name='thematique'),
     path('MainApp/', include('MainApp.urls'))
 ]
 
