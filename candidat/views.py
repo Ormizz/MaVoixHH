@@ -40,14 +40,11 @@ class Proposition_electoralViewSet(viewsets.ModelViewSet):
 # Create your views here
 @login_required
 def index(request, id):
-    is_candidat = request.user.groups.filter(name='Candidat').exists()
-    print(is_candidat)
     return render(request,'candidat/Candidat.html',{
         'candidat': Candidat.objects.get(pk=id),
-        'articles': Article.objects.filter(candidat_id = id).order_by('date_creation'),
+        'articles': Article.objects.filter(candidat_id = id).order_by('-date_creation'),
         'propositions' : Proposition.objects.filter(candidat_id = id),
-        'is_candidat': is_candidat,
-        'equipes' : Equipe.objects.filter(candidat_id = request.user.candidat.pk)
+        'equipes' : Equipe.objects.filter(candidat_id = id)
     })
 
 def listC(request):
