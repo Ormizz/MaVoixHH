@@ -15,8 +15,7 @@ body {
     font-size: 16px;
 }
 .gradients {
-    background: linear-gradient(to right, rgb(202, 143, 95), rgb(113, 225, 131));
-    /* Use the appropriate prefix for browser compatibility */
+    background: rgb(2, 115, 20);
 }
 
 .container {

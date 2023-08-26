@@ -1,4 +1,5 @@
 {% load static %}
+
 <html>
   <head>
     <title>Resultat</title>
@@ -146,7 +147,7 @@
       {% if deuxieme_candidat %} {% if deuxieme_candidat != none %}
       <div class="second item">
         <div class="winner-item">
-          <p class="h1" style="color: black">{{ deuxieme_candidat.nom }}</p>
+          <p class="h1" style="color: #fff">{{ deuxieme_candidat.nom }}</p>
         </div>
         <div class="prize-item">
           <p class="award">Choix #2</p>
@@ -156,7 +157,7 @@
       {% endif %} {% endif %} {% if premier_candidat %}
       <div class="first item">
         <div class="winner-item">
-          <p class="h1" style="color: black">{{ premier_candidat.nom }}</p>
+          <p class="h1" style="color: #fff">{{ premier_candidat.nom }}</p>
         </div>
         <div class="prize-item">
           <p class="award">Choix #1</p>
@@ -166,7 +167,7 @@
       {% endif %} {% if troisieme_candidat %}
       <div class="third item">
         <div class="winner-item">
-          <p class="h1" style="color: black">{{ troisieme_candidat.nom }}</p>
+          <p class="h1" style="color: #fff">{{ troisieme_candidat.nom }}</p>
         </div>
         <div class="prize-item">
           <p class="award">Choix #3</p>
