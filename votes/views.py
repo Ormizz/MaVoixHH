@@ -115,7 +115,7 @@ def resultat(request, id, id2):
     
     # Ajoutez le dictionnaire des résultats au liste
     resultats_par_candidat.append(resultat_candidat)
-    return render(request,'sondages/resultat.html',{ 
+    return render(request,'sondages/classements.html',{ 
         'vote': candidats_avec_votes_pour,
         'premier_candidat': premier_candidat,
         'deuxieme_candidat': deuxieme_candidat,

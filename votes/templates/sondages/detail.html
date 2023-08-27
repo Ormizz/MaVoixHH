@@ -28,54 +28,6 @@
     <link rel="stylesheet" type="text/css" href="{% static '/vote/css/styleD.css' %}"/>
     </head>
     <body>
-        <header class="">
-		<div class="topbar stick">
-			<div class="logo"><img src="{% static 'img/Logo.png' %}" alt=""><span></span></div>
-			<div class="searches">
-				<form method="post">
-					<input type="text" placeholder="Search...">
-					<button type="submit"><i class="icofont-search"></i></button>
-					<span class="cancel-search"><i class="icofont-close"></i></span>
-					<div class="recent-search">
-						<h4 class="recent-searches">Your's Recent Search</h4>
-					</div>
-				</form>
-			</div>
-			
-			<ul class="web-elements">
-				<li>
-					<div class="user-dp" style="border: 1px solid rgb(2, 115, 20); background: rgb(224, 224, 224)">
-						<a href="profile" title="" >
-							<img alt="" src="images/resources/user.jpg">
-							<div class="name" >
-								{% comment %} <h4>{{user.username}}</h4> {% endcomment %}
-								<h4>{{user.username}}</h4>
-								{% comment %} <h4>{{user.groups.get}}</h4> {% endcomment %}
-							</div>
-						</a>	
-					</div>
-				</li>
-				<li >
-					<a style="border: 1px solid rgb(2, 115, 20); background: rgb(224, 224, 224)" class="mesg-notif" href="#" title="Notifications" data-toggle="tooltip">
-						<i>
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></i>
-					</a>
-					<span></span>
-				</li>
-				<li>
-					<a style="border: 1px solid rgb(2, 115, 20); background: rgb(224, 224, 224)" class="create" href="#" title="Add New" data-toggle="tooltip">
-						<i>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></i>
-					</a>
-					<ul class="dropdown">
-						<li><a href="#" title=""><i class="icofont-user-alt-3"></i> Mon Profil</a></li>
-						<li class="logout"><a href="/" title=""><i class="icofont-power"></i> Logout</a></li>
-					</ul>
-				</li>
-			</ul>
-		</div>
-		
-	</header><!-- header -->
         <div id="notebooks" ng-app="notebooks" ng-controller="NotebookListCtrl">
             <ul id="notebook_ul">
                 {% if votes %}
@@ -92,7 +44,7 @@
                 
                 {% endfor %}
                 {% else %}
-                <h3>Vous avez pas vote pour lui</h3>
+                <h3>Pas de proposition</h3>
                 {% endif %}
             </ul>
         </div>

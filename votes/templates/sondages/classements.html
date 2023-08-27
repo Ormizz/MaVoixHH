@@ -1,0 +1,367 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Classement</title>
+
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'vote/Bootstrap/dist/css/bootstrap-reboot.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'vote/Bootstrap/dist/css/bootstrap.css' %} "
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'vote/Bootstrap/dist/css/bootstrap-grid.css' %} "
+    />
+
+    <!-- Main Styles CSS -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'vote/css/main.css' %} "
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'vote/css/fonts.min.css' %} "
+    />
+
+    <!-- Main Font -->
+
+    <style>
+      .button-group .btn {
+        margin-right: -25px; /* Espacement entre les boutons */
+        margin-left: 25px;
+        margin-top: 0px;
+      }
+
+      .badge-rank {
+        position: absolute;
+        top: 10px;
+        right: 290px;
+        padding: 15px 20px;
+        border-radius: 50%;
+        color: white;
+        font-weight: bold;
+      }
+
+      .badge-rank.first {
+        background-color: gold;
+        margin-top: -25px;
+        margin-right: -60px;
+      }
+
+      .badge-rank.second {
+        background-color: silver;
+        margin-right: -50px;
+      }
+
+      .badge-rank.third {
+        background-color: #cd7f32;
+        margin-right: -50px;
+      }
+
+      /* Flexbox pour les écrans plus grands */
+      .birthday-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 70px;
+        margin-left: 100px;
+      }
+
+      /* Media Query pour les écrans plus petits (moins de 768px) */
+      @media (max-width: 768px) {
+        .birthday-container {
+          flex-direction: column;
+          align-items: center;
+          margin-left: 0;
+        }
+
+        .col {
+          margin-bottom: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body class="page-has-left-panels page-has-right-panels">
+    
+    <!-- ... end Responsive Header-BP -->
+    <div class="header-spacer header-spacer-small"></div>
+
+    <!-- Main Header Badges -->
+
+    <div class="main-header">
+      <div class="content-bg-wrap bg-badges"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col col-lg-8 m-auto col-md-8 col-sm-12 col-12"></div>
+        </div>
+      </div>
+
+      <!-- Conteneur Flexbox -->
+      <div
+        class="birthday-container"
+        style="
+          display: flex;
+          justify-content: space-between;
+          margin-top: 70px;
+          margin-left: 100px;
+        "
+      >
+        <div class="col col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12">
+          <div
+            class="ui-block"
+            style="
+              background-color: #ffff;
+              border-color: #ffff;
+              height: 150px;
+              width: 300px;
+            "
+          >
+            <!-- Birthday Item -->
+            {% if deuxieme_candidat %} {% if deuxieme_candidat != none %}
+            <div
+              class="birthday-item inline-items"
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+              "
+            >
+              <span class="badge-rank second" style="font-size: 24px">2e</span>
+              <div
+                class="birthday-author-name"
+                style="
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  flex-grow: 1;
+                "
+              >
+                <div style="margin-top: 60px" class="birthday-date">
+                  <a
+                    href="/candidat/{{ deuxieme_candidat.id_candidat }}"
+                    class="h6 author-name"
+                    style="font-size: 24px; text-transform: uppercase"
+                    >{{ deuxieme_candidat.nom }} {{ deuxieme_candidat.prenoms }}</a
+                  >
+                </div>
+              </div>
+            </div>
+            {% endif %} {% endif %}
+            <!-- ... end Birthday Item -->
+          </div>
+        </div>
+
+        <div class="col col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12">
+          <div
+            class="ui-block"
+            style="
+              background-color: #ffff;
+              border-color: #ffff;
+              height: 150px;
+              width: 300px;
+              margin-top: -20px;
+            "
+          >
+            <!-- Birthday Item -->
+            {% if premier_candidat %}
+            <div
+              class="birthday-item inline-items"
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+              "
+            >
+              <span class="badge-rank first" style="font-size: 24px">1e</span>
+              <div
+                class="birthday-author-name"
+                style="
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  flex-grow: 1;
+                "
+              >
+                <div style="margin-top: 50px" class="birthday-date">
+                  <a
+                    href="/candidat/{{ premier_candidat.id_candidat }}"
+                    class="h6 author-name"
+                    style="font-size: 24px; text-transform: uppercase"
+                    >{{ premier_candidat.nom }} {{ premier_candidat.prenoms }}</a
+                  >
+                </div>
+              </div>
+            </div>
+            {% endif %}
+            <!-- ... end Birthday Item -->
+          </div>
+        </div>
+
+        <div class="col col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12">
+          <div
+            class="ui-block"
+            style="
+              background-color: #ffff;
+              border-color: #ffff;
+              height: 150px;
+              width: 300px;
+            "
+          >
+            <!-- Birthday Item -->
+            {% if troisieme_candidat %}
+            <div
+              class="birthday-item inline-items"
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+              "
+            >
+              <span class="badge-rank third" style="font-size: 24px;">3e</span>
+              <div
+                class="birthday-author-name"
+                style="
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  flex-grow: 1;
+                "
+              >
+                <div style="margin-top: 60px" class="birthday-date">
+                  <a
+                    href="/candidat/{{ troisieme_candidat.id_candidat }}"
+                    class="h6 author-name"
+                    style="font-size: 24px; text-transform: uppercase"
+                    >{{ troisieme_candidat.nom }} {{ troisieme_candidat.prenoms }}</a
+                  >
+                </div>
+              </div>
+            </div>
+            {% endif %}
+            <!-- ... end Birthday Item -->
+          </div>
+        </div>
+      </div>
+      <!-- Fin du conteneur Flexbox -->
+    </div>
+
+    <!-- ... end Main Header Badges -->
+
+    <!-- Main Content Badges -->
+
+    <div class="container">
+      <div class="row">
+        <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          {% for vot in vote %}
+          <div class="ui-block">
+            <div class="birthday-item inline-items badges">
+              <div class="birthday-author-name">
+                <a href="#" class="h6 author-name"
+                  >{{ vot.nom }} {{ vot.prenoms }}</a
+                >
+                <div class="birthday-date">{{ vot.biographie }}</div>
+                <!-- Nouvelle div pour les boutons -->
+              </div>
+              <div class="skills-item">
+                <div class="skills-item-meter">
+                  <span
+                    class="skills-item-meter-active"
+                    id="myDiv{{ vot.id_candidat }}"
+                    style=""
+                  ></span>
+                  <script>
+                    vale =  {{ vot.num_votes_pour }} / {{ nbr_total_vote }}
+                    vale_pourcent = vale * 100
+                    console.log(vale_pourcent)
+                    var divElement = document.getElementById("myDiv{{ vot.id_candidat }}");
+                    divElement.style.width = vale_pourcent+"%";
+                  </script>
+                </div>
+              </div>
+            </div>
+            <div class="button-group">
+              <a
+                href="/vote/detail/{{ vot.id_candidat }}"
+                class="btn btn-primary btn-sm"
+                >Detail</a
+              >
+              <a
+                href="/candidat/{{ vot.id_candidat }}"
+                class="btn btn-primary btn-sm"
+                >Profil</a
+              >
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <!-- ... end Main Content Badges -->
+
+    <!-- Window-popup-CHAT for responsive min-width: 768px -->
+
+    <!-- ... end Window-popup-CHAT for responsive min-width: 768px -->
+
+    <a class="back-to-top" href="#">
+      <img src="{% static 'vote/svg-icons/back-to-top.svg' %}" alt="arrow" class="back-icon" />
+    </a>
+
+    <!-- JS Scripts -->
+    <script src="{% static 'vote/js/jQuery/jquery-3.4.1.js' %} "></script>
+    <script src="{% static 'vote/js/libs/jquery.appear.js' %} "></script>
+    <script src="{% static 'vote/js/libs/jquery.mousewheel.js' %} "></script>
+    <script src="{% static 'vote/js/libs/perfect-scrollbar.js' %} "></script>
+    <script src="{% static 'vote/js/libs/jquery.matchHeight.js' %} "></script>
+    <script src="{% static 'vote/js/libs/svgxuse.js' %} "></script>
+    <script src="{% static 'vote/js/libs/imagesloaded.pkgd.js' %} "></script>
+    <script src="{% static 'vote/js/libs/Headroom.js' %} "></script>
+    <script src="{% static 'vote/js/libs/velocity.js' %} "></script>
+    <script src="{% static 'vote/js/libs/ScrollMagic.js' %}"></script>
+    <script src="{% static 'vote/js/libs/jquery.waypoints.js' %}"></script>
+    <script src="{% static 'vote/js/libs/jquery.countTo.js' %}"></script>
+    <script src="{% static 'vote/js/libs/popper.min.js' %}"></script>
+    <script src="{% static 'vote/js/libs/material.min.js' %}"></script>
+    <script src="{% static 'vote/js/libs/bootstrap-select.js' %}"></script>
+    <script src="{% static 'vote/js/libs/smooth-scroll.js' %}"></script>
+    <script src="{% static 'vote/js/libs/selectize.js' %}"></script>
+    <script src="{% static 'vote/js/libs/swiper.jquery.js' %}"></script>
+    <script src="{% static 'vote/js/libs/moment.js' %}"></script>
+    <script src="{% static 'vote/js/libs/daterangepicker.js' %}"></script>
+    <script src="{% static 'vote/js/libs/fullcalendar.js' %}"></script>
+    <script src="{% static 'vote/js/libs/isotope.pkgd.js' %}"></script>
+    <script src="{% static 'vote/js/libs/ajax-pagination.js' %}"></script>
+    <script src="{% static 'vote/js/libs/Chart.js' %}"></script>
+    <script src="{% static 'vote/js/libs/chartjs-plugin-deferred.js' %}"></script>
+    <script src="{% static 'vote/js/libs/circle-progress.js' %}"></script>
+    <script src="{% static 'vote/js/libs/loader.js' %}"></script>
+    <script src="{% static 'vote/js/libs/run-chart.js' %}"></script>
+    <script src="{% static 'vote/js/libs/jquery.magnific-popup.js' %}"></script>
+    <script src="{% static 'vote/js/libs/jquery.gifplayer.js' %}"></script>
+    <script src="{% static 'vote/js/libs/mediaelement-and-player.js' %}"></script>
+    <script src="{% static 'vote/js/libs/mediaelement-playlist-plugin.min.js' %}"></script>
+    <script src="{% static 'vote/js/libs/ion.rangeSlider.js' %}"></script>
+    <script src="{% static 'vote/js/libs/leaflet.js' %}"></script>
+    <script src="{% static 'vote/js/libs/MarkerClusterGroup.js' %}"></script>
+
+    <script src="{% static 'vote/js/main.js' %}"></script>
+    <script src="{% static 'vote/js/libs-init/libs-init.js' %}"></script>
+    <script defer src="{% static 'vote/fonts/fontawesome-all.js' %}"></script>
+
+    <script src="{% static 'vote/Bootstrap/dist/js/bootstrap.bundle.js' %}"></script>
+  </body>
+</html>
