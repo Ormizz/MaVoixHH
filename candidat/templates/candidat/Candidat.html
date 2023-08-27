@@ -57,9 +57,18 @@
 							<div class="col-lg-9">
 								<div class="group-feed">
 									<div class="group-avatar">
-										<img src="{{ settings.MEDIA_URL }}/media/{{candidat.fond}}" alt="">
+										{% if candidat.fond %}
+										<img style="width:1130px;height:400px" src="{{ settings.MEDIA_URL }}/media/{{candidat.fond}}" alt="">
+										{% else %}
+										<img src="{% static 'img/images/resources/profile-banner.jpg' %}" alt="">
+										{% endif %}
 										<a href="#" title=""><i class="icofont-check-circled"></i>Suivre</a>
-										<figure class="group-dp"><img src="{{candidat.image.url}}" alt=""></figure>
+										{% if candidat.image %}
+										<figure class="group-dp"><img style="width:150px;height:150px" src="{{candidat.image.url}}" alt=""></figure>
+										{% else %}
+										<figure class="group-dp"><img src="{% static 'img/images/resources/user.jpg' %}" alt=""></figure>
+										{% endif %}	
+										
 									</div>
 									<div class="grp-info about">
 										<h4>{{ candidat.nom }} {{ candidat.prenoms }} <span>Surnom: @{{ candidat.surnom }}</span> <span>Partie Politique: {{ candidat.parti_politique }}</span></h4>
@@ -151,21 +160,24 @@
 
 														<div class="col-lg-8" id="equipe">
 															{% if equipes %} {% for equipe in equipes %}
-															<div class="row">
-																<div class="col-lg-2">
-																	<div class="card" style="width: 18rem;">
-																		<img class="card-img-top" src="{{ settings.MEDIA_URL }}{{equipe.image.url}}" alt="Card image cap">
-																		<div class="card-body">
-																			<h5 class="card-title">{{equipe.nomPrenom}}</h5>
-																			<p class="card-text">Poste : {{equipe.poste}}</p>
-																		</div>
-																	</div>
+															<div style="background-color:white; height:300px"  class="col-lg-6 col-md-4 col-sm-6 me-auto">
+																<div class="friendz">
+																	{% if equipe.image.url %}
+																	<figure><img src="{{ settings.MEDIA_URL }}{{equipe.image.url}}" alt=""></figure>
+																	{% else %}
+																	<figure><img src="{% static 'img/images/resources/speak-10.jpg' %}" alt=""></figure>
+																	{% endif %}
+																	
+																	<span><a href="#" title="">{{equipe.nomPrenom}}</a></span>
+																	<ins>Poste : {{equipe.poste}}</ins>
+																	{% comment %} <a href="#" title="" data-ripple=""><i class="icofont-star"></i>Unfollow</a> {% endcomment %}
 																</div>
 															</div>
 															{% endfor %} {% else %}
 															<h5 class="mt-4" style="text-align: center">Pas d'equipe</h5>
 															{% endif %}
 														</div>
+														
 														<div class="col-lg-4">
 															<aside class="sidebar static left">
 																<div class="advertisment-box">
