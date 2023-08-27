@@ -26,13 +26,17 @@
 	<nav class="sidebar">
 		<ul class="menu-slide">
 			<li class="">
-				<a class="" href="index.html" title="">
-					<i><svg id="icon-home" class="feather feather-home" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></i> Dashboard
+				<a class="" href="{% url 'analytic' 1 %}" title=""><i><svg id="icon-home" class="feather feather-home" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></i> Dashboard
 				</a>
 			</li>
 			<li class="">
-				<a class="" href="analytics.html" title="">
-					<i class=""><svg id="ab7" class="feather feather-zap" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></i>Gestion de mon compte
+				<a class="" href="{% url 'G_candidat' %}" title="">
+					<i class=""><svg id="ab7" class="feather feather-zap" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></i>Gestion des candidats
+				</a>
+			</li>
+			<li class="">
+				<a class="" href="{% url 'G_electeur' %}" title="">
+					<i class=""><svg id="ab7" class="feather feather-zap" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></i>Gestion des electeurs
 				</a>
 			</li>
 		</ul>
@@ -43,7 +47,25 @@
 			<div class="col-lg-12">
 				<div class="panel-content">
 					<h4 class="main-title">Tableau de bord</h4>
-					<h4 style="margin-bottom:10px">Effectif global</h4>	
+					<h4 style="margin-bottom:10px">Effectif par commune</h4>	
+					<ul class="cards filtr-tabs" data-aos="fade-down"
+								data-aos-duration="1000"
+								data-aos-easing="ease-in-sine">
+									{% if villes %}
+									{% for ville in villes %}
+									
+									<li class="card justify-content-center">
+											
+										<a style="color: rgb(216, 233, 218); background: rgb(2, 115, 20); margin-bottom:5px"  
+											{% if ville.pk == id %} class="active" {% endif %} href="{% url 'analytic' ville.pk %}" title="">{{ville.libelle}}</a>
+							
+									</li>
+									{% endfor %}
+									{% else %}
+									Pas de ville disponible
+									{% endif %}
+									
+								</ul><!-- tab buttons -->
 					<div class="row merged20 mb-4">
 						<div class="col-lg-3 col-md-6">
 							<div class="w-chart-section">
@@ -116,9 +138,184 @@
 							</div>
 						</div>
 					</div>
+					{% if themes %}
+						{% for theme2 in themes %}
+						<div class="container">
+							<h3>Thematique: {{ theme2.libelle_themes_cles }}</h3>
+							<ul class="cards">
+								{% if all_purposes %}
+									{% for theme, purposes in all_purposes %}
+										{% for purpose in purposes %}
+											{% if purpose.themes_cles.pk == theme2.pk %}
+												{% with pour_ratio=purpose.ratio_votes_pour %}
+												{% with contre_ratio=purpose.ratio_votes_contre %}
+												<li class="card">
+													<div>
+														<h3 class="card-title">{{ purpose.themes_cles.libelle_themes_cles }}</h3>
+														<h5 class=""> Candidat : <br>{{ purpose.candidat.nom }} {{ purpose.candidat.prenoms }}</h5>
+														<div class="card-content">
+															<p>{{ purpose.libelle_proposition }}</p>
+														</div>
+														{{pour_ratio}}
+														{{contre_ratio}}
+													</div>
+													<div class="card-link-wrapper">
+														{% if purpose.num_votes_pour != 0 or purpose.num_votes_contre != 0 %}
+															<div class="progress">
+																<div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{ pour_ratio }}%; background-color: #027314" aria-valuenow="{{ pour_ratio }}" aria-valuemin="0" aria-valuemax="100"></div>
+																<div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{ contre_ratio }}%; background-color: #ff7200" aria-valuenow="{{ contre_ratio }}" aria-valuemin="0" aria-valuemax="100"></div>
+															</div>
+														{% else %}
+															Indisponible
+														{% endif %}
+													</div>
+												</li>
+												{% endwith %}
+												{% endwith %}
+											{% endif %}
+										{% endfor %}
+									{% endfor %}
+								{% endif %}
+							</ul>
+						</div>
+						{% endfor %}
+					{% else %}
+						Pas de thèmes
+					{% endif %}
+
+
+					{% if candidats_vote_podium %}
+					<div class="container">
+						<h4 class="">Classement des candidats</h4>
+						<ul class="cards">
+							{% for candidats_vote in candidats_vote_podium %}
+							<li class="card">
+								<div class="justify-content-center">
+									{% if candidats_vote.image %}
+									<figure><img style="width:100px; height:100px" src="media/{{candidats_vote.image}}" alt=""></figure>
+									{% else %}
+									<figure><img src="{% static 'img/images/resources/group11.jpg' %}" alt=""></figure>
+									{% endif %}
+									<a href="#" title="">{{candidats_vote.nom}} {{candidats_vote.prenoms}}</a>
+									<span>{{candidats_vote.parti_politique}}</span>
+									<h6 style="">Cote: {{candidats_vote.ratio_vote_ville }}%</h6> <br>
+									<button class="btn btn-primary"><a href="../candidat/{{candidats_vote.pk}}">Voir ma page</a></button>
+								</div>
+							</li>
+							{% endfor %}
+						</ul>
+					</div>
+					{% else %}
+						Aucun candidat inscrit
+					{% endif %}	
 				</div>
-			</div>
+			</div>		
 		</div>
 	</div><!-- main content -->
+	<style>
+		.cards {
+			display: flex;
+			padding: 25px 0px;
+			list-style: none;
+			overflow-x: scroll;
+			-ms-scroll-snap-type: x mandatory;
+			scroll-snap-type: x mandatory;
+		}
+		
+		.card {
+			display: flex;
+			flex-direction: column;
+			flex: 0 0 100%;
+			padding: 20px;
+			background: var(--white);
+			border-radius: 12px;
+			box-shadow: 0 5px 15px rgba(0, 0, 0, 15%);
+			scroll-snap-align: start;
+			transition: all 0.2s;
+		}
+		
+		.card:not(:last-child) {
+			margin-right: 10px;
+		}
+		
+		.card:hover {
+			color: white;
+			background: #e0e0e0;
+		}
+		
+		.card .card-title {
+			font-size: 20px;
+		}
+		
+		.card .card-content {
+			margin: 20px 0;
+			max-width: 85%;
+		}
+		
+		.card .card-link-wrapper {
+			margin-top: auto;
+		}
+		
+		.card .card-link {
+			display: inline-block;
+			text-decoration: none;
+			color: white;
+			background: var(--red);
+			padding: 6px 12px;
+			border-radius: 8px;
+			transition: background 0.2s;
+		}
+		
+		.card:hover .card-link {
+			background: var(--darkred);
+		}
+		
+		.cards::-webkit-scrollbar {
+			height: 12px;
+		}
+		
+		.cards::-webkit-scrollbar-thumb,
+		.cards::-webkit-scrollbar-track {
+			border-radius: 92px;
+		}
+		
+		.cards::-webkit-scrollbar-thumb {
+			background: var(--darkred);
+		}
+		
+		.cards::-webkit-scrollbar-track {
+			background: var(--thumb);
+		}
+		
+		@media (min-width: 500px) {
+			.card {
+				flex-basis: calc(50% - 10px);
+			}
+		
+			.card:not(:last-child) {
+				margin-right: 20px;
+			}
+		}
+		
+		@media (min-width: 700px) {
+			.card {
+				flex-basis: calc(calc(100% / 3) - 20px);
+			}
+		
+			.card:not(:last-child) {
+				margin-right: 30px;
+			}
+		}
+		
+		@media (min-width: 1100px) {
+			.card {
+				flex-basis: calc(25% - 30px);
+			}
+		
+			.card:not(:last-child) {
+				margin-right: 40px;
+			}
+		}
+	</style>
 	{% endblock content %}
 	

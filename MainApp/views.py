@@ -214,12 +214,11 @@ def listCandidat(request, id):
     })
   
     
-def analytic(request):
+def analytic(request, id):
     
 
     # Obtention des propositions par thematiques
-    all_purposes = Proposition.objects.filter(candidat_id=request.user.candidat.pk)
-
+    all_purposes = Proposition.objects.filter(ville_id = id)
     # Triez les propositions par thématique
     all_purposes = sorted(all_purposes, key=lambda purpose: purpose.themes_cles_id)
 
@@ -231,15 +230,15 @@ def analytic(request):
     # Calcul des informations de vote pour chaque groupe de propositions
     for theme, purposes in grouped_purposes.items():
         for purpose in purposes:
-            print(theme, purpose)
+            # print(theme, purpose)
             # Obtenir la liste des propositions votées
             all_purposes_voted = Vote.objects.filter(proposition_id=purpose.pk)
             # Compter les votes "pour" et les votes "contre"
             num_votes_pour = all_purposes_voted.filter(nature_vote='Pour').count()
             num_votes_contre = all_purposes_voted.filter(nature_vote='Contre').count()
             num_votes_total = num_votes_contre + num_votes_pour
-            ratio_votes_contre = num_votes_contre / num_votes_total if num_votes_total > 0 else 0
-            ratio_votes_pour = num_votes_pour / num_votes_total if num_votes_total > 0 else 0
+            ratio_votes_contre = (num_votes_contre / num_votes_total)*100 if num_votes_total > 0 else 0
+            ratio_votes_pour = (num_votes_pour / num_votes_total)*100 if num_votes_total > 0 else 0
             # Ajout des informations aux attributs temporaires de l'instance Proposition
             setattr(purpose, 'num_votes_pour', num_votes_pour)
             setattr(purpose, 'num_votes_contre', num_votes_contre)
@@ -247,13 +246,21 @@ def analytic(request):
             setattr(purpose, 'ratio_votes_contre', ratio_votes_contre)
             setattr(purpose, 'ratio_votes_pour', ratio_votes_pour)
 
+    # Triez les propositions par thématique
+    all_purposes = sorted(all_purposes, key=lambda purpose: purpose.themes_cles_id)
+
+    # Groupement des propositions par thématique
+    grouped_purposes = {}
+    for theme, group in groupby(all_purposes, key=lambda purpose: purpose.themes_cles_id):
+        grouped_purposes[theme] = sorted(list(group), key=lambda purpose: purpose.ratio_votes_pour, reverse=True)
+
      # Obtenez tous les candidats avec leur cote de popularité, le nombre de votes "pour" et le nombre de votes "contre"
-    candidats_vote_info = Candidat.objects.filter(Ville=1).annotate(
+    candidats_vote_info = Candidat.objects.filter(Ville=id).annotate(
         num_votes=Count('vote'),
         num_votes_pour=Count('vote', filter=Q(vote__nature_vote='Pour')),
         num_votes_contre=Count('vote', filter=Q(vote__nature_vote='Contre')),
     )
-    nbre_vote_ville = Vote.objects.filter(ville= 1).count()
+    nbre_vote_ville = Vote.objects.filter(ville= id).count()
 
     for candidat in candidats_vote_info:
         candidat.nbre_vote_ville = nbre_vote_ville
@@ -261,19 +268,88 @@ def analytic(request):
             candidat.ratio_vote_ville = int((candidat.num_votes_pour / nbre_vote_ville) * 100)
         else:
             candidat.ratio_vote_ville = 0.0
-    candidats_vote_info_trie = sorted(candidats_vote_info, key=lambda candidat: candidat.ratio_vote_ville, reverse=True)[:3]
+    candidats_vote_info_trie = sorted(candidats_vote_info, key=lambda candidat: candidat.ratio_vote_ville, reverse=True)
     
     candidats_vote_info = sorted(
     candidats_vote_info,
     key=lambda candidat:  candidat.nom,
     reverse=True)
     
+    candidat_count= Candidat.objects.filter(Ville=id).count()
+    
+    article_count = 0
+    
+    for candidat in Candidat.objects.filter(Ville=id):
+        article_count+=Article.objects.filter(candidat = candidat).count()
+    
+    print(all_purposes)
     return render(request, 'analytics.html', {
-        'candidat_count' : Candidat.objects.count(),
-        'Article_count' : Article.objects.count(),
-        'user_count' : Electeur.objects.count(),
+        'candidat_count' : candidat_count,
+        'Article_count' : article_count,
+        'user_count' : Electeur.objects.filter(Ville_id=id).count(),
         'theme_count' : Themes_cles.objects.count(),
-        'purposes' : all_purposes,
-        
+        'villes' : Ville.objects.all(),
+        'themes' : Themes_cles.objects.all(),
         'candidats_vote_podium':candidats_vote_info_trie,
+        'all_purposes' : grouped_purposes.items(),
     })
+    
+def G_electeur(request):
+    return render(request, 'G_electeur.html',{
+        'electeurs':Electeur.objects.all()
+    })
+
+def G_candidat(request):
+    return render(request, 'G_candidat.html',{
+        'candidats':Candidat.objects.all(),
+        'localisations' : Ville.objects.all()
+    })
+    
+@login_required     
+def DeleteCand(request, id):
+    candidat = Candidat.objects.get(pk=id)
+    
+    if request.method == 'POST':
+        candidat.delete()
+        return redirect("G_candidat")
+    
+    return render(request, 'G_candidat.html')
+
+@login_required     
+def DeleteElec(request, id):
+    electeur = Electeur.objects.get(pk=id)
+    
+    if request.method == 'POST':
+        electeur.delete()
+        return redirect("G_electeur")
+    
+    return render(request, 'G_electeur.html')
+
+def CreateCand(request):
+    if request.method == 'POST':
+        ville_id = request.POST['Ville']
+        ville_instance = Ville.objects.get(pk=ville_id)
+        photoPP = request.FILES.get('photoPP')
+        photoFond = request.FILES.get('photoFond')
+        user = User.objects.create_user(
+            username = request.POST["date_naissance"][:6]+request.POST['nom'][:2]+request.POST['prenoms'][:2], 
+            email = request.POST['email'],
+            password = request.POST["date_naissance"][:6]+request.POST['nom'][:2]+request.POST['prenoms'][:2], 
+        )
+        user.save()
+        candidat = Candidat.objects.create(
+            nom = request.POST["nom"],
+            prenoms = request.POST["prenoms"],
+            surnom = request.POST["surnom"],
+            date_naissance = request.POST["date_naissance"],
+            lieu_naissance = request.POST["lieu_naissance"],
+            parti_politique = request.POST["parti_politique"],
+            sexe = request.POST["sexe"],
+            biographie = request.POST["biographie"],
+            Ville = ville_instance,
+            image = photoPP,
+            fond = photoFond,
+            user_id = user.pk,
+        ) 
+        candidat.save()
+        return redirect("G_candidat")

@@ -1,0 +1,130 @@
+{% extends 'candidat/base/base2.html' %}
+{% load static %}
+{% block content %}
+	<div class="top-sub-bar">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-6 col-md-6 col-sm-6">
+					<div class="menu-btn">
+						<i class="">
+<svg id="menu-btn" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></i>
+					</div>
+					<div class="page-title">
+						<h4>Dashboard</h4>
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-6">
+					<ul class="breadcrumb">
+						<li><a href="#" title="">Dashboard</a></li>
+						<li><a href="#" title="">Electeur</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>	
+	</div><!-- top sub bar -->
+	
+	<nav class="sidebar">
+		<ul class="menu-slide">
+			<li class="">
+				<a class="" href="{% url 'analytic' 1 %}" title="">					<i><svg id="icon-home" class="feather feather-home" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></i> Dashboard
+				</a>
+			</li>
+			<li class="">
+				<a class="" href="{% url 'G_candidat' %}" title="">
+					<i class=""><svg id="ab7" class="feather feather-zap" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></i>Gestion des candidats
+				</a>
+			</li>
+			<li class="">
+				<a class="" href="{% url 'G_electeur' %}" title="">
+					<i class=""><svg id="ab7" class="feather feather-zap" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></i>Gestion des electeurs
+				</a>
+			</li>
+		</ul>
+	</nav><!-- sidebar -->
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="panel-content">
+					<h4 class="main-title">Electeur</h4>
+						
+					<div class="row merged20 mb-4">
+						<div class="col-lg-12">
+							<div class="d-widget">
+								<div class="d-widget-title">
+									<h5>Manager les electeurs</h5>
+								</div>
+								<div class="d-widget-content">
+									<table class="table manage-user table-default table-responsive-md">
+										<thead>
+											<tr>
+												<th>Nom</th>
+												<th>Prenoms</th>
+												<th>Date de naissance</th>
+												<th>Sexe</th>
+												<th>Ville</th>
+												<th>Action</th>
+											</tr>
+										</thead>
+										<tbody>
+											{% if electeurs %}
+											{% for electeur in electeurs %}
+											<tr>
+												<td>
+													<figure><img src="images/resources/user.png" alt=""></figure>
+													<h5>{{electeur.nom}}</h5>
+												</td>
+												<td><h5>{{electeur.prenoms}}</h5></td>
+												<td>
+													<h5>{{electeur.date_naissance}}</h5>
+												</td>
+												<td>
+													<h5>{{electeur.sexe}}</h5>
+												</td>
+												<td>
+													<h5>{{electeur.Ville.libelle}}</h5>
+												</td>
+												<td>
+													<div class="actions-btn">
+														<span class="iconbox button soft-danger"><i data-bs-toggle="modal" data-bs-target="#confirmDeleteElecteur{{ electeur.pk }}" class="icofont-trash"></i></span>
+													</div>
+												</td>
+											</tr>
+											{% comment %} suppression {% endcomment %}
+											<div class="modal fade" id="confirmDeleteElecteur{{ electeur.pk }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+												<div class="modal-dialog modal-dialog-centered">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title" id="exampleModalLabel">Confirmer la suppression</h5>
+															<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+														</div>
+														<form class="row g-3" method="post" action="{% url 'deleteElec' electeur.pk %}">
+															{% csrf_token %}
+														<div class="modal-body">
+															Êtes-vous sûr de vouloir supprimer cet electeur ?
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+															<button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Sucess</button>
+														</div>
+														</form>
+													</div>
+												</div>
+											</div>
+											{% endfor %}
+											{% else %}
+											Pas d'electeurs inscrits
+											{% endif %}
+											
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</div><!-- main content -->
+	{% endblock content %}

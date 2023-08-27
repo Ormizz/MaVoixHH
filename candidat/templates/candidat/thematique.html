@@ -99,14 +99,17 @@
 							</div>
 						</div>
 					</div>
+					{% if themes %}
+					{% for theme2 in themes %}
 					<div class="container">
-						<h3>Thematique: Économie et Emploi</h3>
+						<h3>Thematique: {{theme2.libelle_themes_cles}}</h3>
 						<ul class="cards">
 							{% if all_purposes %}
 							{% for theme, purposes in all_purposes %}
 							{% for purpose in purposes %}
-							{% if purpose.themes_cles_id == 1 %}
+							{% if purpose.themes_cles.pk == theme2.pk %}
 							<li class="card">
+								
 								<div>
 									<h3 class="card-title">{{purpose.themes_cles.libelle_themes_cles}}</h3>
 									<div class="card-content">
@@ -136,197 +139,10 @@
 						</ul>
 						
 					</div>
-					
-					<div class="container">
-						<h3>Thematique: Santé </h3>
-						<ul class="cards">
-							{% if all_purposes %}
-							{% for theme, purposes in all_purposes %}
-							{% for purpose in purposes %}
-							{% if purpose.themes_cles_id == 2 %}
-							<li class="card">
-								<div>
-									<h3 class="card-title">{{purpose.themes_cles.libelle_themes_cles}}</h3>
-									<div class="card-content">
-										<p>{{purpose.libelle_proposition}}</p>
-									</div>
-								</div>
-								<div class="card-link-wrapper">
-									{% if purpose.num_votes_pour != 0 or purpose.num_votes_contre != 0 %}
-									<div class="progress">
-										<div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{purpose.ratio_votes_pour}}%; background-color: #027314" aria-valuenow="{{purpose.ratio_votes_pour}}" aria-valuemin="0" aria-valuemax="100"></div>
-										<div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{purpose.ratio_votes_contre}}%; background-color: #ff7200" aria-valuenow="{{purpose.ratio_votes_contre}}" aria-valuemin="0" aria-valuemax="100"></div>
-									</div>
-									{% else %}
-									Indisponible
-									{% endif %}
-								</div>
-							</li>
-							{% else %}
-							
-							{% endif %}
-							{% endfor %}
-							{% endfor %}
-							{% else %}
-							
-							{% endif %}
-							
-						</ul>
-						
-					</div>
-					
-					<div class="container">
-						<h3>Thematique: Éducation  </h3>
-						<ul class="cards">
-							{% if all_purposes %}
-							{% for theme, purposes in all_purposes %}
-							{% for purpose in purposes %}
-							{% if purpose.themes_cles_id == 3 %}
-							<li class="card">
-								<div>
-									<h3 class="card-title">{{purpose.themes_cles.libelle_themes_cles}}</h3>
-									<div class="card-content">
-										<p>{{purpose.libelle_proposition}}</p>
-									</div>
-								</div>
-								<div class="card-link-wrapper">
-									{% if purpose.num_votes_pour != 0 or purpose.num_votes_contre != 0 %}
-									<div class="progress">
-										<div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{purpose.ratio_votes_pour}}%; background-color: #027314" aria-valuenow="{{purpose.ratio_votes_pour}}" aria-valuemin="0" aria-valuemax="100"></div>
-										<div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{purpose.ratio_votes_contre}}%; background-color: #ff7200" aria-valuenow="{{purpose.ratio_votes_contre}}" aria-valuemin="0" aria-valuemax="100"></div>
-									</div>
-									{% else %}
-									Indisponible
-									{% endif %}
-								</div>
-							</li>
-							{% else %}
-							
-							{% endif %}
-							{% endfor %}
-							{% endfor %}
-							{% else %}
-							
-							{% endif %}
-							
-						</ul>
-						
-					</div>
-					
-					<div class="container">
-						<h3>Thematique: Sécurité </h3>
-						<ul class="cards">
-							{% if all_purposes %}
-							{% for theme, purposes in all_purposes %}
-							{% for purpose in purposes %}
-							{% if purpose.themes_cles_id == 4 %}
-							<li class="card">
-								<div>
-									<h3 class="card-title">{{purpose.themes_cles.libelle_themes_cles}}</h3>
-									<div class="card-content">
-										<p>{{purpose.libelle_proposition}}</p>
-									</div>
-								</div>
-								<div class="card-link-wrapper">
-									{% if purpose.num_votes_pour != 0 or purpose.num_votes_contre != 0 %}
-									<div class="progress">
-										<div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{purpose.ratio_votes_pour}}%; background-color: #027314" aria-valuenow="{{purpose.ratio_votes_pour}}" aria-valuemin="0" aria-valuemax="100"></div>
-										<div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{purpose.ratio_votes_contre}}%; background-color: #ff7200" aria-valuenow="{{purpose.ratio_votes_contre}}" aria-valuemin="0" aria-valuemax="100"></div>
-									</div>
-									{% else %}
-									Indisponible
-									{% endif %}
-								</div>
-							</li>
-							{% else %}
-							
-							{% endif %}
-							{% endfor %}
-							{% endfor %}
-							{% else %}
-							
-							{% endif %}
-							
-						</ul>
-						
-					</div>
-
-					<div class="container">
-						<h3>Thematique: Environnement </h3>
-						<ul class="cards">
-							{% if all_purposes %}
-							{% for theme, purposes in all_purposes %}
-							{% for purpose in purposes %}
-							{% if purpose.themes_cles_id == 5 %}
-							<li class="card">
-								<div>
-									<h3 class="card-title">{{purpose.themes_cles.libelle_themes_cles}}</h3>
-									<div class="card-content">
-										<p>{{purpose.libelle_proposition}}</p>
-									</div>
-								</div>
-								<div class="card-link-wrapper">
-									{% if purpose.num_votes_pour != 0 or purpose.num_votes_contre != 0 %}
-									<div class="progress">
-										<div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{purpose.ratio_votes_pour}}%; background-color: #027314" aria-valuenow="{{purpose.ratio_votes_pour}}" aria-valuemin="0" aria-valuemax="100"></div>
-										<div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{purpose.ratio_votes_contre}}%; background-color: #ff7200" aria-valuenow="{{purpose.ratio_votes_contre}}" aria-valuemin="0" aria-valuemax="100"></div>
-									</div>
-									{% else %}
-									Indisponible
-									{% endif %}
-								</div>
-							</li>
-							{% else %}
-							
-							{% endif %}
-							{% endfor %}
-							{% endfor %}
-							{% else %}
-							
-							{% endif %}
-							
-						</ul>
-						
-					</div>
-
-					<div class="container">
-						<h3>Thematique: Culture et Patrimoine </h3>
-						<ul class="cards">
-							{% if all_purposes %}
-							{% for theme, purposes in all_purposes %}
-							{% for purpose in purposes %}
-							{% if purpose.themes_cles_id == 6 %}
-							<li class="card">
-								<div>
-									<h3 class="card-title">{{purpose.themes_cles.libelle_themes_cles}}</h3>
-									<div class="card-content">
-										<p>{{purpose.libelle_proposition}}</p>
-									</div>
-								</div>
-								<div class="card-link-wrapper">
-									{% if purpose.num_votes_pour != 0 or purpose.num_votes_contre != 0 %}
-									<div class="progress">
-										<div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{purpose.ratio_votes_pour}}%; background-color: #027314" aria-valuenow="{{purpose.ratio_votes_pour}}" aria-valuemin="0" aria-valuemax="100"></div>
-										<div class="progress-bar progress-bar-striped" role="progressbar" style="width: {{purpose.ratio_votes_contre}}%; background-color: #ff7200" aria-valuenow="{{purpose.ratio_votes_contre}}" aria-valuemin="0" aria-valuemax="100"></div>
-									</div>
-									{% else %}
-									Indisponible
-									{% endif %}
-								</div>
-							</li>
-							{% else %}
-							
-							{% endif %}
-							{% endfor %}
-							{% endfor %}
-							{% else %}
-							Indisponible
-							{% endif %}
-							
-						</ul>
-						
-					</div>
-
+					{% endfor %}
+					{% else %}
+					Pas de thèmes
+					{% endif %}
 				</div>
 			</div>
 		</div>

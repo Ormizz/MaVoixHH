@@ -15,5 +15,10 @@ urlpatterns = [
     path('carte', views.carte ,name='carteC'),
     path('get_candidats/', views.get_candidats, name='get_candidats'),
     path('listCandidat/<int:id>', views.listCandidat, name='listCandidat'),
-    path('analytic', views.analytic, name='analytic'),
+    path('analytic/<int:id>', views.analytic, name='analytic'),
+    path('G_electeur', views.G_electeur, name='G_electeur'),
+    path('G_candidat', views.G_candidat, name='G_candidat'),
+    path('CreateCand', views.CreateCand, name='CreateCand'),
+    path('deleteCand/<int:id>', views.DeleteCand, name='deleteCand'),
+    path('deleteElec/<int:id>', views.DeleteElec, name='deleteElec'),
 ]

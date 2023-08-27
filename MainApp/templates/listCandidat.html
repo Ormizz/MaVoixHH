@@ -9,18 +9,23 @@
 					<div class="col-lg-12">
 						<div id="page-contents" class="row merged20">
 							<div class="col-lg-9">
-								<ul class="filtr-tabs" data-aos="fade-down"
+								<ul class="cards filtr-tabs" data-aos="fade-down"
 								data-aos-duration="1000"
 								data-aos-easing="ease-in-sine">
 									{% if villes %}
 									{% for ville in villes %}
 									
-									<li style="background: "><a style="color: rgb(216, 233, 218); background: rgb(2, 115, 20); margin-bottom:5px"  
-										{% if ville.pk == id %} class="active" {% endif %} href="{% url 'listCandidat' ville.pk %}" title="">{{ville.libelle}}</a></li>
+									<li class="card justify-content-center">
+											
+										<a style="color: rgb(216, 233, 218); background: rgb(2, 115, 20); margin-bottom:5px"  
+											{% if ville.pk == id %} class="active" {% endif %} href="{% url 'listCandidat' ville.pk %}" title="">{{ville.libelle}}</a>
+							
+									</li>
 									{% endfor %}
 									{% else %}
 									Pas de ville disponible
 									{% endif %}
+									
 								</ul><!-- tab buttons -->
 								<div class="main-wraper">
 									<h4 class="main-title">En vogue</h4>
@@ -195,5 +200,109 @@
 			</div>
 		</div>
 	</section>
+<style>
+	.cards {
+		display: flex;
+		padding: 25px 0px;
+		list-style: none;
+		overflow-x: scroll;
+		-ms-scroll-snap-type: x mandatory;
+		scroll-snap-type: x mandatory;
+	}
 	
+	.card {
+		display: flex;
+		flex-direction: column;
+		flex: 0 0 100%;
+		padding: 20px;
+		background: var(--white);
+		border-radius: 12px;
+		box-shadow: 0 5px 15px rgba(0, 0, 0, 15%);
+		scroll-snap-align: start;
+		transition: all 0.2s;
+	}
+	
+	.card:not(:last-child) {
+		margin-right: 10px;
+	}
+	
+	.card:hover {
+		color: white;
+		background: #e0e0e0;
+	}
+	
+	.card .card-title {
+		font-size: 20px;
+	}
+	
+	.card .card-content {
+		margin: 20px 0;
+		max-width: 85%;
+	}
+	
+	.card .card-link-wrapper {
+		margin-top: auto;
+	}
+	
+	.card .card-link {
+		display: inline-block;
+		text-decoration: none;
+		color: white;
+		background: var(--red);
+		padding: 6px 12px;
+		border-radius: 8px;
+		transition: background 0.2s;
+	}
+	
+	.card:hover .card-link {
+		background: var(--darkred);
+	}
+	
+	.cards::-webkit-scrollbar {
+		height: 12px;
+	}
+	
+	.cards::-webkit-scrollbar-thumb,
+	.cards::-webkit-scrollbar-track {
+		border-radius: 92px;
+	}
+	
+	.cards::-webkit-scrollbar-thumb {
+		background: var(--darkred);
+	}
+	
+	.cards::-webkit-scrollbar-track {
+		background: var(--thumb);
+	}
+	
+	@media (min-width: 500px) {
+		.card {
+			flex-basis: calc(50% - 10px);
+		}
+	
+		.card:not(:last-child) {
+			margin-right: 20px;
+		}
+	}
+	
+	@media (min-width: 700px) {
+		.card {
+			flex-basis: calc(calc(100% / 3) - 20px);
+		}
+	
+		.card:not(:last-child) {
+			margin-right: 30px;
+		}
+	}
+	
+	@media (min-width: 1100px) {
+		.card {
+			flex-basis: calc(25% - 30px);
+		}
+	
+		.card:not(:last-child) {
+			margin-right: 40px;
+		}
+	}
+</style>
 {% endblock content %}

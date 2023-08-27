@@ -234,27 +234,6 @@ def editcandidat(request):
         candidat.save()
         return redirect("profileC")
     
-    if request.method == 'POST':
-        candidat.nom = request.POST["nom"]
-        candidat.prenoms = request.POST["prenoms"]
-        candidat.surnom = request.POST["surnom"]
-        candidat.date_naissance = request.POST["date_naissance"]
-        candidat.lieu_naissance = request.POST["lieu_naissance"]
-        candidat.parti_politique = request.POST["parti_politique"]
-        candidat.sexe = request.POST["sexe"]
-        candidat.biographie = request.POST["biographie"]
-        ville_id = request.POST['Ville']
-        ville_instance = Ville.objects.get(pk=ville_id)
-        candidat.Ville = ville_instance
-        photoPP = request.FILES.get('photoPP')
-        if photoPP:
-            candidat.image = photoPP
-        photoFond = request.FILES.get('photoFond')
-        if photoFond:
-            candidat.fond = photoFond
-        candidat.save()
-        return redirect("profileC")
-    
     return render(request, 'candidat/profile.html')
   
 @login_required     
@@ -287,9 +266,6 @@ def profileDeleteArticle(request, id):
     
     return render(request, 'candidat/profile.html')
 
-
-def Dashboard(request):
-    return render(request, 'candidat/analytics.html')
 
 def thematique(request):
     #general info
@@ -359,13 +335,12 @@ def thematique(request):
         for purpose in purposes:
             print(theme, purpose, purpose.ratio_votes_pour, purpose.num_votes_pour, purpose.num_votes_contre)
 
-   
-   
     return render(request, 'candidat/thematique.html', {
         'all_purposes' : grouped_purposes.items(),
         'Article_count' : Article.objects.filter(candidat_id = request.user.candidat.pk).count(),
         'proposition_count' : Proposition.objects.filter(candidat_id = request.user.candidat.pk).count(),
         'user_count' : user_count,
         'theme_count' : Themes_cles.objects.count(),
+        'themes' : Themes_cles.objects.all(),
         'proposition_count' : proposition_count,
         })

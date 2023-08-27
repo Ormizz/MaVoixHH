@@ -20,7 +20,6 @@ urlpatterns = [
     path('profile/deleteroposition/<int:id>', views.profileDeleteProp, name='deleteProp'),
     path('profile/deletearticle/<int:id>', views.profileDeleteArticle, name='deleteArt'),
     path('profile/deleteequipe/<int:id>', views.profileDeleteEquipe, name='deleteEquipe'),
-    path('profile/dashboard', views.Dashboard, name='Dashboard'),
     path('profile/thematique', views.thematique, name='thematique'),
     path('MainApp/', include('MainApp.urls'))
 ]
