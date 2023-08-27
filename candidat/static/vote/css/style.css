@@ -14,12 +14,19 @@ body {
 }
 
 .gradients {
-    background: linear-gradient(to right, rgb(202, 143, 95),rgb(113, 225, 131));
-    /* Use the appropriate prefix for browser compatibility */
+    background: #FFF;
+    /* background: radial-gradient(ellipse, #fff, #b7c2ae); */
 }
 
 .btn-zone{
     width: 150px;
+    background-color: #fff;
+    border: 1px solid #027314;
+    border-radius: 20px;
+}
+.btn-zone:hover{
+    background-color: #027314;
+    color: #fff;
 }
 
 .tinder {
@@ -83,9 +90,9 @@ body {
 .tinder--card {
     display: inline-block;
     width: 40vw;
-    max-width: 400px;
+    max-width: 350px;
     height: 50vh;
-    background: #FFFFFF;
+    background: #027314;
     padding-bottom: 40px;
     border-radius: 8px;
     overflow: hidden;
@@ -109,14 +116,18 @@ body {
 
 .tinder--card h3 {
     margin-top: 32px;
+    text-align: left;
     font-size: 32px;
     padding: 0 16px;
+    color: #FFF;
     pointer-events: none;
 }
 
 .tinder--card p {
-    margin-top: 24px;
+    margin-top: 74px;
     font-size: 20px;
+    text-align: left;
+    color: #FFF;
     padding: 0 16px;
     pointer-events: none;
 }
@@ -133,6 +144,7 @@ body {
     width: 60px;
     border: 0;
     background: #FFFFFF;
+    border: 1px solid #027314;
     display: inline-block;
     margin: 0 8px;
 }
