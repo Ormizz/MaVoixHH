@@ -13,7 +13,7 @@
                                     data-aos-duration="1000"
                                     data-aos-easing="ease-in-sine">
 										<figure>
-											<a href="#" title="Advertisment"><img src="{% static 'img/images/resources/ad-widget2.gif' %}" alt=""></a>
+											<a href="#" title="Advertisment"><img src="{% static 'img/pub1.jpeg' %}" alt=""></a>
 										</figure>
 									</div><!-- adversment widget -->
 									
@@ -62,9 +62,14 @@
 								<ul class="filtr-tabs" data-aos="fade-down"
 								data-aos-duration="1000"
 								data-aos-easing="ease-in-sine">
-									<li style="background: "><a style="color: rgb(216, 233, 218); background: rgb(2, 115, 20);"  class="active" href="#" title="">Article</a></li>
-									<li><a href="proposition" style="background: rgb(216, 233, 218); color: rgb(2, 115, 20);" title="">Propositions</a></li>
-									<li><a href="{% url 'carteC' %}" style="background: rgb(216, 233, 218); color: rgb(2, 115, 20);" title="">Candidat</a></li>
+									<li style=" background: #fff; width: 100%; height: 50px; border-radius: 5px;"><a style="color: #333;background: transparent; font-size: 20px"  class="active mt-1" href="#" title="">Fil d'actualités</a></li>
+								</ul><!-- tab buttons -->
+								<ul class="filtr-tabs" data-aos="fade-down"
+								data-aos-duration="1000"
+								data-aos-easing="ease-in-sine">
+									<li style="background: "><a style="background-color: #ff7200; color: white"  class="active" href="#" title="">Article</a></li>
+									<li><a href="proposition" style="color: #ff7200; background-color: white" title="">Propositions</a></li>
+									<li><a href="vote/carte/" style="color: #ff7200; background-color: white" title="">Candidat</a></li>
 								</ul><!-- tab buttons -->
 								{% if articles %}
 									{% for article in articles %}
@@ -113,7 +118,7 @@
 								{% endif %}
 								
 							</div>
-							<div class="col-lg-2">
+							<div class="col-lg-3">
 								<aside class="sidebar static right">
 									<div class="widget" data-aos="fade-left"
                                     data-aos-duration="1000"
