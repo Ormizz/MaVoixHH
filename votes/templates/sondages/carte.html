@@ -236,7 +236,7 @@
           var dataArray = input_data.split("|");
           console.log(dataArray[0]);
           detailsPanel.innerHTML = `
-          <h2>${polygonName}</h2>
+          <h2 style="display: flex; justify-content: space-between"><a href="/listCandidat/${polygonId}" class="">${polygonName}(voir)<a></h2>
           <div class="mb-2 mt-2">  
             ${
               dataArray[0]

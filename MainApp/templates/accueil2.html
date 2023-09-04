@@ -22,7 +22,7 @@
     <div class="nk-wrap">
         <header class="nk-header page-header is-transparent is-sticky is-shrink" id="header">
             <!-- Header @s -->
-            <div class="header-main">
+            <div class="header-main" >
                 <div class="header-container header-container-s1">
                     <div class="header-wrap">
                         <!-- Logo @s -->
@@ -48,7 +48,7 @@
                                 </ul>
                                 <ul  class="menu-btns align-items-center animated remove-animation" data-animate="fadeInDown" data-delay=".85">
                                     
-                                    <li><a href="{% url 'login2' %}" class="btn btn-md btn-round btn-outline btn-auto btn-primary"><span>CONNEXION</span></a></li>
+                                    <li><a href="#urur" class="btn btn-md btn-round btn-outline btn-auto btn-primary"><span>CONNEXION</span></a></li>
                                     
                                 </ul>
                             </nav>
@@ -57,12 +57,12 @@
                 </div>
             </div><!-- .header-main @e -->
             <!-- Banner @s -->
-            <div style="background-color: #027314" class="header-banner theme-grad-alt" >
+            <div style="background-color: #027314" id="urur" class="header-banner theme-grad-alt" >
                 <div class="nk-banner" >
                     <div class="banner banner-fs banner-single banner-with-token-box-s1"  >
                         <div class="ui-shape ui-shape-header ui-shape-light"></div>
                         <div class="banner-wrap">
-                            <div class="container">
+                            <div class="container" >
                                 <div class="row align-items-center justify-content-center">
                                     <div class="col-sm-10 col-md-10 col-xl-9">
                                         <div class="banner-caption tc-light text-center">
@@ -72,9 +72,13 @@
                                             <div class="cpn-text cpn-text-center">
                                                 <p class="lead animated" data-animate="fadeInUp" data-delay="1.35">LA PLATEFORME INTERATIVE QUI CONNECTE <br class="d-none d-md-block">LES CANDIDATS ET LES ELECTEURS</p>
                                             </div>
-                                            <div class="cpn-btns">
+                                            <div  class="cpn-btns">
                                                 <ul class="btn-grp justify-content-center animated" data-animate="fadeInUp" data-delay="1.45">
                                                    
+                                                    <li><a  href="/login2" class="btn btn-md btn-round btn-with-icon btn-light">
+                                                            <span style="color: #027314;">INSCRIPTION</span>
+                                                            <em class="icon fas fa-angle-double-right"></em>
+                                                        </a></li>
                                                     <li><a href="/login2" class="btn btn-md btn-round btn-with-icon btn-light">
                                                             <span style="color: #027314;">CONNEXION</span>
                                                             <em class="icon fas fa-angle-double-right"></em>
@@ -123,7 +127,8 @@
                             <div class="col-lg-8">
                                 <div class="nk-block-video tc-light animated" data-animate="fadeInUp" data-delay=".3">
                                     <img src="{% static 'MainApp/images/video/video_iteractive.PNG' %}" alt="">
-                                    <a href="https://www.youtube.com/watch?v=SSo_EIwHSd4" class="nk-block-video-play video-popup btn-play btn-play-s3">
+                                    {% comment %} <iframe width="560" height="315" src="https://www.youtube.com/embed/MaPT1yiLy9s?si=4HiG7xTU_Dg35vYE&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> {% endcomment %}
+                                    <a href="https://www.youtube.com/watch?v=MaPT1yiLy9s" class="nk-block-video-play video-popup btn-play btn-play-s3">
                                         <svg class="btn-play-icon-s2" viewBox="0 0 24 34">
                                             <path fill-rule="evenodd" d="M0.212,32.552 C0.427,32.851 0.769,33.010 1.117,33.010 C1.337,33.010 1.559,32.947 1.752,32.814 L23.521,17.879 C23.816,17.678 23.991,17.350 23.991,16.998 C23.991,16.646 23.816,16.319 23.521,16.115 L1.752,1.181 C1.415,0.950 0.972,0.922 0.606,1.107 C0.240,1.292 0.010,1.661 0.010,2.064 L0.010,22.480 C0.010,23.076 0.506,23.558 1.116,23.558 C1.727,23.558 2.222,23.076 2.222,22.480 L2.222,4.142 L20.963,16.998 L0.479,31.049 C-0.020,31.393 -0.140,32.066 0.212,32.552 Z" />
                                         </svg>
@@ -418,66 +423,19 @@
                             <div class="tab-content">
                                 <div class="tab-pane fade animate" id="tab-dist-1">
                                     <div class="row justify-content-center">
-                                        <div class="col-sm-6 col-lg-3">
-                                            <div class="team team-s3 animated" data-animate="fadeInUp" data-delay=".3">
-                                                <div class="team-photo round-full team-photo-bg">
-                                                    <a href="#team-popup-1" class="team-show content-popup" data-overlay="bg-theme-grad-alt"></a>
-                                                    <img src="{% static 'MAinApp/images/team/sq-a.jpg' %}" alt="team" class="round-full">
-                                                </div>
-                                                <h5 style="color: #ff7220;" class="team-name title title-sm">Waylon Dalton</h5>
-                                                <span class="team-position">CEO &amp; Lead Blockchain</span>
-                                                <ul class="team-social team-social-s2">
-                                                    <li><a href="#"><em class="fab fa-linkedin-in"></em></a></li>
-                                                    <li><a href="#"><em class="fab fa-facebook-f"></em></a></li>
-                                                    <li><a href="#"><em class="fab fa-twitter"></em></a></li>
-                                                </ul>
-                                            </div>
-                                            <!-- Start .team-profile  -->
-                                            <div id="team-popup-1" class="team-popup mfp-hide">
-                                                <a title="Close" class="mfp-close">×</a>
-                                                <div class="row align-items-start">
-                                                    <div class="col-md-6">
-                                                        <div class="team-photo">
-                                                            <img src="{% static 'MainApp/images/team/a-color.jpg' %}" alt="team">
-                                                        </div>
-                                                    </div><!-- .col  -->
-                                                    <div class="col-md-6">
-                                                        <div class="team-popup-info ps-md-3">
-                                                            <h3 class="team-name title title-lg pt-4">Waylon Dalton</h3>
-                                                            <p class="team-position mb-1">CEO &amp; Lead Blockchain </p>
-                                                            <ul class="team-social team-social-s2 mb-4">
-                                                                <li><a href="#"><em class="fab fa-facebook-f"></em></a></li>
-                                                                <li><a href="#"><em class="fab fa-linkedin-in"></em></a></li>
-                                                            </ul>
-                                                            <p>He is a great man to work Lorem ipsum dolor sit amet, consec tetur adipis icing elit. Simi lique, autem. </p>
-                                                            <p>Tenetur quos facere magnam volupt ates quas esse Sedrep ell endus mole stiae tates quas esse Sed repell endus molesti aela uda ntium quis quam iusto minima thanks.</p>
-                                                            <div class="progress-list">
-                                                                <div class="progress-wrap">
-                                                                    <div class="progress-title">Blockchain <span class="progress-amount">85%</span></div>
-                                                                    <div class="progress-bar progress-bar-xs bg-black-10">
-                                                                        <div class="progress-percent bg-primary" data-percent="85"></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="progress-wrap">
-                                                                    <div class="progress-title">Decentralization <span class="progress-amount">68%</span></div>
-                                                                    <div class="progress-bar progress-bar-xs bg-black-10">
-                                                                        <div class="progress-percent bg-primary" data-percent="68"></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div><!-- .col  -->
-                                                </div><!-- .row  -->
-                                            </div><!-- .team-profile  -->
-                                        </div><!-- .col -->
+                                        {% for candidat in candidats  %}
                                         <div class="col-sm-6 col-lg-3">
                                             <div class="team team-s3 animated" data-animate="fadeInUp" data-delay=".4">
                                                 <div class="team-photo round-full team-photo-bg">
-                                                    <a href="#team-popup-2" class="team-show content-popup" data-overlay="bg-theme-grad-alt"></a>
-                                                    <img src="{% static 'MainApp/images/team/sq-b.jpg' %}" alt="team" class="round-full">
+                                                    <a href="#team-popup-{{candidat.id_candidat}}" class="team-show content-popup" data-overlay="bg-theme-grad-alt"></a>
+                                                    {% if candidat.image %}
+                                                    <img src="{{candidat.image.url}}" alt="team" class="round-full">
+                                                    {% else %}
+                                                    <img src="{% static 'img/ci_logo.png' %}" alt="team" class="round-full">
+                                                    {% endif %}	
                                                 </div>
-                                                <h5 style="color: #ff7220;" class="team-name title title-sm">Stefan Harary</h5>
-                                                <span class="team-position">CTO &amp; Software Engineer</span>
+                                                <h5 style="color: #ff7220; text-transform: uppercase;" class="team-name title title-sm">{{ candidat.nom }} {{ candidat.prenoms }}</h5>
+                                                <span class="team-position">({{ candidat.Ville.libelle }})</span>
                                                 <ul class="team-social team-social-s2">
                                                     <li><a href="#"><em class="fab fa-linkedin-in"></em></a></li>
                                                     <li><a href="#"><em class="fab fa-facebook-f"></em></a></li>
@@ -485,264 +443,52 @@
                                                 </ul>
                                             </div>
                                             <!-- Start .team-profile  -->
-                                            <div id="team-popup-2" class="team-popup mfp-hide">
+                                            <div id="team-popup-{{candidat.id_candidat}}" class="team-popup mfp-hide">
                                                 <a title="Close" class="mfp-close">×</a>
                                                 <div class="row align-items-start">
                                                     <div class="col-md-6">
                                                         <div class="team-photo">
-                                                            <img src="{% static 'MainApp/images/team/b-color.jpg' %}" alt="team">
+                                                            {% if candidat.image %}
+                                                            <img src="{{candidat.image.url}}" alt="team" >
+                                                            {% else %}
+                                                            <img src="{% static 'img/ci_logo.png' %}" alt="team">
+                                                            {% endif %}	
+                                                            {% comment %} <img src="{% static 'MainApp/images/team/b-color.jpg' %}" alt="team"> {% endcomment %}
                                                         </div>
                                                     </div><!-- .col  -->
                                                     <div class="col-md-6">
                                                         <div class="team-popup-info ps-md-3">
-                                                            <h3 class="team-name title title-lg pt-4">Stefan Harary</h3>
-                                                            <p class="team-position mb-1">CTO &amp; Software Engineer</p>
+                                                            <h3 class="team-name title title-lg pt-4">{{ candidat.nom }} {{ candidat.prenoms }}</h3>
+                                                            <p class="team-position mb-1">@{{ candidat.surnom }}({{ candidat.parti_politique }}) </p>
                                                             <ul class="team-social team-social-s2 mb-4">
                                                                 <li><a href="#"><em class="fab fa-facebook-f"></em></a></li>
                                                                 <li><a href="#"><em class="fab fa-linkedin-in"></em></a></li>
                                                             </ul>
-                                                            <p>He is a great man to work Lorem ipsum dolor sit amet, consec tetur adipis icing elit. Simi lique, autem. </p>
-                                                            <p>Tenetur quos facere magnam volupt ates quas esse Sedrep ell endus mole stiae tates quas esse Sed repell endus molesti aela uda ntium quis quam iusto minima thanks.</p>
-                                                            <div class="progress-list">
-                                                                <div class="progress-wrap">
-                                                                    <div class="progress-title">Blockchain <span class="progress-amount">85%</span></div>
-                                                                    <div class="progress-bar progress-bar-xs bg-black-10">
-                                                                        <div class="progress-percent bg-primary" data-percent="85"></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="progress-wrap">
-                                                                    <div class="progress-title">Decentralization <span class="progress-amount">68%</span></div>
-                                                                    <div class="progress-bar progress-bar-xs bg-black-10">
-                                                                        <div class="progress-percent bg-primary" data-percent="68"></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                            <p>{{candidat.biographie}} </p>
                                                         </div>
                                                     </div><!-- .col  -->
                                                 </div><!-- .row  -->
                                             </div><!-- .team-profile  -->
                                         </div><!-- .col -->
-                                        <div class="col-lg-3 col-sm-6">
-                                            <div class="team team-s3 animated" data-animate="fadeInUp" data-delay=".5">
-                                                <div class="team-photo round-full team-photo-bg">
-                                                    <a href="#team-popup-3" class="team-show content-popup" data-overlay="bg-theme-grad-alt"></a>
-                                                    <img src="{% static 'MainApp/images/team/sq-c.jpg' %}" alt="team" class="round-full">
-                                                </div>
-                                                <h5 style="color: #ff7220;" class="team-name title title-sm">Moises Teare</h5>
-                                                <span class="team-position">Sr.Backend developer</span>
-                                                <ul class="team-social team-social-s2">
-                                                    <li><a href="#"><em class="fab fa-linkedin-in"></em></a></li>
-                                                    <li><a href="#"><em class="fab fa-facebook-f"></em></a></li>
-                                                    <li><a href="#"><em class="fab fa-twitter"></em></a></li>
-                                                </ul>
-                                            </div>
-                                            <!-- Start .team-profile  -->
-                                            <div id="team-popup-3" class="team-popup mfp-hide">
-                                                <a title="Close" class="mfp-close">×</a>
-                                                <div class="row align-items-start">
-                                                    <div class="col-md-6">
-                                                        <div class="team-photo">
-                                                            <img src="{% static 'MainApp/images/team/c-color.jpg' %}" alt="team">
-                                                        </div>
-                                                    </div><!-- .col  -->
-                                                    <div class="col-md-6">
-                                                        <div class="team-popup-info ps-md-3">
-                                                            <h3 class="team-name title title-lg pt-4">Moises Teare</h3>
-                                                            <p class="team-position mb-1">Sr.Backend developer</p>
-                                                            <ul class="team-social team-social-s2 mb-4">
-                                                                <li><a href="#"><em class="fab fa-facebook-f"></em></a></li>
-                                                                <li><a href="#"><em class="fab fa-linkedin-in"></em></a></li>
-                                                            </ul>
-                                                            <p>He is a great man to work Lorem ipsum dolor sit amet, consec tetur adipis icing elit. Simi lique, autem. </p>
-                                                            <p>Tenetur quos facere magnam volupt ates quas esse Sedrep ell endus mole stiae tates quas esse Sed repell endus molesti aela uda ntium quis quam iusto minima thanks.</p>
-                                                            <div class="progress-list">
-                                                                <div class="progress-wrap">
-                                                                    <div class="progress-title">Blockchain <span class="progress-amount">85%</span></div>
-                                                                    <div class="progress-bar progress-bar-xs bg-black-10">
-                                                                        <div class="progress-percent bg-primary" data-percent="85"></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="progress-wrap">
-                                                                    <div class="progress-title">Decentralization <span class="progress-amount">68%</span></div>
-                                                                    <div class="progress-bar progress-bar-xs bg-black-10">
-                                                                        <div class="progress-percent bg-primary" data-percent="68"></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div><!-- .col  -->
-                                                </div><!-- .row  -->
-                                            </div><!-- .team-profile  -->
-                                        </div><!-- .col -->
-                                        <div class="col-lg-3 col-sm-6">
-                                            <div class="team team-s3 animated" data-animate="fadeInUp" data-delay=".6">
-                                                <div class="team-photo round-full team-photo-bg">
-                                                    <a href="#team-popup-4" class="team-show content-popup" data-overlay="bg-theme-grad-alt"></a>
-                                                    <img src="{% static 'MainApp/images/team/sq-d.jpg' %}" alt="team" class="round-full">
-                                                </div>
-                                                <h5 style="color: #ff7220;" class="team-name title title-sm">Gabriel Bernal</h5>
-                                                <span class="team-position">Software Engineer</span>
-                                                <ul class="team-social team-social-s2">
-                                                    <li><a href="#"><em class="fab fa-linkedin-in"></em></a></li>
-                                                    <li><a href="#"><em class="fab fa-facebook-f"></em></a></li>
-                                                    <li><a href="#"><em class="fab fa-twitter"></em></a></li>
-                                                </ul>
-                                            </div>
-                                            <!-- Start .team-profile  -->
-                                            <div id="team-popup-4" class="team-popup mfp-hide">
-                                                <a title="Close" class="mfp-close">×</a>
-                                                <div class="row align-items-start">
-                                                    <div class="col-md-6">
-                                                        <div class="team-photo">
-                                                            <img src="{% static 'MainApp/images/team/d-color.jpg' %}" alt="team">
-                                                        </div>
-                                                    </div><!-- .col  -->
-                                                    <div class="col-md-6">
-                                                        <div class="team-popup-info ps-md-3">
-                                                            <h3 class="team-name title title-lg pt-4">Gabriel Bernal</h3>
-                                                            <p class="team-position mb-1">Software Engineer</p>
-                                                            <ul class="team-social team-social-s2 mb-4">
-                                                                <li><a href="#"><em class="fab fa-facebook-f"></em></a></li>
-                                                                <li><a href="#"><em class="fab fa-linkedin-in"></em></a></li>
-                                                            </ul>
-                                                            <p>He is a great man to work Lorem ipsum dolor sit amet, consec tetur adipis icing elit. Simi lique, autem. </p>
-                                                            <p>Tenetur quos facere magnam volupt ates quas esse Sedrep ell endus mole stiae tates quas esse Sed repell endus molesti aela uda ntium quis quam iusto minima thanks.</p>
-                                                            <div class="progress-list">
-                                                                <div class="progress-wrap">
-                                                                    <div class="progress-title">Blockchain <span class="progress-amount">85%</span></div>
-                                                                    <div class="progress-bar progress-bar-xs bg-black-10">
-                                                                        <div class="progress-percent bg-primary" data-percent="85"></div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="progress-wrap">
-                                                                    <div class="progress-title">Decentralization <span class="progress-amount">68%</span></div>
-                                                                    <div class="progress-bar progress-bar-xs bg-black-10">
-                                                                        <div class="progress-percent bg-primary" data-percent="68"></div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div><!-- .col  -->
-                                                </div><!-- .row  -->
-                                            </div><!-- .team-profile  -->
-                                        </div><!-- .col -->
+                                        {% endfor %}
                                     </div><!-- .row -->
                                 </div><!-- End tab-pane -->
                                 <div class="tab-pane fade show animate active" id="tab-fund-1">
                                     <div class="token-alocate-item token-alocate-item-s1 shadow-none mb-0">
                                         <div class="row justify-content-center">
-                                            <div class="col-sm-6 col-lg-3">
-                                                <div class="team team-s3 animated" data-animate="fadeInUp" data-delay=".3">
-                                                    <div class="team-photo round-full team-photo-bg">
-                                                        <a href="#team-popup-1" class="team-show content-popup" data-overlay="bg-theme-grad-alt"></a>
-                                                        <img src="{% static 'MainApp/images/team/sq-a.jpg' %}" alt="team" class="round-full">
-                                                    </div>
-                                                    <h5 style="color: #ff7220;" class="team-name title title-sm">Waylon Dalton</h5>
-                                                    <span class="team-position">CEO &amp; Lead Blockchain</span>
-                                                    <ul class="team-social team-social-s2">
-                                                        <li><a href="#"><em class="fab fa-linkedin-in"></em></a></li>
-                                                        <li><a href="#"><em class="fab fa-facebook-f"></em></a></li>
-                                                        <li><a href="#"><em class="fab fa-twitter"></em></a></li>
-                                                    </ul>
-                                                </div>
-                                                <!-- Start .team-profile  -->
-                                                <div id="team-popup-1" class="team-popup mfp-hide">
-                                                    <a title="Close" class="mfp-close">×</a>
-                                                    <div class="row align-items-start">
-                                                        <div class="col-md-6">
-                                                            <div class="team-photo">
-                                                                <img src="{% static 'MainApp/images/team/a-color.jpg' %}" alt="team">
-                                                            </div>
-                                                        </div><!-- .col  -->
-                                                        <div class="col-md-6">
-                                                            <div class="team-popup-info ps-md-3">
-                                                                <h3 class="team-name title title-lg pt-4">Waylon Dalton</h3>
-                                                                <p class="team-position mb-1">CEO &amp; Lead Blockchain </p>
-                                                                <ul class="team-social team-social-s2 mb-4">
-                                                                    <li><a href="#"><em class="fab fa-facebook-f"></em></a></li>
-                                                                    <li><a href="#"><em class="fab fa-linkedin-in"></em></a></li>
-                                                                </ul>
-                                                                <p>He is a great man to work Lorem ipsum dolor sit amet, consec tetur adipis icing elit. Simi lique, autem. </p>
-                                                                <p>Tenetur quos facere magnam volupt ates quas esse Sedrep ell endus mole stiae tates quas esse Sed repell endus molesti aela uda ntium quis quam iusto minima thanks.</p>
-                                                                <div class="progress-list">
-                                                                    <div class="progress-wrap">
-                                                                        <div class="progress-title">Blockchain <span class="progress-amount">85%</span></div>
-                                                                        <div class="progress-bar progress-bar-xs bg-black-10">
-                                                                            <div class="progress-percent bg-primary" data-percent="85"></div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="progress-wrap">
-                                                                        <div class="progress-title">Decentralization <span class="progress-amount">68%</span></div>
-                                                                        <div class="progress-bar progress-bar-xs bg-black-10">
-                                                                            <div class="progress-percent bg-primary" data-percent="68"></div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div><!-- .col  -->
-                                                    </div><!-- .row  -->
-                                                </div><!-- .team-profile  -->
-                                            </div><!-- .col -->
-                                            <div class="col-sm-6 col-lg-3">
-                                                <div class="team team-s3 animated" data-animate="fadeInUp" data-delay=".4">
-                                                    <div class="team-photo round-full team-photo-bg">
-                                                        <a href="#team-popup-2" class="team-show content-popup" data-overlay="bg-theme-grad-alt"></a>
-                                                        <img src="{% static 'MainApp/images/team/sq-b.jpg' %}" alt="team" class="round-full">
-                                                    </div>
-                                                    <h5 style="color: #ff7220;" class="team-name title title-sm">Stefan Harary</h5>
-                                                    <span class="team-position">CTO &amp; Software Engineer</span>
-                                                    <ul class="team-social team-social-s2">
-                                                        <li><a href="#"><em class="fab fa-linkedin-in"></em></a></li>
-                                                        <li><a href="#"><em class="fab fa-facebook-f"></em></a></li>
-                                                        <li><a href="#"><em class="fab fa-twitter"></em></a></li>
-                                                    </ul>
-                                                </div>
-                                                <!-- Start .team-profile  -->
-                                                <div  id="team-popup-2" class="team-popup mfp-hide">
-                                                    <a title="Close" class="mfp-close">×</a>
-                                                    <div class="row align-items-start">
-                                                        <div class="col-md-6">
-                                                            <div class="team-photo">
-                                                                <img src="{% static 'MainApp/images/team/b-color.jpg' %}" alt="team">
-                                                            </div>
-                                                        </div><!-- .col  -->
-                                                        <div class="col-md-6">
-                                                            <div  class="team-popup-info ps-md-3">
-                                                                <h3 class="team-name title title-lg pt-4">Stefan Harary</h3>
-                                                                <p class="team-position mb-1">CTO &amp; Software Engineer</p>
-                                                                <ul class="team-social team-social-s2 mb-4">
-                                                                    <li><a href="#"><em class="fab fa-facebook-f"></em></a></li>
-                                                                    <li><a href="#"><em class="fab fa-linkedin-in"></em></a></li>
-                                                                </ul>
-                                                                <p>He is a great man to work Lorem ipsum dolor sit amet, consec tetur adipis icing elit. Simi lique, autem. </p>
-                                                                <p>Tenetur quos facere magnam volupt ates quas esse Sedrep ell endus mole stiae tates quas esse Sed repell endus molesti aela uda ntium quis quam iusto minima thanks.</p>
-                                                                <div class="progress-list">
-                                                                    <div class="progress-wrap">
-                                                                        <div class="progress-title">Blockchain <span class="progress-amount">85%</span></div>
-                                                                        <div class="progress-bar progress-bar-xs bg-black-10">
-                                                                            <div class="progress-percent bg-primary" data-percent="85"></div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="progress-wrap">
-                                                                        <div class="progress-title">Decentralization <span class="progress-amount">68%</span></div>
-                                                                        <div class="progress-bar progress-bar-xs bg-black-10">
-                                                                            <div class="progress-percent bg-primary" data-percent="68"></div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div><!-- .col  -->
-                                                    </div><!-- .row  -->
-                                                </div><!-- .team-profile  -->
-                                            </div><!-- .col -->
+                                            {% for best in bests  %}
                                             <div class="col-lg-3 col-sm-6">
                                                 <div class="team team-s3 animated" data-animate="fadeInUp" data-delay=".5">
                                                     <div class="team-photo round-full team-photo-bg">
-                                                        <a href="#team-popup-3" class="team-show content-popup" data-overlay="bg-theme-grad-alt"></a>
-                                                        <img src="{% static 'MainApp/images/team/sq-c.jpg' %}" alt="team" class="round-full">
+                                                        <a href="#team-popup-{{ best.id_candidat}}" class="team-show content-popup" data-overlay="bg-theme-grad-alt"></a>
+                                                        {% if candidat.image %}
+                                                        <img src="{{best.image.url}}" alt="team" class="round-full">
+                                                        {% else %}
+                                                        <img src="{% static 'img/ci_logo.png' %}" alt="team" class="round-full">
+                                                        {% endif %}	
                                                     </div>
-                                                    <h5 style="color: #ff7220;" class="team-name title title-sm">Moises Teare</h5>
-                                                    <span class="team-position">Sr.Backend developer</span>
+                                                    <h5 style="color: #ff7220; text-transform: uppercase;" class="team-name title title-sm">{{ best.nom }} {{ best.prenoms }}</h5>
+                                                    <span class="team-position">({{ best.Ville.libelle }})</span>
                                                     <ul class="team-social team-social-s2">
                                                         <li><a href="#"><em class="fab fa-linkedin-in"></em></a></li>
                                                         <li><a href="#"><em class="fab fa-facebook-f"></em></a></li>
@@ -750,7 +496,7 @@
                                                     </ul>
                                                 </div>
                                                 <!-- Start .team-profile  -->
-                                                <div id="team-popup-3" class="team-popup mfp-hide">
+                                                <div id="team-popup-{{ best.id_candidat}}" class="team-popup mfp-hide">
                                                     <a title="Close" class="mfp-close">×</a>
                                                     <div class="row align-items-start">
                                                         <div class="col-md-6">
@@ -787,58 +533,7 @@
                                                     </div><!-- .row  -->
                                                 </div><!-- .team-profile  -->
                                             </div><!-- .col -->
-                                            <div class="col-lg-3 col-sm-6">
-                                                <div class="team team-s3 animated" data-animate="fadeInUp" data-delay=".6">
-                                                    <div class="team-photo round-full team-photo-bg">
-                                                        <a href="#team-popup-4" class="team-show content-popup" data-overlay="bg-theme-grad-alt"></a>
-                                                        <img src="{% static 'MainApp/images/team/sq-d.jpg' %}" alt="team" class="round-full">
-                                                    </div>
-                                                    <h5 style="color: #ff7220;" class="team-name title title-sm">Gabriel Bernal</h5>
-                                                    <span class="team-position">Software Engineer</span>
-                                                    <ul class="team-social team-social-s2">
-                                                        <li><a href="#"><em class="fab fa-linkedin-in"></em></a></li>
-                                                        <li><a href="#"><em class="fab fa-facebook-f"></em></a></li>
-                                                        <li><a href="#"><em class="fab fa-twitter"></em></a></li>
-                                                    </ul>
-                                                </div>
-                                                <!-- Start .team-profile  -->
-                                                <div id="team-popup-4" class="team-popup mfp-hide">
-                                                    <a title="Close" class="mfp-close">×</a>
-                                                    <div class="row align-items-start">
-                                                        <div class="col-md-6">
-                                                            <div class="team-photo">
-                                                                <img src="{% static 'MainApp/images/team/d-color.jpg' %}" alt="team">
-                                                            </div>
-                                                        </div><!-- .col  -->
-                                                        <div class="col-md-6">
-                                                            <div class="team-popup-info ps-md-3">
-                                                                <h3 class="team-name title title-lg pt-4">Gabriel Bernal</h3>
-                                                                <p class="team-position mb-1">Software Engineer</p>
-                                                                <ul class="team-social team-social-s2 mb-4">
-                                                                    <li><a href="#"><em class="fab fa-facebook-f"></em></a></li>
-                                                                    <li><a href="#"><em class="fab fa-linkedin-in"></em></a></li>
-                                                                </ul>
-                                                                <p>He is a great man to work Lorem ipsum dolor sit amet, consec tetur adipis icing elit. Simi lique, autem. </p>
-                                                                <p>Tenetur quos facere magnam volupt ates quas esse Sedrep ell endus mole stiae tates quas esse Sed repell endus molesti aela uda ntium quis quam iusto minima thanks.</p>
-                                                                <div class="progress-list">
-                                                                    <div class="progress-wrap">
-                                                                        <div class="progress-title">Blockchain <span class="progress-amount">85%</span></div>
-                                                                        <div class="progress-bar progress-bar-xs bg-black-10">
-                                                                            <div class="progress-percent bg-primary" data-percent="85"></div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="progress-wrap">
-                                                                        <div class="progress-title">Decentralization <span class="progress-amount">68%</span></div>
-                                                                        <div class="progress-bar progress-bar-xs bg-black-10">
-                                                                            <div class="progress-percent bg-primary" data-percent="68"></div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div><!-- .col  -->
-                                                    </div><!-- .row  -->
-                                                </div><!-- .team-profile  -->
-                                            </div><!-- .col -->
+                                            {% endfor %}
                                         </div>
                                     </div>
                                 </div><!-- End tab-pane -->
@@ -856,156 +551,6 @@
             
             <!-- // -->
             
-            <!-- // -->
-            
-            <!-- // -->
-            <section class="section bg-white" id="faqs">
-                <div class="ui-shape ui-shape-s6"></div>
-                <div class="container">
-                    <!-- Section Head @s -->
-                    <div class="section-head text-center wide-auto-sm">
-                        <h4 style="color: #ff7220;" class="title title-semibold animated" data-animate="fadeInUp" data-delay=".1">QUESTIONS FREQUENTE</h4>
-                        <p class="animated" data-animate="fadeInUp" data-delay=".2">Lorem ipsum dolor sit amet, cons ectetur adipiscing elit, sed</p>
-                    </div><!-- .section-head @e -->
-                    <!-- Block @s -->
-                    <div class="nk-block">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-10">
-                                <ul class="nav tab-nav tab-nav-btn tab-nav-grad pdb-m justify-content-center animated" data-animate="fadeInUp" data-delay=".1">
-                                    <li><a class="active" data-bs-toggle="tab" href="#general-questions-07">Education</a></li>
-                                    <li><a data-bs-toggle="tab" href="#ico-questions-07">Securité</a></li>
-                                    <li><a data-bs-toggle="tab" href="#tokens-sales-07">Santé</a></li>
-                                </ul>
-                                <div class="gap-1x"></div>
-                            </div><!-- .col -->
-                            <div class="col-lg-10">
-                                <div class="tab-content animated" data-animate="fadeInUp" data-delay=".2">
-                                    <div class="tab-pane fade show active" id="general-questions-07">
-                                        <div class="accordion accordion-faq" id="faq-24">
-                                            <div class="accordion-item accordion-item-s2 bg-white">
-                                                <h5 class="accordion-title accordion-title-sm" data-bs-toggle="collapse" data-bs-target="#faq-24-1"> Voulez-vous construire des ecoles? <span class="accordion-icon accordion-icon-s2"></span>
-                                                </h5>
-                                                <div id="faq-24-1" class="collapse show" data-bs-parent="#faq-24">
-                                                    <div class="accordion-content">
-                                                        <p>Lorem ipsum dolor sit amet, cons ectetur adipiscing elit, sed</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="accordion-item accordion-item-s2 bg-white">
-                                                <h5 class="accordion-title accordion-title-sm collapsed" data-bs-toggle="collapse" data-bs-target="#faq-24-2"> Avez-vous des plans de rehabilitation des universités? <span class="accordion-icon accordion-icon-s2"></span>
-                                                </h5>
-                                                <div id="faq-24-2" class="collapse" data-bs-parent="#faq-24">
-                                                    <div class="accordion-content">
-                                                        <p>Lorem ipsum dolor sit amet, cons ectetur adipiscing elit, sed.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="accordion-item accordion-item-s2 bg-white">
-                                                <h5 class="accordion-title accordion-title-sm collapsed" data-bs-toggle="collapse" data-bs-target="#faq-24-3"> Comment voulez vous aider les eleves? <span class="accordion-icon accordion-icon-s2"></span>
-                                                </h5>
-                                                <div id="faq-24-3" class="collapse" data-bs-parent="#faq-24">
-                                                    <div class="accordion-content">
-                                                        <p>Lorem ipsum dolor sit amet, cons ectetur adipiscing elit, sed</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="accordion-item accordion-item-s2 bg-white">
-                                                <h5 class="accordion-title accordion-title-sm collapsed" data-bs-toggle="collapse" data-bs-target="#faq-24-4"> Avez vous des projets pour lutter contre les attaques de FESCI ? <span class="accordion-icon accordion-icon-s2"></span>
-                                                </h5>
-                                                <div id="faq-24-4" class="collapse" data-bs-parent="#faq-24">
-                                                    <div class="accordion-content">
-                                                        <p>Lorem ipsum dolor sit amet, cons ectetur adipiscing elit, sed.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="ico-questions-07">
-                                        <div class="accordion accordion-faq" id="faq-25">
-                                            <div class="accordion-item accordion-item-s2 bg-white">
-                                                <h5 class="accordion-title accordion-title-sm" data-bs-toggle="collapse" data-bs-target="#faq-25-1"> Which of us ever undertakes laborious? <span class="accordion-icon accordion-icon-s2"></span>
-                                                </h5>
-                                                <div id="faq-25-1" class="collapse show" data-bs-parent="#faq-25">
-                                                    <div class="accordion-content">
-                                                        <p>Once ICO period is launched, You can purchased Token with Etherum, Bitcoin or Litecoin. You can also tempor incididunt ut labore et dolore magna aliqua sed do eiusmod eaque ipsa.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="accordion-item accordion-item-s2 bg-white">
-                                                <h5 class="accordion-title accordion-title-sm collapsed" data-bs-toggle="collapse" data-bs-target="#faq-25-2"> Who do not know how to pursue rationally? <span class="accordion-icon accordion-icon-s2"></span>
-                                                </h5>
-                                                <div id="faq-25-2" class="collapse" data-bs-parent="#faq-25">
-                                                    <div class="accordion-content">
-                                                        <p>Once ICO period is launched, You can purchased Token with Etherum, Bitcoin or Litecoin. You can also tempor incididunt ut labore et dolore magna aliqua sed do eiusmod eaque ipsa.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="accordion-item accordion-item-s2 bg-white">
-                                                <h5 class="accordion-title accordion-title-sm collapsed" data-bs-toggle="collapse" data-bs-target="#faq-25-3"> Their separate existence is a myth? <span class="accordion-icon accordion-icon-s2"></span>
-                                                </h5>
-                                                <div id="faq-25-3" class="collapse" data-bs-parent="#faq-25">
-                                                    <div class="accordion-content">
-                                                        <p>Once ICO period is launched, You can purchased Token with Etherum, Bitcoin or Litecoin. You can also tempor incididunt ut labore et dolore magna aliqua sed do eiusmod eaque ipsa.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="accordion-item accordion-item-s2 bg-white">
-                                                <h5 class="accordion-title accordion-title-sm collapsed" data-bs-toggle="collapse" data-bs-target="#faq-25-4"> Pityful a rethoric question ran over her cheek? <span class="accordion-icon accordion-icon-s2"></span>
-                                                </h5>
-                                                <div id="faq-25-4" class="collapse" data-bs-parent="#faq-25">
-                                                    <div class="accordion-content">
-                                                        <p>Once ICO period is launched, You can purchased Token with Etherum, Bitcoin or Litecoin. You can also tempor incididunt ut labore et dolore magna aliqua sed do eiusmod eaque ipsa.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="tokens-sales-07">
-                                        <div class="accordion accordion-faq" id="faq-26">
-                                            <div class="accordion-item accordion-item-s2 bg-white">
-                                                <h5 class="accordion-title accordion-title-sm" data-bs-toggle="collapse" data-bs-target="#faq-26-1"> When she reached the first hills? <span class="accordion-icon accordion-icon-s2"></span>
-                                                </h5>
-                                                <div id="faq-26-1" class="collapse show" data-bs-parent="#faq-26">
-                                                    <div class="accordion-content">
-                                                        <p>Once ICO period is launched, You can purchased Token with Etherum, Bitcoin or Litecoin. You can also tempor incididunt ut labore et dolore magna aliqua sed do eiusmod eaque ipsa.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="accordion-item accordion-item-s2 bg-white">
-                                                <h5 class="accordion-title accordion-title-sm collapsed" data-bs-toggle="collapse" data-bs-target="#faq-26-2"> Big Oxmox advised her not to do? <span class="accordion-icon accordion-icon-s2"></span>
-                                                </h5>
-                                                <div id="faq-26-2" class="collapse" data-bs-parent="#faq-26">
-                                                    <div class="accordion-content">
-                                                        <p>Once ICO period is launched, You can purchased Token with Etherum, Bitcoin or Litecoin. You can also tempor incididunt ut labore et dolore magna aliqua sed do eiusmod eaque ipsa.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="accordion-item accordion-item-s2 bg-white">
-                                                <h5 class="accordion-title accordion-title-sm collapsed" data-bs-toggle="collapse" data-bs-target="#faq-26-3"> Which roasted parts of sentences fly into your mouth? <span class="accordion-icon accordion-icon-s2"></span>
-                                                </h5>
-                                                <div id="faq-26-3" class="collapse" data-bs-parent="#faq-26">
-                                                    <div class="accordion-content">
-                                                        <p>Once ICO period is launched, You can purchased Token with Etherum, Bitcoin or Litecoin. You can also tempor incididunt ut labore et dolore magna aliqua sed do eiusmod eaque ipsa.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="accordion-item accordion-item-s2 bg-white">
-                                                <h5 class="accordion-title accordion-title-sm collapsed" data-bs-toggle="collapse" data-bs-target="#faq-26-4"> Vokalia and Consonantia, there live? <span class="accordion-icon accordion-icon-s2"></span>
-                                                </h5>
-                                                <div id="faq-26-4" class="collapse" data-bs-parent="#faq-26">
-                                                    <div class="accordion-content">
-                                                        <p>Once ICO period is launched, You can purchased Token with Etherum, Bitcoin or Litecoin. You can also tempor incididunt ut labore et dolore magna aliqua sed do eiusmod eaque ipsa.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!-- .col -->
-                        </div><!-- .row -->
-                    </div><!-- .block @e -->
-                </div>
-            </section>
             <!-- // -->
             <section class="section section-contact bg-light-alt" id="contact">
                 <div class="ui-shape ui-shape-s7"></div>
@@ -1041,31 +586,6 @@
                                 </ul>
                             </div><!-- .col -->
                             <div class="col-lg-8">
-                                <div class="contact-wrap-2">
-                                    <form id="contact-form" class="nk-form-submit" action="form/contact.php" method="post">
-                                        <div class="field-item field-item-center animated" data-animate="fadeInUp" data-delay=".6">
-                                            <input name="contact-name" type="text" class="input-line required">
-                                            <label class="field-label field-label-line">NOM & PRENOM</label>
-                                        </div>
-                                        <div class="field-item field-item-center animated" data-animate="fadeInUp" data-delay=".7">
-                                            <input name="contact-email" type="email" class="input-line required email">
-                                            <label class="field-label field-label-line">EMAIL</label>
-                                        </div>
-                                        <div class="field-item field-item-center animated" data-animate="fadeInUp" data-delay=".8">
-                                            <textarea name="contact-message" class="input-line input-textarea required"></textarea>
-                                            <label class="field-label field-label-line">Message</label>
-                                        </div>
-                                        <input type="text" class="d-none" name="form-anti-honeypot" value="">
-                                        <div class="row animated" data-animate="fadeInUp" data-delay=".9">
-                                            <div class="col-sm-12">
-                                                <button type="submit" class="btn btn-md btn-grad btn-grad-theme btn-round">SOUMETTRE</button>
-                                            </div>
-                                            <div class="col-sm-12">
-                                                <div class="form-results"></div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
                             </div><!-- .col -->
                         </div><!-- .row -->
                     </div><!-- .block @e -->
