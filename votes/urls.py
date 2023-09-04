@@ -17,4 +17,5 @@ urlpatterns = [
     path('detail/<int:id>', views.detail, name='detail'),
     path('carte/', views.carte, name='carte'),
     path('api/', include(router.urls)),
+    path('error', views.error, name='error'),
 ]

@@ -6,8 +6,6 @@ from candidat.views import *
 
 urlpatterns = [
     path('<int:id>', views.index, name='index'),
-    path('form/<int:id>', views.formedit, name='formedit'),
-    path('form/', views.form, name='form'),
     path('profile', views.profile, name='profileC'),
     path('profile/article', views.profileCreateArt, name='CreateArt'),
     path('profile/prop', views.profileCreateProp, name='CreateProp'),
@@ -20,7 +18,8 @@ urlpatterns = [
     path('profile/deletearticle/<int:id>', views.profileDeleteArticle, name='deleteArt'),
     path('profile/deleteequipe/<int:id>', views.profileDeleteEquipe, name='deleteEquipe'),
     path('profile/thematique', views.thematique, name='thematique'),
-    path('MainApp/', include('MainApp.urls'))
+    path('MainApp/', include('MainApp.urls')),
+    path('404', views.error, name='error'),
 ]
 
 

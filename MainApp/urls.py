@@ -21,4 +21,5 @@ urlpatterns = [
     path('CreateCand', views.CreateCand, name='CreateCand'),
     path('deleteCand/<int:id>', views.DeleteCand, name='deleteCand'),
     path('deleteElec/<int:id>', views.DeleteElec, name='deleteElec'),
+    path('404', views.error, name='error'),
 ]
