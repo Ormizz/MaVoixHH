@@ -151,7 +151,17 @@ def login2(request):
     })
 
 def index(request):
-    return render(request, 'accueil2.html')
+    candidats_avec_votes_pour = Candidat.objects.filter(
+        vote__nature_vote='pour'
+    ).annotate(num_votes_pour=Count('vote')).order_by('-num_votes_pour')
+    
+    les_quatre_premiers = candidats_avec_votes_pour[:4]
+    
+    print(les_quatre_premiers)
+    return render(request, 'accueil2.html',{
+        'candidats': Candidat.objects.all(),
+        'bests': les_quatre_premiers
+    })
 
 
 @login_required
