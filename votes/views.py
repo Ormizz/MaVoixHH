@@ -1,5 +1,5 @@
 from django.http import Http404
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.db.models import Count
 import requests
 from django.contrib.auth.decorators import login_required
@@ -21,7 +21,7 @@ from django.shortcuts import get_object_or_404
 # Create your views here.
 def index(request, id):
     if not is_electeur(request.user):
-        raise Http404  # Redirection vers la page d'erreur 404
+        return redirect("error")  # Redirection vers la page d'erreur 404
     else:
         # Récupérez la zone spécifique et les thèmes associés
         zone = Ville.objects.get(pk=id)
@@ -81,7 +81,7 @@ def index(request, id):
 
 def resultat(request, id, id2):
     if not is_electeur(request.user):
-        raise Http404  # Redirection vers la page d'erreur 404
+        return redirect("error")  # Redirection vers la page d'erreur 404
     else:
         electeur = Electeur.objects.get(pk=id)
         candidat = Candidat.objects.all()
@@ -155,7 +155,7 @@ class Themes_clesViewSet(viewsets.ModelViewSet):
 @login_required
 def carte(request): 
     if not is_electeur(request.user):
-        raise Http404  # Redirection vers la page d'erreur 404
+        return redirect("error")  # Redirection vers la page d'erreur 404
     else:
         candidats_avec_votes_pour = Candidat.objects.filter(
             vote__nature_vote='pour'
@@ -169,7 +169,7 @@ def carte(request):
 @login_required 
 def detail(request, id):
     if not is_electeur(request.user):
-        raise Http404  # Redirection vers la page d'erreur 404
+        return redirect("error")  # Redirection vers la page d'erreur 404
     else:
         electeur = request.user.electeur
         
@@ -179,3 +179,5 @@ def detail(request, id):
             'votes': votes_pour
         })
     
+def error(request):
+    return (request, 'sondages/error.html')

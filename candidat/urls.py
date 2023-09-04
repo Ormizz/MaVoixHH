@@ -18,7 +18,8 @@ urlpatterns = [
     path('profile/deletearticle/<int:id>', views.profileDeleteArticle, name='deleteArt'),
     path('profile/deleteequipe/<int:id>', views.profileDeleteEquipe, name='deleteEquipe'),
     path('profile/thematique', views.thematique, name='thematique'),
-    path('MainApp/', include('MainApp.urls'))
+    path('MainApp/', include('MainApp.urls')),
+    path('404', views.error, name='error'),
 ]
 
 

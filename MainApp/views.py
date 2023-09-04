@@ -98,7 +98,7 @@ def SignUp(request):
 def actuality(request):
     
     if not is_electeur(request.user):
-        raise Http404  # Redirection vers la page d'erreur 404
+        return redirect("error")  # Redirection vers la page d'erreur 404
     else:
         # Obtenez le nombre total d'objets dans la table
         total_objects = Candidat.objects.count()
@@ -158,7 +158,7 @@ def index(request):
 def profileU(request):
     
     if not is_electeur(request.user):
-        raise Http404  # Redirection vers la page d'erreur 404
+        return redirect("error")  # Redirection vers la page d'erreur 404
     else:
         # Récupérer le nom du groupe du candidat
         # user_group = request
@@ -174,7 +174,7 @@ def profileU(request):
 def editUser(request):
     
     if not is_electeur(request.user):
-        raise Http404  # Redirection vers la page d'erreur 404
+        return redirect("error")  # Redirection vers la page d'erreur 404
     else:
         # Récupérer le nom du groupe du candidat
         # user_group = request
@@ -196,7 +196,7 @@ def editUser(request):
 def carte(request):
     
     if not is_electeur(request.user):
-        raise Http404  # Redirection vers la page d'erreur 404
+        return redirect("error")  # Redirection vers la page d'erreur 404
     else:
         return render(request,'carte.html', {
             'candidats' : Candidat.objects.all(),
@@ -212,7 +212,7 @@ def get_candidats(request):
 def listCandidat(request, id):
 
     if not is_electeur(request.user):
-        raise Http404  # Redirection vers la page d'erreur 404
+        return redirect("error")  # Redirection vers la page d'erreur 404
     else:
         # Obtenez tous les candidats avec leur cote de popularité, le nombre de votes "pour" et le nombre de votes "contre"
         candidats_vote_info = Candidat.objects.filter(Ville=id).annotate(
@@ -246,7 +246,7 @@ def listCandidat(request, id):
 @login_required
 def analytic(request, id):
     if not is_admin(request.user):
-        raise Http404  # Redirection vers la page d'erreur 404 pour les non-administrateurs
+        return redirect("error")  # Redirection vers la page d'erreur 404 pour les non-administrateurs
     else:
         # Obtention des propositions par thematiques
         all_purposes = Proposition.objects.filter(ville_id = id)
@@ -332,7 +332,7 @@ def analytic(request, id):
 def G_electeur(request):
     
     if not is_admin(request.user):
-        raise Http404  # Redirection vers la page d'erreur 404 pour les non-administrateurs
+        return redirect("error")  # Redirection vers la page d'erreur 404 pour les non-administrateurs
     else:
         return render(request, 'G_electeur.html',{
             'electeurs':Electeur.objects.all()
@@ -342,7 +342,7 @@ def G_electeur(request):
 def G_candidat(request):
     
     if not is_admin(request.user):
-        raise Http404  # Redirection vers la page d'erreur 404 pour les non-administrateurs
+        return redirect("error")  # Redirection vers la page d'erreur 404 pour les non-administrateurs
     else:
         return render(request, 'G_candidat.html',{
             'candidats':Candidat.objects.all(),
@@ -353,7 +353,7 @@ def G_candidat(request):
 def DeleteCand(request, id):
     
     if not is_admin(request.user):
-        raise Http404  # Redirection vers la page d'erreur 404 pour les non-administrateurs
+        return redirect("error")  # Redirection vers la page d'erreur 404 pour les non-administrateurs
     else:
         candidat = Candidat.objects.get(pk=id)
 
@@ -366,9 +366,8 @@ def DeleteCand(request, id):
 @login_required  
 def DeleteElec(request, id):
     
-
     if not is_admin(request.user):
-        raise Http404  # Redirection vers la page d'erreur 404 pour les non-administrateurs
+        return redirect("error")  # Redirection vers la page d'erreur 404 pour les non-administrateurs
     else:
         electeur = Electeur.objects.get(pk=id)
         if request.method == 'POST':
@@ -380,7 +379,7 @@ def DeleteElec(request, id):
 @login_required
 def CreateCand(request):
     if not is_admin(request.user):
-        raise Http404  # Redirection vers la page d'erreur 404 pour les non-administrateurs
+        return redirect("error")  # Redirection vers la page d'erreur 404 pour les non-administrateurs
     else:
         if request.method == 'POST':
             ville_id = request.POST['Ville']
@@ -414,4 +413,4 @@ def CreateCand(request):
     
     
 def error(request):
-    return (request, '404.html')
+    return (request, 'error.html')

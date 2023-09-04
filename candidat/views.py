@@ -53,7 +53,7 @@ def index(request, id):
 @login_required  
 def profile(request):
     if not is_candidat(request.user):
-        raise Http404  # Redirection vers la page d'erreur 404 pour les non-candidats
+        return redirect("error")  # Redirection vers la page d'erreur 404 pour les non-candidats
     else:
         # Récupérer le nom du groupe du candidat
         # user_group = request
@@ -78,7 +78,7 @@ def profile(request):
 @login_required  
 def profileCreateProp(request):
     if not is_candidat(request.user):
-        raise Http404  # Redirection vers la page d'erreur 404 pour les non-candidats
+        return redirect("error")  # Redirection vers la page d'erreur 404 pour les non-candidats
     else:
         # Récupérer le nom du groupe du candidat
         # user_group = request
@@ -96,7 +96,7 @@ def profileCreateProp(request):
 @login_required  
 def profileCreateArt(request):
     if not is_candidat(request.user):
-        raise Http404  # Redirection vers la page d'erreur 404 pour les non-candidats
+        return redirect("error")  # Redirection vers la page d'erreur 404 pour les non-candidats
     else:
         # Récupérer le nom du groupe du candidat
         # user_group = request
@@ -116,7 +116,7 @@ def profileCreateArt(request):
 @login_required  
 def profileCreateEquipe(request):
     if not is_candidat(request.user):
-        raise Http404  # Redirection vers la page d'erreur 404 pour les non-candidats
+        return redirect("error")  # Redirection vers la page d'erreur 404 pour les non-candidats
     else:
         # Récupérer le nom du groupe du candidat
         # user_group = request
@@ -137,7 +137,7 @@ def profileCreateEquipe(request):
 @login_required  
 def profileModifEquipe(request, id):
     if not is_candidat(request.user):
-        raise Http404  # Redirection vers la page d'erreur 404 pour les non-candidats
+        return redirect("error")  # Redirection vers la page d'erreur 404 pour les non-candidats
     else:
         equipe = Equipe.objects.get(pk=id)
     
@@ -158,7 +158,7 @@ def profileModifEquipe(request, id):
 @login_required  
 def profileModifProp(request, id):
     if not is_candidat(request.user):
-        raise Http404  # Redirection vers la page d'erreur 404 pour les non-candidats
+        return redirect("error")  # Redirection vers la page d'erreur 404 pour les non-candidats
     else:
         propo = Proposition.objects.get(pk=id)
     
@@ -178,7 +178,7 @@ def profileModifProp(request, id):
 @login_required  
 def profileModifArt(request, id):
     if not is_candidat(request.user):
-        raise Http404  # Redirection vers la page d'erreur 404 pour les non-candidats
+        return redirect("error")  # Redirection vers la page d'erreur 404 pour les non-candidats
     else:
         # Récupérer le nom du groupe du candidat
         # user_group = request
@@ -199,7 +199,7 @@ def profileModifArt(request, id):
 @login_required  
 def editcandidat(request):
     if not is_candidat(request.user):
-        raise Http404  # Redirection vers la page d'erreur 404 pour les non-candidats
+        return redirect("error")  # Redirection vers la page d'erreur 404 pour les non-candidats
     else:
         # Récupérer le nom du groupe du candidat
         # user_group = request
@@ -232,7 +232,7 @@ def editcandidat(request):
 @login_required     
 def profileDeleteProp(request, id):
     if not is_candidat(request.user):
-        raise Http404  # Redirection vers la page d'erreur 404 pour les non-candidats
+        return redirect("error")  # Redirection vers la page d'erreur 404 pour les non-candidats
     else:
         propo = Proposition.objects.get(pk=id)
     
@@ -246,7 +246,7 @@ def profileDeleteProp(request, id):
 @login_required     
 def profileDeleteEquipe(request, id):
     if not is_candidat(request.user):
-        raise Http404  # Redirection vers la page d'erreur 404 pour les non-candidats
+        return redirect("error")  # Redirection vers la page d'erreur 404 pour les non-candidats
     else:
         equipe = Equipe.objects.get(pk=id)
     
@@ -260,7 +260,7 @@ def profileDeleteEquipe(request, id):
 @login_required  
 def profileDeleteArticle(request, id):
     if not is_candidat(request.user):
-        raise Http404  # Redirection vers la page d'erreur 404 pour les non-candidats
+        return redirect("error")  # Redirection vers la page d'erreur 404 pour les non-candidats
     else:
         article = Article.objects.get(pk=id)
     
@@ -274,7 +274,7 @@ def profileDeleteArticle(request, id):
 @login_required
 def thematique(request):
     if not is_candidat(request.user):
-        raise Http404  # Redirection vers la page d'erreur 404 pour les non-candidats
+        return redirect("error")  # Redirection vers la page d'erreur 404 pour les non-candidats
     else:
         #general info
         user_count = Electeur.objects.filter(Ville = request.user.candidat.Ville).count()
@@ -323,3 +323,5 @@ def thematique(request):
             'proposition_count' : proposition_count,
             })
     
+def error(request):
+    return (request, 'candidat/error.html')
