@@ -114,14 +114,20 @@ def actuality(request):
         for cand in random_candidat:
             print(cand.nom)
         
-        actualite = Article.objects.all()
+        actualite = Article.objects.all().order_by('-date_creation')
         is_candidat = request.user.groups.filter(name='Candidat').exists()
         utilisateur = request.user
+        images = ImagesPUB.objects.all()  # Récupérez toutes les images depuis votre modèle
+
+        if images:
+            image_aleatoire = random.choice(images) 
+            
         return render(request, 'index.html', {
             'user': utilisateur, 
             'articles': actualite,
             'rdCandidat': random_candidat,
             'is_candidat':is_candidat,
+            'image_aleatoire': image_aleatoire
             }
         )
     
@@ -134,13 +140,19 @@ def propositionfunc(request):
     
     for cand in random_candidat:
         print(cand.nom)
-    proposition = Proposition.objects.all()
+    proposition = Proposition.objects.all().order_by('-date_creation')
+    
+    images = ImagesPUB.objects.all()  # Récupérez toutes les images depuis votre modèle
+
+    if images:
+        image_aleatoire = random.choice(images) 
     
     utilisateur = request.user
     return render(request, 'proposition.html', {
         'user': utilisateur, 
         'propositions': proposition,
         'rdCandidat': random_candidat,
+        'image_aleatoire': image_aleatoire
         }
     )
 
@@ -247,7 +259,7 @@ def listCandidat(request, id):
 
         return render(request, 'listCandidat.html', {
             'candidats' : candidats_vote_info,
-            'villes' : Ville.objects.all(),
+            'villes' : Ville.objects.all().order_by('libelle'),
             'id':id,
             'candidats_vote_podium':candidats_vote_info_trie,
         })
@@ -420,6 +432,31 @@ def CreateCand(request):
             CandidatGroup = Group.objects.get(name='Candidat')
             user.groups.add(CandidatGroup)
             return redirect("G_candidat")
+        
+
+from .forms import PhotoForm  # Importez le formulaire PhotoForm
+
+def pub(request):
+    if request.method == 'POST':
+        form = PhotoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()  # Enregistrez l'image
+            return redirect('pub')  # Redirigez l'utilisateur vers la liste des photos après avoir enregistré
+    else:
+        form = PhotoForm()
+
+    return render(request, 'pub.html', {'form': form})
+
+def ajouter_photo(request):
+    if request.method == 'POST':
+        form = PhotoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()  # Enregistrez l'image
+            return redirect('liste_photos')  # Redirigez l'utilisateur vers la liste des photos après avoir enregistré
+    else:
+        form = PhotoForm()
+
+    return render(request, 'votre_template.html', {'form': form})
     
     
 def error(request):

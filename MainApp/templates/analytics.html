@@ -7,7 +7,7 @@
 				<div class="col-lg-6 col-md-6 col-sm-6">
 					<div class="menu-btn">
 						<i class="">
-						<svg id="menu-btn" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></i>
+						<svg style="color:#024314;" id="menu-btn" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></i>
 					</div>
 					<div class="page-title">
 						<h4>Analytics</h4>
@@ -26,17 +26,17 @@
 	<nav class="sidebar">
 		<ul class="menu-slide">
 			<li class="">
-				<a class="" href="{% url 'analytic' 1 %}" title=""><i><svg id="icon-home" class="feather feather-home" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></i> Dashboard
+				<a class="" href="{% url 'analytic' 1 %}" title="">					<i><svg style="color:#024314;" id="icon-home" class="feather feather-home" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></i> Dashboard
 				</a>
 			</li>
 			<li class="">
 				<a class="" href="{% url 'G_candidat' %}" title="">
-					<i class=""><svg id="ab7" class="feather feather-zap" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></i>Gestion des candidats
+					<i class=""><svg style="color:#024314;" id="ab7" class="feather feather-zap" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></i>Gestion des candidats
 				</a>
 			</li>
 			<li class="">
 				<a class="" href="{% url 'G_electeur' %}" title="">
-					<i class=""><svg id="ab7" class="feather feather-zap" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></i>Gestion des electeurs
+					<i class=""><svg style="color:#024314;" id="ab7" class="feather feather-zap" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" stroke="currentColor" fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></i>Gestion des electeurs
 				</a>
 			</li>
 		</ul>
@@ -56,7 +56,7 @@
 									
 									<li class="card justify-content-center">
 											
-										<a style="color: rgb(216, 233, 218); background: rgb(2, 115, 20); margin-bottom:5px"  
+										<a style="color: #024314;  margin-bottom:5px"  
 											{% if ville.pk == id %} class="active" {% endif %} href="{% url 'analytic' ville.pk %}" title="">{{ville.libelle}}</a>
 							
 									</li>
@@ -70,7 +70,7 @@
 						<div class="col-lg-3 col-md-6">
 							<div class="w-chart-section">
 								<div class="w-detail">
-									<p class="w-title">Nombre d'utilisateur: </p>
+									<p class="w-title">Electeur de la zone: </p>
 									{% if user_count %}
 									<p class="w-stats">{{user_count}}</p>
 									{% else %}
@@ -192,14 +192,14 @@
 							<li class="card">
 								<div class="justify-content-center">
 									{% if candidats_vote.image %}
-									<figure><img style="width:100px; height:100px" src="media/{{candidats_vote.image}}" alt=""></figure>
+									<figure style="margin-left: 50px;"><img style="width:100px; height:100px" src="{{candidats_vote.image.url}}" alt=""></figure>
 									{% else %}
-									<figure><img src="{% static 'img/images/resources/group11.jpg' %}" alt=""></figure>
+									<figure ><img src="{% static 'img/images/resources/group11.jpg' %}" alt=""></figure>
 									{% endif %}
-									<a href="#" title="">{{candidats_vote.nom}} {{candidats_vote.prenoms}}</a>
-									<span>{{candidats_vote.parti_politique}}</span>
-									<h6 style="">Cote: {{candidats_vote.ratio_vote_ville }}%</h6> <br>
-									<button class="btn btn-primary"><a href="../candidat/{{candidats_vote.pk}}">Voir ma page</a></button>
+									<a href="#"  title=""><h6 style="text-align: center">{{candidats_vote.nom}} {{candidats_vote.prenoms}}</h6></a>
+									<span style=""><h6 style="text-align: center">{{candidats_vote.parti_politique}}</h6></span>
+									<h6 style="text-align: center">Cote: {{candidats_vote.ratio_vote_ville }}%</h6> <br>
+									<button style="margin-left: 40px;" class="btn btn-success"><a href="../candidat/{{candidats_vote.pk}}">Voir ma page</a></button>
 								</div>
 							</li>
 							{% endfor %}

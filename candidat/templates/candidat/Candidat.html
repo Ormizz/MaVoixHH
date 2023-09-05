@@ -40,7 +40,7 @@
 										}
 									</style>
 									<div class="widget">
-										<h4 class="widget-title">Les futurs évènements<a class="see-all" href="#" title="">Voir plus</a></h4>
+										<h4 class="widget-title">Cote<a class="see-all" href="/vote/carte/" title="">Faire le test</a></h4>
 										<div class="rec-events" style="background-color: #ff7200;">
 											<i class="icofont-gift"></i>
 											<h6><a title="" href="">Création d'une école</a></h6>
@@ -112,13 +112,14 @@
 																<div class="user-post">
 																	<div class="friend-info">
 																		<figure>
-																			<img alt="" src="{%static 'img/images/resources/user4.jpg' %}">
+																			<img alt="" src="{{candidat.image.url}}">
 																		</figure>
 																		<div class="friend-name">
 																			<ins><a title="" href="time-line.html">{{ candidat.nom }} {{ candidat.prenoms }}</a></ins>
 																			<span><i class="icofont-globe"></i> Publé: {{article.date_creation}} </span>
 																		</div>
 																		<div class="post-meta">
+																			<img  src="/media/{{article.image}}" alt="">
 																			<a href="post-detail.html" class="post-title">{{ article.titre }}</a>
 																			<p>
 																				{{ article.content }}
@@ -138,7 +139,7 @@
 																<div class="user-post">
 																	<div class="friend-info">
 																		<figure>
-																			<img alt="" src="{%static 'img/images/resources/user4.jpg' %}">
+																			<img alt="" src="{{candidat.image.url}}">
 																		</figure>
 																		<div class="friend-name">
 																			<ins><a title="" href="time-line.html">{{ candidat.nom }} {{ candidat.prenoms }}</a></ins>
@@ -183,25 +184,26 @@
 																<div class="advertisment-box">
 																	<h4 class=""><i class="icofont-info-circle"></i> Informations</h4>
 																	<figure>
-																		<a href="#" title="Advertisment"><img src="{%static 'img/images/resources/ad-widget2.gif' %}" alt=""></a>
+																		<a href="#" title="Advertisment"><img src="{{image_aleatoire.image.url}}" alt=""></a>
 																	</figure>
 																</div>
 																<div class="widget">
 																	<h4 class="widget-title">Autres Candidats</h4>
 																	<div class="sug-caro">
+																	{% for Candidat_aleatoire  in Candidat_aleatoires  %}
+																		{% if Candidat_aleatoire.id_candidat != candidat.id_candidat %}
 																		<div class="friend-box">
 																			<figure>
-																				<img alt="" src="{%static 'img/images/resources/sidebar-info.jpg' %}">
-																				<span>Membres: 505K</span>
+																				<img alt="" src="{{Candidat_aleatoire.fond.url}}">
 																			</figure>
 																			<div class="frnd-meta">
-																				<img alt="" src="{%static 'img/images/resources/frnd-figure2.jpg' %}">
+																				<img style="height: 100px" alt="" src="{{Candidat_aleatoire.image.url}}">
 																				<div class="frnd-name">
-																					<a title="" href="#">Candidat</a>
-																					<span>Independant</span>
+																					<a title="" href="/candidat/{{Candidat_aleatoire.id_candidat}}">{{Candidat_aleatoire.nom}}</a>
+																					<span>{{Candidat_aleatoire.parti_politique}}</span>
 							
 																				</div>
-																				<a id="link" class="main-btn2" href="#" title="">Voir la page</a>
+																				<a id="link" class="main-btn2" href="/candidat/{{Candidat_aleatoire.id_candidat}}" title="">Voir la page</a>
 																				<style>
 																					#link{
 																						color: #ff7200;
@@ -214,6 +216,8 @@
 																				</style>
 																			</div>
 																		</div>
+																		{% endif %}
+																	{% endfor %}
 																	</div>	
 																</div>
 															</aside>

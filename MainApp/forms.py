@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Photo
+from .models import ImagesPUB
 
 class LoginForm(forms.Form):
     username = forms.CharField()
@@ -10,5 +10,5 @@ class LoginForm(forms.Form):
 
 class PhotoForm(forms.ModelForm):
     class Meta:
-        model = Photo
-        fields = ('titre', 'image')
+        model = ImagesPUB  # Utilisez le modèle Photo
+        fields = ['titre', 'image'] 
