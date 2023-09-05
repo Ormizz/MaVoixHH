@@ -3,13 +3,14 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
 from django.contrib.auth import authenticate, login, logout
+import random
 import requests
 from rest_framework import viewsets
 from itertools import groupby
 from MainApp.models import Electeur
 from candidat.models import *
 from candidat.serializers import *
-from votes.models import Proposition, Themes_cles, Vote
+from votes.models import *
 from MainApp.views import is_admin, is_candidat, is_electeur
 
 
@@ -42,11 +43,20 @@ class Proposition_electoralViewSet(viewsets.ModelViewSet):
 # Create your views here
 @login_required
 def index(request, id):
+    toutes_les_Candidat = Candidat.objects.all()
+    Candidat_aleatoires = random.sample(list(toutes_les_Candidat), 3) 
+    
+    images = ImagesPUB.objects.all()  # Récupérez toutes les images depuis votre modèle
+
+    if images:
+        image_aleatoire = random.choice(images) 
     return render(request,'candidat/Candidat.html',{
         'candidat': Candidat.objects.get(pk=id),
         'articles': Article.objects.filter(candidat_id = id).order_by('-date_creation'),
         'propositions' : Proposition.objects.filter(candidat_id = id),
-        'equipes' : Equipe.objects.filter(candidat_id = id)
+        'equipes' : Equipe.objects.filter(candidat_id = id),
+        'image_aleatoire': image_aleatoire,
+        'Candidat_aleatoires': Candidat_aleatoires
     })
     
     

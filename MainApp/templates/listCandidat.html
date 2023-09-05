@@ -15,9 +15,9 @@
 									{% if villes %}
 									{% for ville in villes %}
 									
-									<li class="card justify-content-center">
+									<li class="card justify-content-center " style="background: #fff; height:25gpx">
 											
-										<a style="color: rgb(216, 233, 218); background: rgb(2, 115, 20); margin-bottom:5px"  
+										<a style="color: rgb(2, 115, 20); background: transparent; font-size: 19px; font-weight: 600;"  
 											{% if ville.pk == id %} class="active" {% endif %} href="{% url 'listCandidat' ville.pk %}" title="">{{ville.libelle}}</a>
 							
 									</li>
@@ -35,14 +35,13 @@
 											{% for candidats_vote in candidats_vote_podium %}
 											<div class="col-lg-4 col-md-4 col-sm-12">
 												<div class="rec-group">
-													<span>Free</span>
 													<div style="width:154px; height:229px" class="rec-groupbox">
-														<figure><img style="width:216px; height:229px" src="/media/{{candidats_vote.fond}}" alt=""></figure>
-														<div class="grp-dp"><img style="width:50px; height:50px" src="/media/{{candidats_vote.img}}" alt=""></div>
+														<figure><img style="width:100%; height:229px" src="/media/{{candidats_vote.fond}}" alt=""></figure>
+														<div class="grp-dp"><img style="width:70px; height:70px" src="/media/{{candidats_vote.image}}" alt=""></div>
 													</div>
 													<div class="row d-flex">
-														<div class="grp-name" style="padding-left:0">
-															<h5 class="text-start"><a class="text-start" href="group-detail.html"> {{ candidats_vote.nom}} {{ candidats_vote.prenoms}} </a></h5>
+														<div class="grp-name text-center" style="padding-left:0">
+															<h5 class="text-start text "><a class="text-start" href="group-detail.html"> {{ candidats_vote.nom}} {{ candidats_vote.prenoms}} </a></h5>
 															<span class="text-start">@{{candidats_vote.surnom}} </span>
 															<h6 style="color:white">Cote: {{candidats_vote.ratio_vote_ville }}%</h6>
 														</div>
@@ -68,7 +67,7 @@
 											<div class="col-lg-3 col-md-4 col-sm-4">
 												<div class="group-box">
 													{% if candidat.image %}
-													<figure><img style="width:100px; height:100px" src="media/{{candidat.image}}" alt=""></figure>
+													<figure><img style="width:100px; height:100px" src="/media/{{candidat.image}}" alt=""></figure>
 													{% else %}
 													<figure><img src="{% static 'img/images/resources/group11.jpg' %}" alt=""></figure>
 													{% endif %}
@@ -95,7 +94,7 @@
 												<figure><img alt="" src="images/resources/recentlink-1.jpg"></figure>
 												<div class="re-links-meta" style="display: flex;">
 													<img style="height: 15px; margin-right: 15px" src="{% static 'img/debat.png' %}" alt=""></i>
-													<h6><a title=""  href="#">Débat</a></h6>
+													<h6><a title=""  href="/accueil">Accueil</a></h6>
 												</div>
 											</li>
 											<li>

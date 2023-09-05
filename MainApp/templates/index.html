@@ -13,7 +13,7 @@
                                     data-aos-duration="1000"
                                     data-aos-easing="ease-in-sine">
 										<figure>
-											<a href="#" title="Advertisment"><img src="{% static 'img/images/resources/ad-widget2.gif' %}" alt=""></a>
+											<a href="#" title="Advertisment"><img src="{{image_aleatoire.image.url}}" alt=""></a>
 										</figure>
 									</div><!-- adversment widget -->
 									
@@ -62,9 +62,14 @@
 								<ul class="filtr-tabs" data-aos="fade-down"
 								data-aos-duration="1000"
 								data-aos-easing="ease-in-sine">
-									<li style="background: "><a style="color: rgb(216, 233, 218); background: rgb(2, 115, 20);"  class="active" href="#" title="">Article</a></li>
-									<li><a href="proposition" style="background: rgb(216, 233, 218); color: rgb(2, 115, 20);" title="">Propositions</a></li>
-									<li><a href="{% url 'carteC' %}" style="background: rgb(216, 233, 218); color: rgb(2, 115, 20);" title="">Candidat</a></li>
+									<li style=" background: #fff; width: 100%; height: 50px; border-radius: 5px;"><a style="color: #333;background: transparent; font-size: 20px"  class="active mt-1" href="#" title="">Fil d'actualités</a></li>
+								</ul><!-- tab buttons -->
+								<ul class="filtr-tabs" data-aos="fade-down"
+								data-aos-duration="1000"
+								data-aos-easing="ease-in-sine">
+									<li style="background: "><a style="background-color: #ff7200; color: white"  class="active" href="#" title="">Article</a></li>
+									<li><a href="proposition" style="color: #ff7200; background-color: white" title="">Propositions</a></li>
+									<li><a href="vote/carte/" style="color: #ff7200; background-color: white" title="">Candidat</a></li>
 								</ul><!-- tab buttons -->
 								{% if articles %}
 									{% for article in articles %}
@@ -76,7 +81,7 @@
 												<figure>
 													<em>
 													<svg style="vertical-align: middle;"  xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><path fill="#7fba00" stroke="#7fba00" d="M23,12L20.56,9.22L20.9,5.54L17.29,4.72L15.4,1.54L12,3L8.6,1.54L6.71,4.72L3.1,5.53L3.44,9.21L1,12L3.44,14.78L3.1,18.47L6.71,19.29L8.6,22.47L12,21L15.4,22.46L17.29,19.28L20.9,18.46L20.56,14.78L23,12M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"></path></svg></em>
-													<img alt="" src="images/resources/user3.jpg">
+													<img alt="" src="{{article.candidat.image.url}}">
 												</figure>
 												<div class="friend-name">
 													<div class="more">

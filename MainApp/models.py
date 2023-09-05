@@ -23,6 +23,13 @@ class Photo(models.Model):
 
     def __str__(self):
         return self.titre
+    
+class ImagesPUB(models.Model):
+    titre = models.CharField(max_length=255)  # Un champ pour le titre de la photo
+    image = models.ImageField(upload_to='imagesPUB/')  # Un champ pour l'image, 'upload_to' spécifie le répertoire de stockage
+
+    def __str__(self):
+        return self.titre
 
     
 # class Type_utilisateur(models.Model):
