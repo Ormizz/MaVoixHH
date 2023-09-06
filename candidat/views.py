@@ -3,6 +3,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
 from django.contrib.auth import authenticate, login, logout
+from django.db.models import Count
 import random
 import requests
 from rest_framework import viewsets
@@ -47,7 +48,30 @@ def index(request, id):
     Candidat_aleatoires = random.sample(list(toutes_les_Candidat), 3) 
     
     images = ImagesPUB.objects.all()  # Récupérez toutes les images depuis votre modèle
+    candidats_avec_votes_pour = Candidat.objects.filter(
+            vote__candidat_id=id, vote__nature_vote='pour'
+        ).annotate(num_votes_pour=Count('vote')).order_by('-num_votes_pour')
+    
+    for candidats_avec_votes_pours in candidats_avec_votes_pour:
+        nbr_pour =candidats_avec_votes_pours.num_votes_pour
 
+    candidats_avec_votes_contre = Candidat.objects.filter(
+            vote__candidat_id=id, vote__nature_vote='contre'
+        ).annotate(num_votes_pour=Count('vote')).order_by('-num_votes_pour')
+    
+    for candidats_avec_votes_contres in candidats_avec_votes_contre:
+        nbr_contre =candidats_avec_votes_contres.num_votes_pour
+        
+    candidatId = Candidat.objects.get(pk=id)
+    
+    id_v = candidatId.Ville.id_Ville
+        
+    nombre_de_votes = Vote.objects.filter(ville_id=id_v).count()
+    
+    pourcentage_pour = int(nbr_pour/nombre_de_votes*100)
+    pourcentage_contre = int(nbr_contre/nombre_de_votes*100)
+    
+    print(nbr_pour,"/",nombre_de_votes,"=",pourcentage_pour)
     if images:
         image_aleatoire = random.choice(images) 
     return render(request,'candidat/Candidat.html',{
@@ -56,7 +80,9 @@ def index(request, id):
         'propositions' : Proposition.objects.filter(candidat_id = id),
         'equipes' : Equipe.objects.filter(candidat_id = id),
         'image_aleatoire': image_aleatoire,
-        'Candidat_aleatoires': Candidat_aleatoires
+        'Candidat_aleatoires': Candidat_aleatoires,
+        'pourcentage_pour': pourcentage_pour,
+        'pourcentage_contre': pourcentage_contre,
     })
     
     

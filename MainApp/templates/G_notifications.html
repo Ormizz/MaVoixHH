@@ -7,7 +7,7 @@
 				<div class="col-lg-6 col-md-6 col-sm-6">
 					<div class="menu-btn">
 						<i class="">
-<svg style="color:#024314;" id="menu-btn" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></i>
+						<svg style="color:#024314;" id="menu-btn" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></i>
 					</div>
 					<div class="page-title">
 						<h4>Dashboard</h4>
@@ -16,7 +16,7 @@
 				<div class="col-lg-6 col-md-6 col-sm-6">
 					<ul class="breadcrumb">
 						<li><a href="#" title="">Dashboard</a></li>
-						<li><a href="#" title="">Electeur</a></li>
+						<li><a href="#" title="">Candidat</a></li>
 					</ul>
 				</div>
 			</div>
@@ -51,62 +51,54 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="panel-content">
-					<h4 class="main-title">Electeur</h4>
+					<h4 class="main-title">Notifications</h4>
 						
 					<div class="row merged20 mb-4">
 						<div class="col-lg-12">
 							<div class="d-widget">
 								<div class="d-widget-title">
-									<h5>Manager les electeurs</h5>
+									<h5>Manager les Notifications</h5> <br><br>
+									<button type="button" class="btn btn-primary" style="background-color:#ff7200; border-color:#ff7200" data-bs-toggle="modal" data-bs-target="#CreateCand">
+										Envoyer Notifications
+									</button> <br><br>
 								</div>
 								<div class="d-widget-content">
-									<table class="table manage-user table-default table-responsive-md">
+									<table  class="table manage-user table-default table-responsive-md">
 										<thead>
-											<tr>
-												<th style="background-color:#ff7220af;">Nom</th>
-												<th style="background-color:#ff7220af;">Prenoms</th>
-												<th style="background-color:#ff7220af;">Date de naissance</th>
-												<th style="background-color:#ff7220af;">Sexe</th>
-												<th style="background-color:#ff7220af;">Ville</th>
-												<th style="background-color:#ff7220af;">Action</th>
+											<tr >
+												<th style="background-color:#ff7220af;">Titre</th>
+												<th style="background-color:#ff7220af;">Status</th>
+												<th style="background-color:#ff7220af;">Date de créations</th>
+												<th style="background-color:#ff7220af;"></th>
 											</tr>
 										</thead>
 										<tbody>
-											{% if electeurs %}
-											{% for electeur in electeurs %}
+											{% if messages %}
+											{% for message in messages %}
 											<tr>
+												<td><h5>{{message.titre}}</h5></td>
+												<td><h5>{{message.contenu}}</h5></td>
 												<td>
-													<figure><img src="images/resources/user.png" alt=""></figure>
-													<h5>{{electeur.nom}}</h5>
-												</td>
-												<td><h5>{{electeur.prenoms}}</h5></td>
-												<td>
-													<h5>{{electeur.date_naissance}}</h5>
-												</td>
-												<td>
-													<h5>{{electeur.sexe}}</h5>
-												</td>
-												<td>
-													<h5>{{electeur.Ville.libelle}}</h5>
+													<h5>{{message.date_creation}}</h5>
 												</td>
 												<td>
 													<div class="actions-btn">
-														<span class="iconbox button soft-danger"><i data-bs-toggle="modal" data-bs-target="#confirmDeleteElecteur{{ electeur.pk }}" class="icofont-trash"></i></span>
+														<span class="iconbox button soft-danger"><i data-bs-toggle="modal" data-bs-target="#confirmDeleteCandidat{{ candidat.pk }}" class="icofont-trash"></i></span>
 													</div>
 												</td>
 											</tr>
 											{% comment %} suppression {% endcomment %}
-											<div class="modal fade" id="confirmDeleteElecteur{{ electeur.pk }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal fade" id="confirmDeleteCandidat{{ message.pk }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 												<div class="modal-dialog modal-dialog-centered">
 													<div class="modal-content">
 														<div class="modal-header">
 															<h5 class="modal-title" id="exampleModalLabel">Confirmer la suppression</h5>
 															<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 														</div>
-														<form class="row g-3" method="post" action="{% url 'deleteElec' electeur.pk %}">
+														<form class="row g-3" method="post" action="">
 															{% csrf_token %}
 														<div class="modal-body">
-															Êtes-vous sûr de vouloir supprimer cet electeur ?
+															Êtes-vous sûr de vouloir supprimer ce candidat ?
 														</div>
 														<div class="modal-footer">
 															<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
@@ -118,7 +110,7 @@
 											</div>
 											{% endfor %}
 											{% else %}
-											Pas d'electeurs inscrits
+											Pas de Notifications
 											{% endif %}
 											
 										</tbody>
@@ -132,4 +124,39 @@
 			</div>
 		</div>
 	</div><!-- main content -->
+
+	{% comment %} edit candidant {% endcomment %}
+	<div class="modal fade" id="CreateCand" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog modal-dialog-centered modal-dialog-scrollable">
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <h5 class="modal-title" id="exampleModalLabel">Notifications</h5>
+			  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+                {% comment %} {% url 'notificationSend' %} {% endcomment %}
+				<form class="row g-3" method="POST" action="{% url 'notificationSend' %}" enctype="multipart/form-data">
+					{% csrf_token %}
+					<div class="col-md-12">
+						<div class="form-floating">
+							<input type="text" name="titre" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+							<label for="floatingTextarea2">Titre</label>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="form-floating">
+						  <textarea class="form-control" name="contenu" id="floatingTextarea2" style="height: 100px"></textarea>
+						  <label for="floatingTextarea2">Contenues</label>
+						</div>
+					</div>				
+				  
+			</div>
+			<div class="modal-footer">
+			  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+			  <button type="submit" class="btn btn-primary">Envoyer</button>
+			</div>
+			</form>
+		  </div>
+		</div>
+	  </div>
 	{% endblock content %}

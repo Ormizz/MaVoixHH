@@ -30,6 +30,14 @@ class ImagesPUB(models.Model):
 
     def __str__(self):
         return self.titre
+    
+class Message(models.Model):
+    titre = models.CharField(max_length=255)
+    contenu = models.TextField()
+    date_creation = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.titre
 
     
 # class Type_utilisateur(models.Model):

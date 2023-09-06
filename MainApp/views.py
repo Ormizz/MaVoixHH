@@ -359,6 +359,14 @@ def G_electeur(request):
         return render(request, 'G_electeur.html',{
             'electeurs':Electeur.objects.all()
         })
+        
+@login_required
+def G_notifications(request):
+    
+    if not is_admin(request.user):
+        return redirect("error")  # Redirection vers la page d'erreur 404 pour les non-administrateurs
+    else:
+        return render(request, 'G_notifications.html',{'messages': Message.objects.all()})
 
 @login_required
 def G_candidat(request):
@@ -457,7 +465,36 @@ def ajouter_photo(request):
         form = PhotoForm()
 
     return render(request, 'votre_template.html', {'form': form})
+
+from django.core.mail import send_mail
+from django.conf import settings
+
+def notificationSend(request):
+    # if request.method == "POST":
+    #     message = "sdjnvs sdo"
+    #     name = request.POST["titre"]
+    #     email = "michelyapi123@gmail.com"
+    #     send_mail(
+    #         'Contacte Form',
+    #         message,
+    #         'settings.EMAIL_HOST_USER',
+    #         ['michelyapi123@gmail.com'],
+    #         fail_silently=False
+    #     )
+    if request.method == 'POST':
+        titre = request.POST['titre']
+        contenu = request.POST['contenu']
+        nouveau_message = Message(titre=titre, contenu=contenu)
+        nouveau_message.save()
+        return redirect('G_notifications')
+    return render(request, 'G_notifications.html',{
+        'messages': Message.objects.all()
+    })
     
-    
+def messagesend(request):
+    return render(request, 'message.html',{
+        'messages': Message.objects.all()
+    })
+
 def error(request):
     return (request, 'error.html')

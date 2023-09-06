@@ -11,23 +11,34 @@
 							<div class="col-lg-3">
 								<aside class="sidebar static left">
 									
-									<div class="widget">
-										<h4 class="widget-title">Meetings</h4>
-										<div class="ask-question">
-											<div class="card mb-2" style="padding: 20px">
-												<h5><i style="margin-right: 10px; font-size: 20px; " class="fa-regular fa-calendar-days"></i><span style="color: #ff7200;">07 Sep 2003 09:00</span></h5>
-												<p>
-													Conference 
-												</p>
-											</div>
-											<div class="card mb-2" style="padding: 20px">
-												<h5><i style="margin-right: 10px; font-size: 20px; " class="fa-regular fa-calendar-days"></i><span style="color: #ff7200;">07 Sep 2003 09:00</span></h5>
-												<p>
-													Conference 
-												</p>
-											</div>
-										</div>
-									</div>
+									<div class="widget" data-aos="fade-right"
+                                    data-aos-duration="1000"
+                                    data-aos-easing="ease-in-sine">
+										{% comment %} <h4 class="widget-title">Recent</h4> {% endcomment %}
+										<ul class="recent-links">
+											<li>
+												<figure><img alt="" src="images/resources/recentlink-1.jpg"></figure>
+												<div class="re-links-meta" style="display: flex;">
+													<img style="height: 15px; margin-right: 15px" src="{% static 'img/debat.png' %}" alt=""></i>
+													<h6><a title=""  href="/accueil">Accueil</a></h6>
+												</div>
+											</li>
+											<li>
+												<figure><img alt="" src="images/resources/recentlink-3.jpg"></figure>
+												<div class="re-links-meta" style="display: flex;">
+													<img style="height: 15px; margin-right: 15px" src="{% static 'img/sondage.png' %}" alt=""></i>
+													<h6><a title=""  href="#">Sondage</a></h6>
+												</div>
+											</li>
+											<li>
+												<figure><img alt="" src="images/resources/recentlink-2.jpg"></figure>
+												<div class="re-links-meta" style="display: flex;">
+													<img style="height: 15px; margin-right: 15px" src="{% static 'img/localisation.png' %}" alt=""></i>
+													<h6><a title=""  href="/vote/carte/">Cartographie</a></h6>
+												</div>
+											</li>
+										</ul>
+									</div><!-- recent blog -->
 									<style>
 										
 										#asking{
@@ -42,14 +53,12 @@
 									<div class="widget">
 										<h4 class="widget-title">Cote<a class="see-all" href="/vote/carte/" title="">Faire le test</a></h4>
 										<div class="rec-events" style="background-color: #ff7200;">
-											<i class="icofont-gift"></i>
-											<h6><a title="" href="">Création d'une école</a></h6>
-											<img alt="" src="{%static 'img/images/clock.png' %}">
+											<i class="fa-regular fa-face-smile"></i>
+											<h6><a title="" href="">{{pourcentage_pour}}%</a></h6>
 										</div>
 										<div class="rec-events" style="background-color: #027314;">
-											<i class="icofont-microphone"></i>
-											<h6><a title="" href="">La 03ième Conference 2023</a></h6>
-											<img alt="" src="{%static 'img/images/clock.png' %}">
+											<i class="fa-solid fa-face-frown"></i>
+											<h6><a title="" href="">{{pourcentage_contre}}%</a></h6>
 										</div>
 									</div>
 								</aside>

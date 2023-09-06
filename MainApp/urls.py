@@ -19,8 +19,11 @@ urlpatterns = [
     path('analytic/<int:id>', views.analytic, name='analytic'),
     path('G_electeur', views.G_electeur, name='G_electeur'),
     path('G_candidat', views.G_candidat, name='G_candidat'),
+    path('notificationSend', views.notificationSend, name='notificationSend'),
+    path('G_notifications', views.G_notifications, name='G_notifications'),
     path('CreateCand', views.CreateCand, name='CreateCand'),
     path('deleteCand/<int:id>', views.DeleteCand, name='deleteCand'),
     path('deleteElec/<int:id>', views.DeleteElec, name='deleteElec'),
+    path('message', views.messagesend, name='message'),
     path('404', views.error, name='error'),
 ]
